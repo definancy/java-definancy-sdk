@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    name: Build Definancy Node API
+    name: Build Definancy API
     runs-on: ubuntu-latest
     strategy:
       matrix:

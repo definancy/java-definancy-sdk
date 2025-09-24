@@ -1,8 +1,8 @@
 # definancy-sdk
 
-Definancy Node API
-- API version: 0.0.1.wip.20250826
-  - Build date: 2025-09-24T14:07:22.312732801Z[Etc/UTC]
+Definancy API
+- API version: 0.0.1.wip.20250924
+  - Build date: 2025-09-24T14:56:52.498104927Z[Etc/UTC]
   - Generator version: 7.16.0-SNAPSHOT
 
 REST API for managing asset, network and contract configurations, and vault-based financial operations.
