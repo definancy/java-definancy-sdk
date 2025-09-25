@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Config {
 	public static String network = "dev";
-	public static String audience = "http://localhost:8080";
+	public static String audience = "https://dev.definancy.com";
     public static String secret = "qHWHe6jLnx7gD-CZSe3X2UwgC-ISFOVy4rfFWxxJXX0";
     public static String vaultId = "myVault";
 
