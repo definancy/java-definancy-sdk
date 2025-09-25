@@ -1,11 +1,11 @@
 # VaultContractSubscriptionApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**vaultSubscribeContract**](VaultContractSubscriptionApi.md#vaultSubscribeContract) | **PUT** /api/v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Subscribe Contract to Vault |
-| [**vaultUnsubscribeContract**](VaultContractSubscriptionApi.md#vaultUnsubscribeContract) | **DELETE** /api/v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Unsubscribe Contract from Vault |
+| [**vaultSubscribeContract**](VaultContractSubscriptionApi.md#vaultSubscribeContract) | **PUT** /v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Subscribe Contract to Vault |
+| [**vaultUnsubscribeContract**](VaultContractSubscriptionApi.md#vaultUnsubscribeContract) | **DELETE** /v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Unsubscribe Contract from Vault |
 
 
 <a id="vaultSubscribeContract"></a>
@@ -29,7 +29,7 @@ import com.definancy.api.VaultContractSubscriptionApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -116,7 +116,7 @@ import com.definancy.api.VaultContractSubscriptionApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

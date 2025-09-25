@@ -1,10 +1,10 @@
 # ExperimentalApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**registerDid**](ExperimentalApi.md#registerDid) | **PUT** /api/v1/did/{definancyId} | Register a Definancy DID |
+| [**registerDid**](ExperimentalApi.md#registerDid) | **PUT** /v1/did/{definancyId} | Register a Definancy DID |
 
 
 <a id="registerDid"></a>
@@ -27,7 +27,7 @@ import com.definancy.api.ExperimentalApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

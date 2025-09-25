@@ -11,5 +11,7 @@
 
 * `NON_CUSTODIAL_V1` (value: `"NonCustodialV1"`)
 
+* `UNKNOWN_DEFAULT_OPEN_API` (value: `"unknown_default_open_api"`)
+
 
 

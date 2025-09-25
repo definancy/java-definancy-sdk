@@ -1,5 +1,7 @@
 package com.definancy.sdk.crypto;
 
+import com.definancy.sdk.DID;
+import com.definancy.sdk.ID;
 import com.definancy.sdk.auth.Jwk;
 import com.definancy.sdk.util.Encoder;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -51,6 +53,11 @@ public class Ed25519PublicKey implements Serializable {
 	// default values for serializer to ignore
 	public Ed25519PublicKey() {
 	}
+
+    public DID computeDID(String network) throws Exception {
+        ID id = new ID(this);
+        return new DID(network, id);
+    }
 
 	@JsonIgnore
 	public Jwk jwk() {

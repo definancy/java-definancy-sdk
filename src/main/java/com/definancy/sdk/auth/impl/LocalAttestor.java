@@ -11,17 +11,21 @@ public class LocalAttestor implements Attestor {
     private final String network;
     private final String audience;
 
-    public LocalAttestor(String network, String audience) throws Exception {
-        this.keyPair = KeyPair.generateKeyPair();
+    public LocalAttestor(KeyPair keyPair, String network, String audience) throws Exception {
+        this.keyPair = keyPair;
         this.network = network;
         this.audience = audience;
+    }
+
+    public LocalAttestor(String network, String audience) throws Exception {
+        this(KeyPair.generateKeyPair(), network, audience);
     }
 
     @Override
     public String Attest(String thumbprint) throws IOException {
         try {
             Jwt authorization = Jwt.createAuthorization(
-                    this.keyPair.computeDID(this.network),
+                    this.keyPair.publicKey().computeDID(this.network),
                     this.audience,
                     thumbprint
             );

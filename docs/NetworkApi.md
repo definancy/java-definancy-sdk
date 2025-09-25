@@ -1,13 +1,13 @@
 # NetworkApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**configNetwork**](NetworkApi.md#configNetwork) | **PATCH** /api/v1/network/{networkId} | Configure Network |
-| [**getNetwork**](NetworkApi.md#getNetwork) | **GET** /api/v1/network/{networkId} | Get Network |
-| [**getNetworkNativeAsset**](NetworkApi.md#getNetworkNativeAsset) | **GET** /api/v1/network/{networkId}/native | Get Network Native Asset |
-| [**getNetworks**](NetworkApi.md#getNetworks) | **GET** /api/v1/network | List Networks |
+| [**configNetwork**](NetworkApi.md#configNetwork) | **PATCH** /v1/network/{networkId} | Configure Network |
+| [**getNetwork**](NetworkApi.md#getNetwork) | **GET** /v1/network/{networkId} | Get Network |
+| [**getNetworkNativeAsset**](NetworkApi.md#getNetworkNativeAsset) | **GET** /v1/network/{networkId}/native | Get Network Native Asset |
+| [**getNetworks**](NetworkApi.md#getNetworks) | **GET** /v1/network | List Networks |
 
 
 <a id="configNetwork"></a>
@@ -31,7 +31,7 @@ import com.definancy.api.NetworkApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -117,7 +117,7 @@ import com.definancy.api.NetworkApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -200,7 +200,7 @@ import com.definancy.api.NetworkApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -283,7 +283,7 @@ import com.definancy.api.NetworkApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

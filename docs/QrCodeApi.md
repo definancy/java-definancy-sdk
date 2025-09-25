@@ -1,15 +1,15 @@
 # QrCodeApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**generateWalletQrCodes**](QrCodeApi.md#generateWalletQrCodes) | **POST** /api/v1/qrcode/transaction | Generate QR-Codes for wallets |
+| [**generateWalletQrCodes**](QrCodeApi.md#generateWalletQrCodes) | **POST** /v1/qrcode/transaction | Generate QR-Codes for wallets |
 
 
 <a id="generateWalletQrCodes"></a>
 # **generateWalletQrCodes**
-> List&lt;QrCode&gt; generateWalletQrCodes(contractAmount)
+> List&lt;QrCode&gt; generateWalletQrCodes(contractAmountFormat)
 
 Generate QR-Codes for wallets
 
@@ -28,7 +28,7 @@ import com.definancy.api.QrCodeApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -47,9 +47,9 @@ public class Example {
     apiClient.setHttpClient(httpClient);
 
     QrCodeApi apiInstance = new QrCodeApi(apiClient);
-    ContractAmount contractAmount = new ContractAmount(); // ContractAmount | Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract's unit.
+    ContractAmountFormat contractAmountFormat = new ContractAmountFormat(); // ContractAmountFormat | Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract's unit.
     try {
-      List<QrCode> result = apiInstance.generateWalletQrCodes(contractAmount);
+      List<QrCode> result = apiInstance.generateWalletQrCodes(contractAmountFormat);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling QrCodeApi#generateWalletQrCodes");
@@ -66,7 +66,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **contractAmount** | [**ContractAmount**](ContractAmount.md)| Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. | |
+| **contractAmountFormat** | [**ContractAmountFormat**](ContractAmountFormat.md)| Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. | |
 
 ### Return type
 

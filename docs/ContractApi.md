@@ -1,12 +1,12 @@
 # ContractApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**configContract**](ContractApi.md#configContract) | **PATCH** /api/v1/contract/{assetUnit}/{networkId} | Configure Contract |
-| [**getContract**](ContractApi.md#getContract) | **GET** /api/v1/contract/{assetUnit}/{networkId} | Get Contract |
-| [**getContracts**](ContractApi.md#getContracts) | **GET** /api/v1/contract | List Contracts |
+| [**configContract**](ContractApi.md#configContract) | **PATCH** /v1/contract/{assetUnit}/{networkId} | Configure Contract |
+| [**getContract**](ContractApi.md#getContract) | **GET** /v1/contract/{assetUnit}/{networkId} | Get Contract |
+| [**getContracts**](ContractApi.md#getContracts) | **GET** /v1/contract | List Contracts |
 
 
 <a id="configContract"></a>
@@ -30,7 +30,7 @@ import com.definancy.api.ContractApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -118,7 +118,7 @@ import com.definancy.api.ContractApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -203,7 +203,7 @@ import com.definancy.api.ContractApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

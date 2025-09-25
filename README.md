@@ -1,8 +1,7 @@
 # definancy-sdk
 
 Definancy API
-- API version: 0.0.1.wip.20250924
-  - Build date: 2025-09-24T14:56:52.498104927Z[Etc/UTC]
+- API version: 0.0.1.wip.20250925
   - Generator version: 7.16.0-SNAPSHOT
 
 REST API for managing asset, network and contract configurations, and vault-based financial operations.
@@ -95,7 +94,7 @@ import com.definancy.api.AssetApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -133,41 +132,41 @@ public class Example {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AssetApi* | [**configAsset**](docs/AssetApi.md#configAsset) | **PATCH** /api/v1/asset/{assetUnit} | Configure Asset
-*AssetApi* | [**getAsset**](docs/AssetApi.md#getAsset) | **GET** /api/v1/asset/{assetUnit} | Get Asset
-*AssetApi* | [**getAssets**](docs/AssetApi.md#getAssets) | **GET** /api/v1/asset | List Assets
-*ContractApi* | [**configContract**](docs/ContractApi.md#configContract) | **PATCH** /api/v1/contract/{assetUnit}/{networkId} | Configure Contract
-*ContractApi* | [**getContract**](docs/ContractApi.md#getContract) | **GET** /api/v1/contract/{assetUnit}/{networkId} | Get Contract
-*ContractApi* | [**getContracts**](docs/ContractApi.md#getContracts) | **GET** /api/v1/contract | List Contracts
-*ExperimentalApi* | [**registerDid**](docs/ExperimentalApi.md#registerDid) | **PUT** /api/v1/did/{definancyId} | Register a Definancy DID
-*NetworkApi* | [**configNetwork**](docs/NetworkApi.md#configNetwork) | **PATCH** /api/v1/network/{networkId} | Configure Network
-*NetworkApi* | [**getNetwork**](docs/NetworkApi.md#getNetwork) | **GET** /api/v1/network/{networkId} | Get Network
-*NetworkApi* | [**getNetworkNativeAsset**](docs/NetworkApi.md#getNetworkNativeAsset) | **GET** /api/v1/network/{networkId}/native | Get Network Native Asset
-*NetworkApi* | [**getNetworks**](docs/NetworkApi.md#getNetworks) | **GET** /api/v1/network | List Networks
-*ProbeApi* | [**healthyCheck**](docs/ProbeApi.md#healthyCheck) | **GET** /api/v1/healthy | Health Check
-*ProbeApi* | [**readyCheck**](docs/ProbeApi.md#readyCheck) | **GET** /api/v1/ready | Ready Check
-*QrCodeApi* | [**generateWalletQrCodes**](docs/QrCodeApi.md#generateWalletQrCodes) | **POST** /api/v1/qrcode/transaction | Generate QR-Codes for wallets
-*VaultApi* | [**archiveVault**](docs/VaultApi.md#archiveVault) | **DELETE** /api/v1/vault/{vaultId} | Archive Vault
-*VaultApi* | [**configVault**](docs/VaultApi.md#configVault) | **PATCH** /api/v1/vault/{vaultId} | Partially Update Vault Configuration
-*VaultApi* | [**getVault**](docs/VaultApi.md#getVault) | **GET** /api/v1/vault/{vaultId} | Get Vault
-*VaultApi* | [**getVaults**](docs/VaultApi.md#getVaults) | **GET** /api/v1/vault | List Vaults
-*VaultApi* | [**setVault**](docs/VaultApi.md#setVault) | **PUT** /api/v1/vault/{vaultId} | Create or Update Vault
-*VaultContractSubscriptionApi* | [**vaultSubscribeContract**](docs/VaultContractSubscriptionApi.md#vaultSubscribeContract) | **PUT** /api/v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Subscribe Contract to Vault
-*VaultContractSubscriptionApi* | [**vaultUnsubscribeContract**](docs/VaultContractSubscriptionApi.md#vaultUnsubscribeContract) | **DELETE** /api/v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Unsubscribe Contract from Vault
-*VaultDocumentApi* | [**archiveDocument**](docs/VaultDocumentApi.md#archiveDocument) | **DELETE** /api/v1/vault/{vaultId}/document/{documentId} | Archive Document
-*VaultDocumentApi* | [**getDocument**](docs/VaultDocumentApi.md#getDocument) | **GET** /api/v1/vault/{vaultId}/document/{documentId} | Get Document
-*VaultDocumentApi* | [**submitDocument**](docs/VaultDocumentApi.md#submitDocument) | **PUT** /api/v1/vault/{vaultId}/document | Submit Document
-*VaultPaymentApi* | [**archivePaymentAcceptance**](docs/VaultPaymentApi.md#archivePaymentAcceptance) | **DELETE** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Archive Payment Acceptance
-*VaultPaymentApi* | [**createPaymentAcceptance**](docs/VaultPaymentApi.md#createPaymentAcceptance) | **PUT** /api/v1/vault/{vaultId}/payment/acceptance | Create Payment Acceptance
-*VaultPaymentApi* | [**getPaymentAcceptance**](docs/VaultPaymentApi.md#getPaymentAcceptance) | **GET** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Get Payment Acceptance
-*VaultPaymentApi* | [**linkPaymentAcceptanceDocument**](docs/VaultPaymentApi.md#linkPaymentAcceptanceDocument) | **PUT** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Link Document to Payment Acceptance
-*VaultPaymentApi* | [**unlinkPaymentAcceptanceDocument**](docs/VaultPaymentApi.md#unlinkPaymentAcceptanceDocument) | **DELETE** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Unlink Document from Payment Acceptance
-*VaultPaymentApi* | [**updatePaymentAcceptance**](docs/VaultPaymentApi.md#updatePaymentAcceptance) | **PATCH** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Update Payment Acceptance
-*VaultPaymentApi* | [**vaultGetPaymentEstimate**](docs/VaultPaymentApi.md#vaultGetPaymentEstimate) | **POST** /api/v1/vault/{vaultId}/payment/estimate | Generate Payment Estimate
+*AssetApi* | [**configAsset**](docs/AssetApi.md#configAsset) | **PATCH** /v1/asset/{assetUnit} | Configure Asset
+*AssetApi* | [**getAsset**](docs/AssetApi.md#getAsset) | **GET** /v1/asset/{assetUnit} | Get Asset
+*AssetApi* | [**getAssets**](docs/AssetApi.md#getAssets) | **GET** /v1/asset | List Assets
+*ContractApi* | [**configContract**](docs/ContractApi.md#configContract) | **PATCH** /v1/contract/{assetUnit}/{networkId} | Configure Contract
+*ContractApi* | [**getContract**](docs/ContractApi.md#getContract) | **GET** /v1/contract/{assetUnit}/{networkId} | Get Contract
+*ContractApi* | [**getContracts**](docs/ContractApi.md#getContracts) | **GET** /v1/contract | List Contracts
+*ExperimentalApi* | [**registerDid**](docs/ExperimentalApi.md#registerDid) | **PUT** /v1/did/{definancyId} | Register a Definancy DID
+*NetworkApi* | [**configNetwork**](docs/NetworkApi.md#configNetwork) | **PATCH** /v1/network/{networkId} | Configure Network
+*NetworkApi* | [**getNetwork**](docs/NetworkApi.md#getNetwork) | **GET** /v1/network/{networkId} | Get Network
+*NetworkApi* | [**getNetworkNativeAsset**](docs/NetworkApi.md#getNetworkNativeAsset) | **GET** /v1/network/{networkId}/native | Get Network Native Asset
+*NetworkApi* | [**getNetworks**](docs/NetworkApi.md#getNetworks) | **GET** /v1/network | List Networks
+*ProbeApi* | [**healthyCheck**](docs/ProbeApi.md#healthyCheck) | **GET** /v1/healthy | Health Check
+*ProbeApi* | [**readyCheck**](docs/ProbeApi.md#readyCheck) | **GET** /v1/ready | Ready Check
+*QrCodeApi* | [**generateWalletQrCodes**](docs/QrCodeApi.md#generateWalletQrCodes) | **POST** /v1/qrcode/transaction | Generate QR-Codes for wallets
+*VaultApi* | [**archiveVault**](docs/VaultApi.md#archiveVault) | **DELETE** /v1/vault/{vaultId} | Archive Vault
+*VaultApi* | [**configVault**](docs/VaultApi.md#configVault) | **PATCH** /v1/vault/{vaultId} | Partially Update Vault Configuration
+*VaultApi* | [**getVault**](docs/VaultApi.md#getVault) | **GET** /v1/vault/{vaultId} | Get Vault
+*VaultApi* | [**getVaults**](docs/VaultApi.md#getVaults) | **GET** /v1/vault | List Vaults
+*VaultApi* | [**setVault**](docs/VaultApi.md#setVault) | **PUT** /v1/vault/{vaultId} | Create or Update Vault
+*VaultContractSubscriptionApi* | [**vaultSubscribeContract**](docs/VaultContractSubscriptionApi.md#vaultSubscribeContract) | **PUT** /v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Subscribe Contract to Vault
+*VaultContractSubscriptionApi* | [**vaultUnsubscribeContract**](docs/VaultContractSubscriptionApi.md#vaultUnsubscribeContract) | **DELETE** /v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Unsubscribe Contract from Vault
+*VaultDocumentApi* | [**archiveDocument**](docs/VaultDocumentApi.md#archiveDocument) | **DELETE** /v1/vault/{vaultId}/document/{documentId} | Archive Document
+*VaultDocumentApi* | [**getDocument**](docs/VaultDocumentApi.md#getDocument) | **GET** /v1/vault/{vaultId}/document/{documentId} | Get Document
+*VaultDocumentApi* | [**submitDocument**](docs/VaultDocumentApi.md#submitDocument) | **PUT** /v1/vault/{vaultId}/document | Submit Document
+*VaultPaymentApi* | [**archivePaymentAcceptance**](docs/VaultPaymentApi.md#archivePaymentAcceptance) | **DELETE** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Archive Payment Acceptance
+*VaultPaymentApi* | [**createPaymentAcceptance**](docs/VaultPaymentApi.md#createPaymentAcceptance) | **PUT** /v1/vault/{vaultId}/payment/acceptance | Create Payment Acceptance
+*VaultPaymentApi* | [**getPaymentAcceptance**](docs/VaultPaymentApi.md#getPaymentAcceptance) | **GET** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Get Payment Acceptance
+*VaultPaymentApi* | [**linkPaymentAcceptanceDocument**](docs/VaultPaymentApi.md#linkPaymentAcceptanceDocument) | **PUT** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Link Document to Payment Acceptance
+*VaultPaymentApi* | [**unlinkPaymentAcceptanceDocument**](docs/VaultPaymentApi.md#unlinkPaymentAcceptanceDocument) | **DELETE** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Unlink Document from Payment Acceptance
+*VaultPaymentApi* | [**updatePaymentAcceptance**](docs/VaultPaymentApi.md#updatePaymentAcceptance) | **PATCH** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Update Payment Acceptance
+*VaultPaymentApi* | [**vaultGetPaymentEstimate**](docs/VaultPaymentApi.md#vaultGetPaymentEstimate) | **POST** /v1/vault/{vaultId}/payment/estimate | Generate Payment Estimate
 
 
 ## Documentation for Models
@@ -175,6 +174,7 @@ Class | Method | HTTP request | Description
  - [AcceptancePaymentTrait](docs/AcceptancePaymentTrait.md)
  - [AcceptancePriceTrait](docs/AcceptancePriceTrait.md)
  - [Amount](docs/Amount.md)
+ - [AmountFormat](docs/AmountFormat.md)
  - [AmountRaw](docs/AmountRaw.md)
  - [AmountValue](docs/AmountValue.md)
  - [Asset](docs/Asset.md)
@@ -190,6 +190,7 @@ Class | Method | HTTP request | Description
  - [ComplianceScenarioStatus](docs/ComplianceScenarioStatus.md)
  - [Contract](docs/Contract.md)
  - [ContractAmount](docs/ContractAmount.md)
+ - [ContractAmountFormat](docs/ContractAmountFormat.md)
  - [ContractConfig](docs/ContractConfig.md)
  - [ContractId](docs/ContractId.md)
  - [ContractInfo](docs/ContractInfo.md)
@@ -218,6 +219,8 @@ Class | Method | HTTP request | Description
  - [NonCustodialV1](docs/NonCustodialV1.md)
  - [PaymentAcceptance](docs/PaymentAcceptance.md)
  - [PaymentAcceptanceConfig](docs/PaymentAcceptanceConfig.md)
+ - [PaymentAcceptanceConfigBase](docs/PaymentAcceptanceConfigBase.md)
+ - [PaymentAcceptanceConfigFormat](docs/PaymentAcceptanceConfigFormat.md)
  - [PaymentAcceptanceInfo](docs/PaymentAcceptanceInfo.md)
  - [PaymentAcceptanceOrder](docs/PaymentAcceptanceOrder.md)
  - [PaymentAcceptanceScenario](docs/PaymentAcceptanceScenario.md)

@@ -12,7 +12,7 @@ public class GenerateAuth {
 		String audience = Config.audience;
 
 		Jwt authorization  = Jwt.createAuthorization(
-			master.computeDID(network),
+			master.publicKey().computeDID(network),
 			audience,
 			slave.publicKey().jwk().thumbprint()
 		);

@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   title: Definancy API
-  version: 0.0.1.wip.20250924
+  version: 0.0.1.wip.20250925
   description: |-
     REST API for managing asset, network and contract configurations, and vault-based financial operations.
     This API provides a comprehensive set of endpoints for health monitoring, network management, asset 
@@ -65,8 +65,10 @@ tags:
       wallets.
 
 servers:
-  - url: https://definancy.xboshy.io
-    description: Stub server
+  - url: https://stub.definancy.com
+    description: Stub - Authentication is disabled
+  - url: https://dev.definancy.com
+    description: Development
 
 security:
   - dpop-auth: []
@@ -74,7 +76,7 @@ security:
 
 paths:
   # Security & Identity Endpoints
-  /api/v1/did/{definancyId}:
+  /v1/did/{definancyId}:
     put:
       operationId: RegisterDid
       summary: Register a Definancy DID
@@ -120,7 +122,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Probes
-  /api/v1/healthy:
+  /v1/healthy:
     get:
       operationId: HealthyCheck
       summary: Health Check
@@ -145,7 +147,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/ready:
+  /v1/ready:
     get:
       operationId: ReadyCheck
       summary: Ready Check
@@ -171,7 +173,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Network
-  /api/v1/network:
+  /v1/network:
     get:
       operationId: GetNetworks
       summary: List Networks
@@ -201,7 +203,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/network/{networkId}:
+  /v1/network/{networkId}:
     get:
       operationId: GetNetwork
       summary: Get Network
@@ -278,7 +280,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/network/{networkId}/native:
+  /v1/network/{networkId}/native:
     get:
       operationId: GetNetworkNativeAsset
       summary: Get Network Native Asset
@@ -311,7 +313,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Asset
-  /api/v1/asset:
+  /v1/asset:
     get:
       operationId: GetAssets
       summary: List Assets
@@ -341,7 +343,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/asset/{assetUnit}:
+  /v1/asset/{assetUnit}:
     get:
       operationId: GetAsset
       summary: Get Asset
@@ -417,7 +419,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Contract
-  /api/v1/contract:
+  /v1/contract:
     get:
       operationId: GetContracts
       summary: List Contracts
@@ -447,7 +449,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/contract/{assetUnit}/{networkId}:
+  /v1/contract/{assetUnit}/{networkId}:
     get:
       operationId: GetContract
       summary: Get Contract
@@ -525,7 +527,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Vault
-  /api/v1/vault:
+  /v1/vault:
     get:
       operationId: GetVaults
       summary: List Vaults
@@ -555,7 +557,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/vault/{vaultId}:
+  /v1/vault/{vaultId}:
     get:
       operationId: GetVault
       summary: Get Vault
@@ -703,7 +705,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Vault - Contract Subscription
-  /api/v1/vault/{vaultId}/contract/{assetUnit}/{networkId}:
+  /v1/vault/{vaultId}/contract/{assetUnit}/{networkId}:
     put:
       operationId: VaultSubscribeContract
       summary: Subscribe Contract to Vault
@@ -766,7 +768,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Vault - Payment
-  /api/v1/vault/{vaultId}/payment/estimate:
+  /v1/vault/{vaultId}/payment/estimate:
     post:
       operationId: VaultGetPaymentEstimate
       summary: Generate Payment Estimate
@@ -784,7 +786,7 @@ paths:
               type: array
               minItems: 1
               items:
-                $ref: "#/components/schemas/ContractAmount"
+                $ref: "#/components/schemas/ContractAmountFormat"
         description: |-
           List of contract-amount pairs for which to generate payment estimates. Must contain
           at least one contract-amount pair. Each contract must be subscribed to the vault.
@@ -812,7 +814,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/vault/{vaultId}/payment/acceptance:
+  /v1/vault/{vaultId}/payment/acceptance:
     put:
       operationId: CreatePaymentAcceptance
       summary: Create Payment Acceptance
@@ -826,7 +828,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PaymentAcceptanceConfig"
+              $ref: "#/components/schemas/PaymentAcceptanceConfigFormat"
         description: |-
           Payment acceptance configuration including required payment scenarios and optional
           order context. The 'price-scenarios' list must contain at least one contract-amount
@@ -860,7 +862,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}:
+  /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}:
     get:
       operationId: GetPaymentAcceptance
       summary: Get Payment Acceptance
@@ -904,7 +906,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/PaymentAcceptanceConfig"
+              $ref: "#/components/schemas/PaymentAcceptanceConfigFormat"
         description: |-
           Partial payment acceptance configuration for updates. Can be used to modify
           the 'documents' list to add or remove compliance document associations, or to
@@ -963,7 +965,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Vault - Payment - Acceptance - Document
-  /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId}:
+  /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId}:
     put:
       operationId: LinkPaymentAcceptanceDocument
       summary: Link Document to Payment Acceptance
@@ -1033,7 +1035,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # Vault - Document
-  /api/v1/vault/{vaultId}/document:
+  /v1/vault/{vaultId}/document:
     put:
       operationId: SubmitDocument
       summary: Submit Document
@@ -1082,7 +1084,7 @@ paths:
         default:
           $ref: "#/components/responses/DefaultResponse"
 
-  /api/v1/vault/{vaultId}/document/{documentId}:
+  /v1/vault/{vaultId}/document/{documentId}:
     get:
       operationId: GetDocument
       summary: Get Document
@@ -1145,7 +1147,7 @@ paths:
           $ref: "#/components/responses/DefaultResponse"
 
   # QR-Code - Transaction
-  /api/v1/qrcode/transaction:
+  /v1/qrcode/transaction:
     post:
       operationId: GenerateWalletQrCodes
       summary: Generate QR-Codes for wallets
@@ -1158,7 +1160,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ContractAmount"
+              $ref: "#/components/schemas/ContractAmountFormat"
         description: |-
           Contract-amount pair for which to generate the qr-codes.
           The amount should represent the desired payment value in the contract's unit.
@@ -1367,7 +1369,16 @@ components:
         Precise representation of a amount combining a raw value with decimal precision
         information. This structure ensures accurate handling of token amounts across 
         different assets with varying decimal places.
-      anyOf:
+      allOf:
+        - $ref: "#/components/schemas/AmountValue"
+        - $ref: "#/components/schemas/AmountRaw"
+    "AmountFormat":
+      type: object
+      description: |-
+        Precise representation of a amount combining a raw value with decimal precision
+        information. This structure ensures accurate handling of token amounts across 
+        different assets with varying decimal places.
+      oneOf:
         - $ref: "#/components/schemas/AmountValue"
         - $ref: "#/components/schemas/AmountRaw"
     "AmountValue":
@@ -1970,13 +1981,27 @@ components:
       type: object
       description: |-
         Pairing of a specific contract with a precise amount value.
-        Used throughout the API to specify payment amounts for particular
-        contracts in payment estimates, acceptance, and transaction records.
+        Used in **API responses** to provide complete amount information including
+        both display value and raw precision data.
       properties:
         "contract-id":
           $ref: "#/components/schemas/ContractId"
         "amount":
           $ref: "#/components/schemas/Amount"
+      required:
+        - "contract-id"
+        - "amount"
+    "ContractAmountFormat":
+      type: object
+      description: |-
+        Pairing of a specific contract with a precise amount value.
+        Used in **API requests** to accept amount data in flexible formats,
+        allowing callers to provide either display value or raw precision data.
+      properties:
+        "contract-id":
+          $ref: "#/components/schemas/ContractId"
+        "amount":
+          $ref: "#/components/schemas/AmountFormat"
       required:
         - "contract-id"
         - "amount"
@@ -2520,25 +2545,18 @@ components:
         - "version"
         - "scenarios"
         - "compliance"
-    "PaymentAcceptanceConfig":
+    "PaymentAcceptanceConfigBase":
       type: object
       description: |-
-        Payment acceptance configuration parameters including commercial order 
-        context, payment scenarios, and document associations. Defines the 
-        structure and requirements for payment processing operations.
+        Base configuration for payment acceptance operations containing optional
+        commercial context and document associations. Serves as the foundation for
+        both request and response payment acceptance structures.
       properties:
         "order":
           $ref: "#/components/schemas/PaymentAcceptanceOrder"
           description: |-
             Optional commercial order context providing business information 
             about the transaction being processed.
-        "price-scenarios":
-          type: array
-          description: |-
-            Required payment obligations as contract-amount pairs. Must contain 
-            at least one scenario when creating new payment acceptance.
-          items:
-            $ref: "#/components/schemas/ContractAmount"
         "documents":
           type: array
           description: |-
@@ -2546,6 +2564,40 @@ components:
             acceptance for compliance purposes.
           items:
             $ref: "#/components/schemas/DocumentId"
+    "PaymentAcceptanceConfig":
+      type: object
+      description: |-
+        Complete payment acceptance configuration used in API responses. Provides
+        full amount information with both display values and raw precision data
+        for all payment scenarios.
+      allOf:
+        - $ref: "#/components/schemas/PaymentAcceptanceConfigBase"
+        - type: object
+          properties:
+            "price-scenarios":
+              type: array
+              description: |-
+                Required payment obligations as contract-amount pairs. Must contain 
+                at least one scenario when creating new payment acceptance.
+              items:
+                $ref: "#/components/schemas/ContractAmount"
+    "PaymentAcceptanceConfigFormat":
+      type: object
+      description: |-
+        Payment acceptance configuration for API requests. Accepts amount data
+        in flexible formats, allowing callers to provide either display values
+        or raw precision data for payment scenarios.
+      allOf:
+        - $ref: "#/components/schemas/PaymentAcceptanceConfigBase"
+        - type: object
+          properties:
+            "price-scenarios":
+              type: array
+              description: |-
+                Required payment obligations as contract-amount pairs. Must contain 
+                at least one scenario when creating new payment acceptance.
+              items:
+                $ref: "#/components/schemas/ContractAmountFormat"
     "PaymentAcceptance":
       type: object
       description: |-

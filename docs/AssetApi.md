@@ -1,12 +1,12 @@
 # AssetApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**configAsset**](AssetApi.md#configAsset) | **PATCH** /api/v1/asset/{assetUnit} | Configure Asset |
-| [**getAsset**](AssetApi.md#getAsset) | **GET** /api/v1/asset/{assetUnit} | Get Asset |
-| [**getAssets**](AssetApi.md#getAssets) | **GET** /api/v1/asset | List Assets |
+| [**configAsset**](AssetApi.md#configAsset) | **PATCH** /v1/asset/{assetUnit} | Configure Asset |
+| [**getAsset**](AssetApi.md#getAsset) | **GET** /v1/asset/{assetUnit} | Get Asset |
+| [**getAssets**](AssetApi.md#getAssets) | **GET** /v1/asset | List Assets |
 
 
 <a id="configAsset"></a>
@@ -30,7 +30,7 @@ import com.definancy.api.AssetApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -116,7 +116,7 @@ import com.definancy.api.AssetApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -199,7 +199,7 @@ import com.definancy.api.AssetApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

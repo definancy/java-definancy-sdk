@@ -1,11 +1,11 @@
 # ProbeApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**healthyCheck**](ProbeApi.md#healthyCheck) | **GET** /api/v1/healthy | Health Check |
-| [**readyCheck**](ProbeApi.md#readyCheck) | **GET** /api/v1/ready | Ready Check |
+| [**healthyCheck**](ProbeApi.md#healthyCheck) | **GET** /v1/healthy | Health Check |
+| [**readyCheck**](ProbeApi.md#readyCheck) | **GET** /v1/ready | Ready Check |
 
 
 <a id="healthyCheck"></a>
@@ -28,7 +28,7 @@ import com.definancy.api.ProbeApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -103,7 +103,7 @@ import com.definancy.api.ProbeApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

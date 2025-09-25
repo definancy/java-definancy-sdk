@@ -1,12 +1,12 @@
 # VaultDocumentApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**archiveDocument**](VaultDocumentApi.md#archiveDocument) | **DELETE** /api/v1/vault/{vaultId}/document/{documentId} | Archive Document |
-| [**getDocument**](VaultDocumentApi.md#getDocument) | **GET** /api/v1/vault/{vaultId}/document/{documentId} | Get Document |
-| [**submitDocument**](VaultDocumentApi.md#submitDocument) | **PUT** /api/v1/vault/{vaultId}/document | Submit Document |
+| [**archiveDocument**](VaultDocumentApi.md#archiveDocument) | **DELETE** /v1/vault/{vaultId}/document/{documentId} | Archive Document |
+| [**getDocument**](VaultDocumentApi.md#getDocument) | **GET** /v1/vault/{vaultId}/document/{documentId} | Get Document |
+| [**submitDocument**](VaultDocumentApi.md#submitDocument) | **PUT** /v1/vault/{vaultId}/document | Submit Document |
 
 
 <a id="archiveDocument"></a>
@@ -30,7 +30,7 @@ import com.definancy.api.VaultDocumentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -115,7 +115,7 @@ import com.definancy.api.VaultDocumentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -200,7 +200,7 @@ import com.definancy.api.VaultDocumentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

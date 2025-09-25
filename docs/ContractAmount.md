@@ -2,7 +2,7 @@
 
 # ContractAmount
 
-Pairing of a specific contract with a precise amount value. Used throughout the API to specify payment amounts for particular contracts in payment estimates, acceptance, and transaction records.
+Pairing of a specific contract with a precise amount value. Used in **API responses** to provide complete amount information including both display value and raw precision data.
 
 ## Properties
 

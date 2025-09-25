@@ -3,6 +3,7 @@ package com.definancy.sdk.auth;
 import com.definancy.sdk.crypto.KeyPair;
 import okhttp3.Interceptor;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,15 +28,18 @@ public class AuthInterceptor implements Interceptor {
         }
 
         // Generate DPoP token for this specific request
+        RequestBody body = originalRequest.body();
         Jwt dpop = Jwt.createDPoP(
             this.keyPair.publicKey(),
             originalRequest.method(),
             originalRequest.url().toString(),
-            null
+            body == null? null : body.toString()
         );
 
         String dpopToken;
         try {
+            String signature = keyPair.sign(dpop.encodeB64());
+            dpop.setSignature(signature);
             dpopToken = dpop.encodeB64();
         } catch (Exception e) {
             throw new IOException(e);

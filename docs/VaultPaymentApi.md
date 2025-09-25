@@ -1,16 +1,16 @@
 # VaultPaymentApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**archivePaymentAcceptance**](VaultPaymentApi.md#archivePaymentAcceptance) | **DELETE** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Archive Payment Acceptance |
-| [**createPaymentAcceptance**](VaultPaymentApi.md#createPaymentAcceptance) | **PUT** /api/v1/vault/{vaultId}/payment/acceptance | Create Payment Acceptance |
-| [**getPaymentAcceptance**](VaultPaymentApi.md#getPaymentAcceptance) | **GET** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Get Payment Acceptance |
-| [**linkPaymentAcceptanceDocument**](VaultPaymentApi.md#linkPaymentAcceptanceDocument) | **PUT** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Link Document to Payment Acceptance |
-| [**unlinkPaymentAcceptanceDocument**](VaultPaymentApi.md#unlinkPaymentAcceptanceDocument) | **DELETE** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Unlink Document from Payment Acceptance |
-| [**updatePaymentAcceptance**](VaultPaymentApi.md#updatePaymentAcceptance) | **PATCH** /api/v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Update Payment Acceptance |
-| [**vaultGetPaymentEstimate**](VaultPaymentApi.md#vaultGetPaymentEstimate) | **POST** /api/v1/vault/{vaultId}/payment/estimate | Generate Payment Estimate |
+| [**archivePaymentAcceptance**](VaultPaymentApi.md#archivePaymentAcceptance) | **DELETE** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Archive Payment Acceptance |
+| [**createPaymentAcceptance**](VaultPaymentApi.md#createPaymentAcceptance) | **PUT** /v1/vault/{vaultId}/payment/acceptance | Create Payment Acceptance |
+| [**getPaymentAcceptance**](VaultPaymentApi.md#getPaymentAcceptance) | **GET** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Get Payment Acceptance |
+| [**linkPaymentAcceptanceDocument**](VaultPaymentApi.md#linkPaymentAcceptanceDocument) | **PUT** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Link Document to Payment Acceptance |
+| [**unlinkPaymentAcceptanceDocument**](VaultPaymentApi.md#unlinkPaymentAcceptanceDocument) | **DELETE** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId}/document/{documentId} | Unlink Document from Payment Acceptance |
+| [**updatePaymentAcceptance**](VaultPaymentApi.md#updatePaymentAcceptance) | **PATCH** /v1/vault/{vaultId}/payment/acceptance/{paymentAcceptanceId} | Update Payment Acceptance |
+| [**vaultGetPaymentEstimate**](VaultPaymentApi.md#vaultGetPaymentEstimate) | **POST** /v1/vault/{vaultId}/payment/estimate | Generate Payment Estimate |
 
 
 <a id="archivePaymentAcceptance"></a>
@@ -34,7 +34,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -100,7 +100,7 @@ public class Example {
 
 <a id="createPaymentAcceptance"></a>
 # **createPaymentAcceptance**
-> PaymentAcceptance createPaymentAcceptance(vaultId, paymentAcceptanceConfig)
+> PaymentAcceptance createPaymentAcceptance(vaultId, paymentAcceptanceConfigFormat)
 
 Create Payment Acceptance
 
@@ -119,7 +119,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -139,9 +139,9 @@ public class Example {
 
     VaultPaymentApi apiInstance = new VaultPaymentApi(apiClient);
     String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
-    PaymentAcceptanceConfig paymentAcceptanceConfig = new PaymentAcceptanceConfig(); // PaymentAcceptanceConfig | Payment acceptance configuration including required payment scenarios and optional order context. The 'price-scenarios' list must contain at least one contract-amount pair and all contracts must be subscribed to the vault. Optional 'order' provides commercial context, and 'documents' can reference existing compliance documents.
+    PaymentAcceptanceConfigFormat paymentAcceptanceConfigFormat = new PaymentAcceptanceConfigFormat(); // PaymentAcceptanceConfigFormat | Payment acceptance configuration including required payment scenarios and optional order context. The 'price-scenarios' list must contain at least one contract-amount pair and all contracts must be subscribed to the vault. Optional 'order' provides commercial context, and 'documents' can reference existing compliance documents.
     try {
-      PaymentAcceptance result = apiInstance.createPaymentAcceptance(vaultId, paymentAcceptanceConfig);
+      PaymentAcceptance result = apiInstance.createPaymentAcceptance(vaultId, paymentAcceptanceConfigFormat);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VaultPaymentApi#createPaymentAcceptance");
@@ -159,7 +159,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **vaultId** | **String**| Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates. | |
-| **paymentAcceptanceConfig** | [**PaymentAcceptanceConfig**](PaymentAcceptanceConfig.md)| Payment acceptance configuration including required payment scenarios and optional order context. The &#39;price-scenarios&#39; list must contain at least one contract-amount pair and all contracts must be subscribed to the vault. Optional &#39;order&#39; provides commercial context, and &#39;documents&#39; can reference existing compliance documents. | |
+| **paymentAcceptanceConfigFormat** | [**PaymentAcceptanceConfigFormat**](PaymentAcceptanceConfigFormat.md)| Payment acceptance configuration including required payment scenarios and optional order context. The &#39;price-scenarios&#39; list must contain at least one contract-amount pair and all contracts must be subscribed to the vault. Optional &#39;order&#39; provides commercial context, and &#39;documents&#39; can reference existing compliance documents. | |
 
 ### Return type
 
@@ -205,7 +205,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -290,7 +290,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -378,7 +378,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -447,7 +447,7 @@ public class Example {
 
 <a id="updatePaymentAcceptance"></a>
 # **updatePaymentAcceptance**
-> PaymentAcceptance updatePaymentAcceptance(vaultId, paymentAcceptanceId, paymentAcceptanceConfig)
+> PaymentAcceptance updatePaymentAcceptance(vaultId, paymentAcceptanceId, paymentAcceptanceConfigFormat)
 
 Update Payment Acceptance
 
@@ -466,7 +466,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -487,9 +487,9 @@ public class Example {
     VaultPaymentApi apiInstance = new VaultPaymentApi(apiClient);
     String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
     UUID paymentAcceptanceId = UUID.randomUUID(); // UUID | Unique identifier for a payment acceptance within a vault. Used to track specific payment requests, monitor transaction status, manage associated documents, and retrieve payment history and compliance information.
-    PaymentAcceptanceConfig paymentAcceptanceConfig = new PaymentAcceptanceConfig(); // PaymentAcceptanceConfig | Partial payment acceptance configuration for updates. Can be used to modify the 'documents' list to add or remove compliance document associations, or to update 'order' information. Core price scenarios cannot be modified after  creation.
+    PaymentAcceptanceConfigFormat paymentAcceptanceConfigFormat = new PaymentAcceptanceConfigFormat(); // PaymentAcceptanceConfigFormat | Partial payment acceptance configuration for updates. Can be used to modify the 'documents' list to add or remove compliance document associations, or to update 'order' information. Core price scenarios cannot be modified after  creation.
     try {
-      PaymentAcceptance result = apiInstance.updatePaymentAcceptance(vaultId, paymentAcceptanceId, paymentAcceptanceConfig);
+      PaymentAcceptance result = apiInstance.updatePaymentAcceptance(vaultId, paymentAcceptanceId, paymentAcceptanceConfigFormat);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VaultPaymentApi#updatePaymentAcceptance");
@@ -508,7 +508,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **vaultId** | **String**| Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates. | |
 | **paymentAcceptanceId** | **UUID**| Unique identifier for a payment acceptance within a vault. Used to track specific payment requests, monitor transaction status, manage associated documents, and retrieve payment history and compliance information. | |
-| **paymentAcceptanceConfig** | [**PaymentAcceptanceConfig**](PaymentAcceptanceConfig.md)| Partial payment acceptance configuration for updates. Can be used to modify the &#39;documents&#39; list to add or remove compliance document associations, or to update &#39;order&#39; information. Core price scenarios cannot be modified after  creation. | |
+| **paymentAcceptanceConfigFormat** | [**PaymentAcceptanceConfigFormat**](PaymentAcceptanceConfigFormat.md)| Partial payment acceptance configuration for updates. Can be used to modify the &#39;documents&#39; list to add or remove compliance document associations, or to update &#39;order&#39; information. Core price scenarios cannot be modified after  creation. | |
 
 ### Return type
 
@@ -535,7 +535,7 @@ public class Example {
 
 <a id="vaultGetPaymentEstimate"></a>
 # **vaultGetPaymentEstimate**
-> PaymentEstimate vaultGetPaymentEstimate(vaultId, contractAmount)
+> PaymentEstimate vaultGetPaymentEstimate(vaultId, contractAmountFormat)
 
 Generate Payment Estimate
 
@@ -554,7 +554,7 @@ import com.definancy.api.VaultPaymentApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -574,9 +574,9 @@ public class Example {
 
     VaultPaymentApi apiInstance = new VaultPaymentApi(apiClient);
     String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
-    List<ContractAmount> contractAmount = Arrays.asList(); // List<ContractAmount> | List of contract-amount pairs for which to generate payment estimates. Must contain at least one contract-amount pair. Each contract must be subscribed to the vault. The amounts should represent the desired payment values in the contract's native units.
+    List<ContractAmountFormat> contractAmountFormat = Arrays.asList(); // List<ContractAmountFormat> | List of contract-amount pairs for which to generate payment estimates. Must contain at least one contract-amount pair. Each contract must be subscribed to the vault. The amounts should represent the desired payment values in the contract's native units.
     try {
-      PaymentEstimate result = apiInstance.vaultGetPaymentEstimate(vaultId, contractAmount);
+      PaymentEstimate result = apiInstance.vaultGetPaymentEstimate(vaultId, contractAmountFormat);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling VaultPaymentApi#vaultGetPaymentEstimate");
@@ -594,7 +594,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **vaultId** | **String**| Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates. | |
-| **contractAmount** | [**List&lt;ContractAmount&gt;**](ContractAmount.md)| List of contract-amount pairs for which to generate payment estimates. Must contain at least one contract-amount pair. Each contract must be subscribed to the vault. The amounts should represent the desired payment values in the contract&#39;s native units. | |
+| **contractAmountFormat** | [**List&lt;ContractAmountFormat&gt;**](ContractAmountFormat.md)| List of contract-amount pairs for which to generate payment estimates. Must contain at least one contract-amount pair. Each contract must be subscribed to the vault. The amounts should represent the desired payment values in the contract&#39;s native units. | |
 
 ### Return type
 

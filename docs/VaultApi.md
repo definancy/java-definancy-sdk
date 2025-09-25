@@ -1,14 +1,14 @@
 # VaultApi
 
-All URIs are relative to *https://definancy.xboshy.io*
+All URIs are relative to *https://stub.definancy.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**archiveVault**](VaultApi.md#archiveVault) | **DELETE** /api/v1/vault/{vaultId} | Archive Vault |
-| [**configVault**](VaultApi.md#configVault) | **PATCH** /api/v1/vault/{vaultId} | Partially Update Vault Configuration |
-| [**getVault**](VaultApi.md#getVault) | **GET** /api/v1/vault/{vaultId} | Get Vault |
-| [**getVaults**](VaultApi.md#getVaults) | **GET** /api/v1/vault | List Vaults |
-| [**setVault**](VaultApi.md#setVault) | **PUT** /api/v1/vault/{vaultId} | Create or Update Vault |
+| [**archiveVault**](VaultApi.md#archiveVault) | **DELETE** /v1/vault/{vaultId} | Archive Vault |
+| [**configVault**](VaultApi.md#configVault) | **PATCH** /v1/vault/{vaultId} | Partially Update Vault Configuration |
+| [**getVault**](VaultApi.md#getVault) | **GET** /v1/vault/{vaultId} | Get Vault |
+| [**getVaults**](VaultApi.md#getVaults) | **GET** /v1/vault | List Vaults |
+| [**setVault**](VaultApi.md#setVault) | **PUT** /v1/vault/{vaultId} | Create or Update Vault |
 
 
 <a id="archiveVault"></a>
@@ -32,7 +32,7 @@ import com.definancy.api.VaultApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -115,7 +115,7 @@ import com.definancy.api.VaultApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -201,7 +201,7 @@ import com.definancy.api.VaultApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -284,7 +284,7 @@ import com.definancy.api.VaultApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
@@ -362,7 +362,7 @@ import com.definancy.api.VaultApi;
 public class Example {
   public static void main(String[] args) {
     String network = "dev";
-    String audience = "https://definancy.xboshy.io";
+    String audience = "https://stub.definancy.com";
 
     LocalAttestor localAttestor = new LocalAttestor(network, audience);
     AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);

@@ -21,7 +21,6 @@ public class GenerateDIDFromPublicKey {
 		id = new ID(pubStr);
 		printKeyValue("Definancy ID (imported string)", id.toString());
 
-
 		DID did = new DID(network, id);
 		printKeyValue("Definancy DID on dev network", did.toString());
     }

@@ -8,6 +8,7 @@ build.sbt
 docs/AcceptancePaymentTrait.md
 docs/AcceptancePriceTrait.md
 docs/Amount.md
+docs/AmountFormat.md
 docs/AmountRaw.md
 docs/AmountValue.md
 docs/Asset.md
@@ -24,6 +25,7 @@ docs/ComplianceScenario.md
 docs/ComplianceScenarioStatus.md
 docs/Contract.md
 docs/ContractAmount.md
+docs/ContractAmountFormat.md
 docs/ContractApi.md
 docs/ContractConfig.md
 docs/ContractId.md
@@ -55,6 +57,8 @@ docs/NetworkStatus.md
 docs/NonCustodialV1.md
 docs/PaymentAcceptance.md
 docs/PaymentAcceptanceConfig.md
+docs/PaymentAcceptanceConfigBase.md
+docs/PaymentAcceptanceConfigFormat.md
 docs/PaymentAcceptanceInfo.md
 docs/PaymentAcceptanceOrder.md
 docs/PaymentAcceptanceScenario.md
@@ -130,6 +134,7 @@ src/main/java/com/definancy/model/AbstractOpenApiSchema.java
 src/main/java/com/definancy/model/AcceptancePaymentTrait.java
 src/main/java/com/definancy/model/AcceptancePriceTrait.java
 src/main/java/com/definancy/model/Amount.java
+src/main/java/com/definancy/model/AmountFormat.java
 src/main/java/com/definancy/model/AmountRaw.java
 src/main/java/com/definancy/model/AmountValue.java
 src/main/java/com/definancy/model/Asset.java
@@ -145,6 +150,7 @@ src/main/java/com/definancy/model/ComplianceScenario.java
 src/main/java/com/definancy/model/ComplianceScenarioStatus.java
 src/main/java/com/definancy/model/Contract.java
 src/main/java/com/definancy/model/ContractAmount.java
+src/main/java/com/definancy/model/ContractAmountFormat.java
 src/main/java/com/definancy/model/ContractConfig.java
 src/main/java/com/definancy/model/ContractId.java
 src/main/java/com/definancy/model/ContractInfo.java
@@ -173,6 +179,8 @@ src/main/java/com/definancy/model/NetworkStatus.java
 src/main/java/com/definancy/model/NonCustodialV1.java
 src/main/java/com/definancy/model/PaymentAcceptance.java
 src/main/java/com/definancy/model/PaymentAcceptanceConfig.java
+src/main/java/com/definancy/model/PaymentAcceptanceConfigBase.java
+src/main/java/com/definancy/model/PaymentAcceptanceConfigFormat.java
 src/main/java/com/definancy/model/PaymentAcceptanceInfo.java
 src/main/java/com/definancy/model/PaymentAcceptanceOrder.java
 src/main/java/com/definancy/model/PaymentAcceptanceScenario.java
