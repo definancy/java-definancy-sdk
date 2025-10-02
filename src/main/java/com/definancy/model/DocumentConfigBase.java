@@ -11,11 +11,7 @@ package com.definancy.model;
 
 import java.util.Objects;
 import java.util.Locale;
-import com.definancy.model.PersonAddress;
-import com.definancy.model.PersonBase;
-import com.definancy.model.PersonNaturalBirth;
-import com.definancy.model.PersonNaturalId;
-import com.definancy.model.PersonType;
+import com.definancy.model.DocumentType;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -49,61 +45,34 @@ import java.util.Locale;
 import com.definancy.JSON;
 
 /**
- * Natural person (individual) details.
+ * Document content specification.
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
-public class PersonNaturalV1 extends PersonBase {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+public class DocumentConfigBase {
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nonnull
-  private PersonNaturalId id;
+  private DocumentType type;
 
-  public static final String SERIALIZED_NAME_BIRTH = "birth";
-  @SerializedName(SERIALIZED_NAME_BIRTH)
-  @javax.annotation.Nonnull
-  private PersonNaturalBirth birth;
-
-  public PersonNaturalV1() {
-
-    this.type = PersonType.PERSON_NATURAL_V1;
-
+  public DocumentConfigBase() {
   }
 
-  public PersonNaturalV1 id(@javax.annotation.Nonnull PersonNaturalId id) {
-    this.id = id;
+  public DocumentConfigBase type(@javax.annotation.Nonnull DocumentType type) {
+    this.type = type;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get type
+   * @return type
    */
   @javax.annotation.Nonnull
-  public PersonNaturalId getId() {
-    return id;
+  public DocumentType getType() {
+    return type;
   }
 
-  public void setId(@javax.annotation.Nonnull PersonNaturalId id) {
-    this.id = id;
-  }
-
-
-  public PersonNaturalV1 birth(@javax.annotation.Nonnull PersonNaturalBirth birth) {
-    this.birth = birth;
-    return this;
-  }
-
-  /**
-   * Get birth
-   * @return birth
-   */
-  @javax.annotation.Nonnull
-  public PersonNaturalBirth getBirth() {
-    return birth;
-  }
-
-  public void setBirth(@javax.annotation.Nonnull PersonNaturalBirth birth) {
-    this.birth = birth;
+  public void setType(@javax.annotation.Nonnull DocumentType type) {
+    this.type = type;
   }
 
 
@@ -116,24 +85,20 @@ public class PersonNaturalV1 extends PersonBase {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PersonNaturalV1 personNaturalV1 = (PersonNaturalV1) o;
-    return Objects.equals(this.id, personNaturalV1.id) &&
-        Objects.equals(this.birth, personNaturalV1.birth) &&
-        super.equals(o);
+    DocumentConfigBase documentConfigBase = (DocumentConfigBase) o;
+    return Objects.equals(this.type, documentConfigBase.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, birth, super.hashCode());
+    return Objects.hash(type);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PersonNaturalV1 {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    birth: ").append(toIndentedString(birth)).append("\n");
+    sb.append("class DocumentConfigBase {\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -155,61 +120,64 @@ public class PersonNaturalV1 extends PersonBase {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("type", "name", "address", "id", "birth"));
+    openapiFields = new HashSet<String>(Arrays.asList("type"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "birth", "type", "name", "address"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("type"));
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PersonNaturalV1
+   * @throws IOException if the JSON Element is invalid with respect to DocumentConfigBase
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PersonNaturalV1.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PersonNaturalV1 is not found in the empty JSON string", PersonNaturalV1.openapiRequiredFields.toString()));
+        if (!DocumentConfigBase.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in DocumentConfigBase is not found in the empty JSON string", DocumentConfigBase.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PersonNaturalV1.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PersonNaturalV1` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!DocumentConfigBase.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `DocumentConfigBase` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PersonNaturalV1.openapiRequiredFields) {
+      for (String requiredField : DocumentConfigBase.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+      // validate the required field `type`
+      DocumentType.validateJsonElement(jsonObj.get("type"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PersonNaturalV1.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PersonNaturalV1' and its subtypes
+       if (!DocumentConfigBase.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'DocumentConfigBase' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PersonNaturalV1> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PersonNaturalV1.class));
+       final TypeAdapter<DocumentConfigBase> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(DocumentConfigBase.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PersonNaturalV1>() {
+       return (TypeAdapter<T>) new TypeAdapter<DocumentConfigBase>() {
            @Override
-           public void write(JsonWriter out, PersonNaturalV1 value) throws IOException {
+           public void write(JsonWriter out, DocumentConfigBase value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PersonNaturalV1 read(JsonReader in) throws IOException {
+           public DocumentConfigBase read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -220,18 +188,18 @@ public class PersonNaturalV1 extends PersonBase {
   }
 
   /**
-   * Create an instance of PersonNaturalV1 given an JSON string
+   * Create an instance of DocumentConfigBase given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of PersonNaturalV1
-   * @throws IOException if the JSON string is invalid with respect to PersonNaturalV1
+   * @return An instance of DocumentConfigBase
+   * @throws IOException if the JSON string is invalid with respect to DocumentConfigBase
    */
-  public static PersonNaturalV1 fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PersonNaturalV1.class);
+  public static DocumentConfigBase fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, DocumentConfigBase.class);
   }
 
   /**
-   * Convert an instance of PersonNaturalV1 to an JSON string
+   * Convert an instance of DocumentConfigBase to an JSON string
    *
    * @return JSON string
    */

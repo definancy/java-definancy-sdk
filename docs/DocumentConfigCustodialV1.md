@@ -1,6 +1,6 @@
 
 
-# DocumentConfig
+# DocumentConfigCustodialV1
 
 
 ## Properties
@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**type** | **DocumentType** |  |  |
-|**data** | [**NonCustodialV1**](NonCustodialV1.md) |  |  |
+|**data** | [**CustodialV1**](CustodialV1.md) |  |  |
 
 
 

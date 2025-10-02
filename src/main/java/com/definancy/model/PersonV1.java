@@ -12,6 +12,11 @@ package com.definancy.model;
 import java.util.Objects;
 import java.util.Locale;
 import com.definancy.model.PersonAddress;
+import com.definancy.model.PersonLegalId;
+import com.definancy.model.PersonLegalIncorporation;
+import com.definancy.model.PersonLegalV1;
+import com.definancy.model.PersonNaturalBirth;
+import com.definancy.model.PersonNaturalV1;
 import com.definancy.model.PersonType;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -21,210 +26,253 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
 
-import java.util.HashMap;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Locale;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import com.definancy.JSON;
 
-/**
- * Base identification document data common to both natural and legal persons.
- */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
-public class PersonV1 {
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
-  @javax.annotation.Nonnull
-  protected PersonType type;
+public class PersonV1 extends AbstractOpenApiSchema {
+    private static final Logger log = Logger.getLogger(PersonV1.class.getName());
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  @javax.annotation.Nonnull
-  private String name;
+    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (!PersonV1.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'PersonV1' and its subtypes
+            }
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+            final TypeAdapter<PersonNaturalV1> adapterPersonNaturalV1 = gson.getDelegateAdapter(this, TypeToken.get(PersonNaturalV1.class));
+            final TypeAdapter<PersonLegalV1> adapterPersonLegalV1 = gson.getDelegateAdapter(this, TypeToken.get(PersonLegalV1.class));
 
-  public static final String SERIALIZED_NAME_ADDRESS = "address";
-  @SerializedName(SERIALIZED_NAME_ADDRESS)
-  @javax.annotation.Nonnull
-  private PersonAddress address;
+            return (TypeAdapter<T>) new TypeAdapter<PersonV1>() {
+                @Override
+                public void write(JsonWriter out, PersonV1 value) throws IOException {
+                    if (value == null || value.getActualInstance() == null) {
+                        elementAdapter.write(out, null);
+                        return;
+                    }
 
-  public PersonV1() {
+                    // check if the actual instance is of the type `PersonNaturalV1`
+                    if (value.getActualInstance() instanceof PersonNaturalV1) {
+                        JsonElement element = adapterPersonNaturalV1.toJsonTree((PersonNaturalV1)value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        return;
+                    }
+                    // check if the actual instance is of the type `PersonLegalV1`
+                    if (value.getActualInstance() instanceof PersonLegalV1) {
+                        JsonElement element = adapterPersonLegalV1.toJsonTree((PersonLegalV1)value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        return;
+                    }
+                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: PersonLegalV1, PersonNaturalV1");
+                }
 
-  }
+                @Override
+                public PersonV1 read(JsonReader in) throws IOException {
+                    Object deserialized = null;
+                    JsonElement jsonElement = elementAdapter.read(in);
 
-  public PersonV1 type(@javax.annotation.Nonnull PersonType type) {
-    this.type = type;
-    return this;
-  }
+                    int match = 0;
+                    ArrayList<String> errorMessages = new ArrayList<>();
+                    TypeAdapter actualAdapter = elementAdapter;
 
-  /**
-   * Get type
-   * @return type
-   */
-  @javax.annotation.Nonnull
-  public PersonType getType() {
-    return type;
-  }
+                    // deserialize PersonNaturalV1
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        PersonNaturalV1.validateJsonElement(jsonElement);
+                        actualAdapter = adapterPersonNaturalV1;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'PersonNaturalV1'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for PersonNaturalV1 failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'PersonNaturalV1'", e);
+                    }
+                    // deserialize PersonLegalV1
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        PersonLegalV1.validateJsonElement(jsonElement);
+                        actualAdapter = adapterPersonLegalV1;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'PersonLegalV1'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for PersonLegalV1 failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'PersonLegalV1'", e);
+                    }
 
-  public void setType(@javax.annotation.Nonnull PersonType type) {
-    this.type = type;
-  }
+                    if (match == 1) {
+                        PersonV1 ret = new PersonV1();
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
+                        return ret;
+                    }
 
-
-  public PersonV1 name(@javax.annotation.Nonnull String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Full legal name of person/entity.
-   * @return name
-   */
-  @javax.annotation.Nonnull
-  public String getName() {
-    return name;
-  }
-
-  public void setName(@javax.annotation.Nonnull String name) {
-    this.name = name;
-  }
-
-
-  public PersonV1 address(@javax.annotation.Nonnull PersonAddress address) {
-    this.address = address;
-    return this;
-  }
-
-  /**
-   * Get address
-   * @return address
-   */
-  @javax.annotation.Nonnull
-  public PersonAddress getAddress() {
-    return address;
-  }
-
-  public void setAddress(@javax.annotation.Nonnull PersonAddress address) {
-    this.address = address;
-  }
-
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PersonV1 personV1 = (PersonV1) o;
-    return Objects.equals(this.type, personV1.type) &&
-        Objects.equals(this.name, personV1.name) &&
-        Objects.equals(this.address, personV1.address);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(type, name, address);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PersonV1 {\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    address: ").append(toIndentedString(address)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
-
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("type", "name", "address"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("type", "name", "address"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PersonV1
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PersonV1.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PersonV1 is not found in the empty JSON string", PersonV1.openapiRequiredFields.toString()));
+                    throw new IOException(String.format(Locale.ROOT, "Failed deserialization for PersonV1: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, jsonElement.toString()));
+                }
+            }.nullSafe();
         }
-      }
+    }
 
-      String discriminatorValue = jsonElement.getAsJsonObject().get("type").getAsString();
-      switch (discriminatorValue) {
-        case "PersonLegalV1":
-          PersonLegalV1.validateJsonElement(jsonElement);
-          break;
-        case "PersonNaturalV1":
-          PersonNaturalV1.validateJsonElement(jsonElement);
-          break;
-        default:
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The value of the `type` field `%s` does not match any key defined in the discriminator's mapping.", discriminatorValue));
-      }
-  }
+    // store a list of schema names defined in oneOf
+    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
 
+    public PersonV1() {
+        super("oneOf", Boolean.FALSE);
+    }
 
-  /**
-   * Create an instance of PersonV1 given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PersonV1
-   * @throws IOException if the JSON string is invalid with respect to PersonV1
-   */
-  public static PersonV1 fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PersonV1.class);
-  }
+    public PersonV1(Object o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
 
-  /**
-   * Convert an instance of PersonV1 to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
+    static {
+        schemas.put("PersonNaturalV1", PersonNaturalV1.class);
+        schemas.put("PersonLegalV1", PersonLegalV1.class);
+    }
+
+    @Override
+    public Map<String, Class<?>> getSchemas() {
+        return PersonV1.schemas;
+    }
+
+    /**
+     * Set the instance that matches the oneOf child schema, check
+     * the instance parameter is valid against the oneOf child schemas:
+     * PersonLegalV1, PersonNaturalV1
+     *
+     * It could be an instance of the 'oneOf' schemas.
+     */
+    @Override
+    public void setActualInstance(Object instance) {
+        if (instance instanceof PersonNaturalV1) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof PersonLegalV1) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be PersonLegalV1, PersonNaturalV1");
+    }
+
+    /**
+     * Get the actual instance, which can be the following:
+     * PersonLegalV1, PersonNaturalV1
+     *
+     * @return The actual instance (PersonLegalV1, PersonNaturalV1)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public Object getActualInstance() {
+        return super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `PersonNaturalV1`. If the actual instance is not `PersonNaturalV1`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `PersonNaturalV1`
+     * @throws ClassCastException if the instance is not `PersonNaturalV1`
+     */
+    public PersonNaturalV1 getPersonNaturalV1() throws ClassCastException {
+        return (PersonNaturalV1)super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `PersonLegalV1`. If the actual instance is not `PersonLegalV1`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `PersonLegalV1`
+     * @throws ClassCastException if the instance is not `PersonLegalV1`
+     */
+    public PersonLegalV1 getPersonLegalV1() throws ClassCastException {
+        return (PersonLegalV1)super.getActualInstance();
+    }
+
+    /**
+     * Validates the JSON Element and throws an exception if issues found
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to PersonV1
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        // validate oneOf schemas one by one
+        int validCount = 0;
+        ArrayList<String> errorMessages = new ArrayList<>();
+        // validate the json string with PersonNaturalV1
+        try {
+            PersonNaturalV1.validateJsonElement(jsonElement);
+            validCount++;
+        } catch (Exception e) {
+            errorMessages.add(String.format(Locale.ROOT, "Deserialization for PersonNaturalV1 failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        // validate the json string with PersonLegalV1
+        try {
+            PersonLegalV1.validateJsonElement(jsonElement);
+            validCount++;
+        } catch (Exception e) {
+            errorMessages.add(String.format(Locale.ROOT, "Deserialization for PersonLegalV1 failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        if (validCount != 1) {
+            throw new IOException(String.format(Locale.ROOT, "The JSON string is invalid for PersonV1 with oneOf schemas: PersonLegalV1, PersonNaturalV1. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
+        }
+    }
+
+    /**
+     * Create an instance of PersonV1 given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of PersonV1
+     * @throws IOException if the JSON string is invalid with respect to PersonV1
+     */
+    public static PersonV1 fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, PersonV1.class);
+    }
+
+    /**
+     * Convert an instance of PersonV1 to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
+    }
 }
 

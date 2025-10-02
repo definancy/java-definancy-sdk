@@ -1,7 +1,8 @@
 
 
-# PersonV1
+# PersonBase
 
+Base identification document data common to both natural and legal persons.
 
 ## Properties
 
@@ -10,9 +11,6 @@
 |**type** | **PersonType** |  |  |
 |**name** | **String** | Full legal name of person/entity. |  |
 |**address** | [**PersonAddress**](PersonAddress.md) |  |  |
-|**id** | [**PersonLegalId**](PersonLegalId.md) |  |  |
-|**birth** | [**PersonNaturalBirth**](PersonNaturalBirth.md) |  |  |
-|**incorporation** | [**PersonLegalIncorporation**](PersonLegalIncorporation.md) |  |  |
 
 
 

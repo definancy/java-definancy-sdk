@@ -57,6 +57,29 @@ public class JSON {
     @SuppressWarnings("unchecked")
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
+                .registerTypeSelector(com.definancy.model.DocumentConfig.class, new TypeSelector<com.definancy.model.DocumentConfig>() {
+                    @Override
+                    public Class<? extends com.definancy.model.DocumentConfig> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("CustodialV1", com.definancy.model.DocumentConfigCustodialV1.class);
+                        classByDiscriminatorValue.put("NonCustodialV1", com.definancy.model.DocumentConfigNonCustodialV1.class);
+                        classByDiscriminatorValue.put("PersonV1", com.definancy.model.DocumentConfigPersonV1.class);
+                        classByDiscriminatorValue.put("DocumentConfig", com.definancy.model.DocumentConfig.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
+                .registerTypeSelector(com.definancy.model.PersonBase.class, new TypeSelector<com.definancy.model.PersonBase>() {
+                    @Override
+                    public Class<? extends com.definancy.model.PersonBase> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("PersonLegalV1", com.definancy.model.PersonLegalV1.class);
+                        classByDiscriminatorValue.put("PersonNaturalV1", com.definancy.model.PersonNaturalV1.class);
+                        classByDiscriminatorValue.put("PersonBase", com.definancy.model.PersonBase.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "type"));
+                    }
+          })
                 .registerTypeSelector(com.definancy.model.PersonLegalV1.class, new TypeSelector<com.definancy.model.PersonLegalV1>() {
                     @Override
                     public Class<? extends com.definancy.model.PersonLegalV1> getClassForElement(JsonElement readElement) {
@@ -146,7 +169,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.CustodialV1.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.Document.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentConfig.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentData.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentConfigBase.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentConfigCustodialV1.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentConfigNonCustodialV1.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentConfigPersonV1.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentInfo.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.DocumentStatus.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.Error.CustomTypeAdapterFactory());
@@ -176,6 +202,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.PersonNaturalBirth.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.PersonNaturalId.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.PersonNaturalV1.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.PersonV1.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.QrCode.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.Status.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.TraitProperties.CustomTypeAdapterFactory());

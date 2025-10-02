@@ -11,11 +11,8 @@ package com.definancy.model;
 
 import java.util.Objects;
 import java.util.Locale;
-import com.definancy.model.PersonAddress;
-import com.definancy.model.PersonBase;
-import com.definancy.model.PersonNaturalBirth;
-import com.definancy.model.PersonNaturalId;
-import com.definancy.model.PersonType;
+import com.definancy.model.DocumentType;
+import com.definancy.model.NonCustodialV1;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -49,61 +46,58 @@ import java.util.Locale;
 import com.definancy.JSON;
 
 /**
- * Natural person (individual) details.
+ * DocumentConfigNonCustodialV1
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
-public class PersonNaturalV1 extends PersonBase {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+public class DocumentConfigNonCustodialV1 {
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nonnull
-  private PersonNaturalId id;
+  private DocumentType type;
 
-  public static final String SERIALIZED_NAME_BIRTH = "birth";
-  @SerializedName(SERIALIZED_NAME_BIRTH)
+  public static final String SERIALIZED_NAME_DATA = "data";
+  @SerializedName(SERIALIZED_NAME_DATA)
   @javax.annotation.Nonnull
-  private PersonNaturalBirth birth;
+  private NonCustodialV1 data;
 
-  public PersonNaturalV1() {
-
-    this.type = PersonType.PERSON_NATURAL_V1;
-
+  public DocumentConfigNonCustodialV1() {
   }
 
-  public PersonNaturalV1 id(@javax.annotation.Nonnull PersonNaturalId id) {
-    this.id = id;
+  public DocumentConfigNonCustodialV1 type(@javax.annotation.Nonnull DocumentType type) {
+    this.type = type;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get type
+   * @return type
    */
   @javax.annotation.Nonnull
-  public PersonNaturalId getId() {
-    return id;
+  public DocumentType getType() {
+    return type;
   }
 
-  public void setId(@javax.annotation.Nonnull PersonNaturalId id) {
-    this.id = id;
+  public void setType(@javax.annotation.Nonnull DocumentType type) {
+    this.type = type;
   }
 
 
-  public PersonNaturalV1 birth(@javax.annotation.Nonnull PersonNaturalBirth birth) {
-    this.birth = birth;
+  public DocumentConfigNonCustodialV1 data(@javax.annotation.Nonnull NonCustodialV1 data) {
+    this.data = data;
     return this;
   }
 
   /**
-   * Get birth
-   * @return birth
+   * Get data
+   * @return data
    */
   @javax.annotation.Nonnull
-  public PersonNaturalBirth getBirth() {
-    return birth;
+  public NonCustodialV1 getData() {
+    return data;
   }
 
-  public void setBirth(@javax.annotation.Nonnull PersonNaturalBirth birth) {
-    this.birth = birth;
+  public void setData(@javax.annotation.Nonnull NonCustodialV1 data) {
+    this.data = data;
   }
 
 
@@ -116,24 +110,22 @@ public class PersonNaturalV1 extends PersonBase {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PersonNaturalV1 personNaturalV1 = (PersonNaturalV1) o;
-    return Objects.equals(this.id, personNaturalV1.id) &&
-        Objects.equals(this.birth, personNaturalV1.birth) &&
-        super.equals(o);
+    DocumentConfigNonCustodialV1 documentConfigNonCustodialV1 = (DocumentConfigNonCustodialV1) o;
+    return Objects.equals(this.type, documentConfigNonCustodialV1.type) &&
+        Objects.equals(this.data, documentConfigNonCustodialV1.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, birth, super.hashCode());
+    return Objects.hash(type, data);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PersonNaturalV1 {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    birth: ").append(toIndentedString(birth)).append("\n");
+    sb.append("class DocumentConfigNonCustodialV1 {\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -155,61 +147,66 @@ public class PersonNaturalV1 extends PersonBase {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("type", "name", "address", "id", "birth"));
+    openapiFields = new HashSet<String>(Arrays.asList("type", "data"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "birth", "type", "name", "address"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("type", "data"));
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PersonNaturalV1
+   * @throws IOException if the JSON Element is invalid with respect to DocumentConfigNonCustodialV1
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PersonNaturalV1.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PersonNaturalV1 is not found in the empty JSON string", PersonNaturalV1.openapiRequiredFields.toString()));
+        if (!DocumentConfigNonCustodialV1.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in DocumentConfigNonCustodialV1 is not found in the empty JSON string", DocumentConfigNonCustodialV1.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PersonNaturalV1.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PersonNaturalV1` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!DocumentConfigNonCustodialV1.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `DocumentConfigNonCustodialV1` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PersonNaturalV1.openapiRequiredFields) {
+      for (String requiredField : DocumentConfigNonCustodialV1.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
+        JsonObject jsonObj = jsonElement.getAsJsonObject();
+      // validate the required field `type`
+      DocumentType.validateJsonElement(jsonObj.get("type"));
+      // validate the required field `data`
+      NonCustodialV1.validateJsonElement(jsonObj.get("data"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PersonNaturalV1.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PersonNaturalV1' and its subtypes
+       if (!DocumentConfigNonCustodialV1.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'DocumentConfigNonCustodialV1' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PersonNaturalV1> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PersonNaturalV1.class));
+       final TypeAdapter<DocumentConfigNonCustodialV1> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(DocumentConfigNonCustodialV1.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PersonNaturalV1>() {
+       return (TypeAdapter<T>) new TypeAdapter<DocumentConfigNonCustodialV1>() {
            @Override
-           public void write(JsonWriter out, PersonNaturalV1 value) throws IOException {
+           public void write(JsonWriter out, DocumentConfigNonCustodialV1 value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PersonNaturalV1 read(JsonReader in) throws IOException {
+           public DocumentConfigNonCustodialV1 read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -220,18 +217,18 @@ public class PersonNaturalV1 extends PersonBase {
   }
 
   /**
-   * Create an instance of PersonNaturalV1 given an JSON string
+   * Create an instance of DocumentConfigNonCustodialV1 given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of PersonNaturalV1
-   * @throws IOException if the JSON string is invalid with respect to PersonNaturalV1
+   * @return An instance of DocumentConfigNonCustodialV1
+   * @throws IOException if the JSON string is invalid with respect to DocumentConfigNonCustodialV1
    */
-  public static PersonNaturalV1 fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PersonNaturalV1.class);
+  public static DocumentConfigNonCustodialV1 fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, DocumentConfigNonCustodialV1.class);
   }
 
   /**
-   * Convert an instance of PersonNaturalV1 to an JSON string
+   * Convert an instance of DocumentConfigNonCustodialV1 to an JSON string
    *
    * @return JSON string
    */

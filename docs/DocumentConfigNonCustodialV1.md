@@ -1,6 +1,6 @@
 
 
-# DocumentConfig
+# DocumentConfigNonCustodialV1
 
 
 ## Properties

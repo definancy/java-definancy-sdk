@@ -12,10 +12,10 @@ package com.definancy.model;
 import java.util.Objects;
 import java.util.Locale;
 import com.definancy.model.PersonAddress;
+import com.definancy.model.PersonBase;
 import com.definancy.model.PersonLegalId;
 import com.definancy.model.PersonLegalIncorporation;
 import com.definancy.model.PersonType;
-import com.definancy.model.PersonV1;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -52,7 +52,7 @@ import com.definancy.JSON;
  * Legal entity (organization) details.
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
-public class PersonLegalV1 extends PersonV1 {
+public class PersonLegalV1 extends PersonBase {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   @javax.annotation.Nonnull

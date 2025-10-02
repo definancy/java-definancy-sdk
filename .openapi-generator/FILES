@@ -36,7 +36,10 @@ docs/ContractTraits.md
 docs/CustodialV1.md
 docs/Document.md
 docs/DocumentConfig.md
-docs/DocumentData.md
+docs/DocumentConfigBase.md
+docs/DocumentConfigCustodialV1.md
+docs/DocumentConfigNonCustodialV1.md
+docs/DocumentConfigPersonV1.md
 docs/DocumentInfo.md
 docs/DocumentStatus.md
 docs/DocumentStatusId.md
@@ -68,6 +71,7 @@ docs/PaymentAcceptanceStatusId.md
 docs/PaymentEstimate.md
 docs/PaymentEstimateScenario.md
 docs/PersonAddress.md
+docs/PersonBase.md
 docs/PersonLegalId.md
 docs/PersonLegalIdType.md
 docs/PersonLegalIncorporation.md
@@ -160,7 +164,10 @@ src/main/java/com/definancy/model/ContractTraits.java
 src/main/java/com/definancy/model/CustodialV1.java
 src/main/java/com/definancy/model/Document.java
 src/main/java/com/definancy/model/DocumentConfig.java
-src/main/java/com/definancy/model/DocumentData.java
+src/main/java/com/definancy/model/DocumentConfigBase.java
+src/main/java/com/definancy/model/DocumentConfigCustodialV1.java
+src/main/java/com/definancy/model/DocumentConfigNonCustodialV1.java
+src/main/java/com/definancy/model/DocumentConfigPersonV1.java
 src/main/java/com/definancy/model/DocumentInfo.java
 src/main/java/com/definancy/model/DocumentStatus.java
 src/main/java/com/definancy/model/DocumentStatusId.java
@@ -190,6 +197,7 @@ src/main/java/com/definancy/model/PaymentAcceptanceStatusId.java
 src/main/java/com/definancy/model/PaymentEstimate.java
 src/main/java/com/definancy/model/PaymentEstimateScenario.java
 src/main/java/com/definancy/model/PersonAddress.java
+src/main/java/com/definancy/model/PersonBase.java
 src/main/java/com/definancy/model/PersonLegalId.java
 src/main/java/com/definancy/model/PersonLegalIdType.java
 src/main/java/com/definancy/model/PersonLegalIncorporation.java

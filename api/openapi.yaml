@@ -2090,18 +2090,6 @@ components:
       required:
         - "vault"
         - "status"
-    "DocumentConfig":
-      type: object
-      description: |-
-        Document content specification.
-      properties:
-        "type":
-          $ref: "#/components/schemas/DocumentType"
-        "data":
-          $ref: "#/components/schemas/DocumentData"
-      required:
-        - "type"
-        - "data"
     "DocumentType":
       type: string
       description: |-
@@ -2110,12 +2098,56 @@ components:
         - "PersonV1"
         - "CustodialV1"
         - "NonCustodialV1"
-    "DocumentData":
-      type: object
+    "DocumentConfig":
       oneOf:
-        - $ref: "#/components/schemas/PersonV1"
-        - $ref: "#/components/schemas/CustodialV1"
-        - $ref: "#/components/schemas/NonCustodialV1"
+        - $ref: "#/components/schemas/DocumentConfigPersonV1"
+        - $ref: "#/components/schemas/DocumentConfigCustodialV1"
+        - $ref: "#/components/schemas/DocumentConfigNonCustodialV1"
+      discriminator:
+        propertyName: "type"
+        mapping:
+          "PersonV1": "#/components/schemas/DocumentConfigPersonV1"
+          "CustodialV1": "#/components/schemas/DocumentConfigCustodialV1"
+          "NonCustodialV1": "#/components/schemas/DocumentConfigNonCustodialV1"
+    "DocumentConfigBase":
+      type: object
+      description: |-
+        Document content specification.
+      properties:
+        "type":
+          $ref: "#/components/schemas/DocumentType"
+      required:
+        - "type"
+    "DocumentConfigPersonV1":
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DocumentConfigBase"
+        - type: object
+          properties:
+            "data":
+              $ref: "#/components/schemas/PersonV1"
+          required:
+            - "data"
+    "DocumentConfigCustodialV1":
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DocumentConfigBase"
+        - type: object
+          properties:
+            "data":
+              $ref: "#/components/schemas/CustodialV1"
+          required:
+            - "data"
+    "DocumentConfigNonCustodialV1":
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DocumentConfigBase"
+        - type: object
+          properties:
+            "data":
+              $ref: "#/components/schemas/NonCustodialV1"
+          required:
+            - "data"
     "DocumentStatus":
       type: object
       description: |-
@@ -2147,6 +2179,15 @@ components:
       minLength: 1
       maxLength: 400
     "PersonV1":
+      oneOf:
+        - $ref: "#/components/schemas/PersonNaturalV1"
+        - $ref: "#/components/schemas/PersonLegalV1"
+      discriminator:
+        propertyName: "type"
+        mapping:
+          "PersonNaturalV1": "#/components/schemas/PersonNaturalV1"
+          "PersonLegalV1": "#/components/schemas/PersonLegalV1"
+    "PersonBase":
       type: object
       description: |-
         Base identification document data common to both natural and legal persons.
@@ -2203,7 +2244,7 @@ components:
       description: |-
         Natural person (individual) details.
       allOf:
-        - $ref: "#/components/schemas/PersonV1"
+        - $ref: "#/components/schemas/PersonBase"
         - type: object
           properties:
             "id":
@@ -2267,7 +2308,7 @@ components:
       description: |-
         Legal entity (organization) details.
       allOf:
-        - $ref: "#/components/schemas/PersonV1"
+        - $ref: "#/components/schemas/PersonBase"
         - type: object
           properties:
             "id":
