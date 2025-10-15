@@ -9,7 +9,7 @@ All URIs are relative to *https://stub.definancy.com*
 
 <a id="generateWalletQrCodes"></a>
 # **generateWalletQrCodes**
-> List&lt;QrCode&gt; generateWalletQrCodes(contractAmountFormat)
+> List&lt;QrCode&gt; generateWalletQrCodes(qrCodeTransactionRequest)
 
 Generate QR-Codes for wallets
 
@@ -47,9 +47,9 @@ public class Example {
     apiClient.setHttpClient(httpClient);
 
     QrCodeApi apiInstance = new QrCodeApi(apiClient);
-    ContractAmountFormat contractAmountFormat = new ContractAmountFormat(); // ContractAmountFormat | Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract's unit.
+    QrCodeTransactionRequest qrCodeTransactionRequest = new QrCodeTransactionRequest(); // QrCodeTransactionRequest | Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract's unit.
     try {
-      List<QrCode> result = apiInstance.generateWalletQrCodes(contractAmountFormat);
+      List<QrCode> result = apiInstance.generateWalletQrCodes(qrCodeTransactionRequest);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling QrCodeApi#generateWalletQrCodes");
@@ -66,7 +66,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **contractAmountFormat** | [**ContractAmountFormat**](ContractAmountFormat.md)| Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. | |
+| **qrCodeTransactionRequest** | [**QrCodeTransactionRequest**](QrCodeTransactionRequest.md)| Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. | |
 
 ### Return type
 

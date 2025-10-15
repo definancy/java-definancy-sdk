@@ -23,9 +23,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.definancy.model.ContractAmountFormat;
 import com.definancy.model.ErrorList;
 import com.definancy.model.QrCode;
+import com.definancy.model.QrCodeTransactionRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class QrCodeApi {
 
     /**
      * Build call for generateWalletQrCodes
-     * @param contractAmountFormat Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
+     * @param qrCodeTransactionRequest Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -88,7 +88,7 @@ public class QrCodeApi {
         <tr><td> 0 </td><td> An unexpected server error occurred while processing the request. This indicates an internal system issue that prevented successful completion. The error details may provide additional context for debugging and support purposes. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call generateWalletQrCodesCall(@javax.annotation.Nonnull ContractAmountFormat contractAmountFormat, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call generateWalletQrCodesCall(@javax.annotation.Nonnull QrCodeTransactionRequest qrCodeTransactionRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -102,7 +102,7 @@ public class QrCodeApi {
             basePath = null;
         }
 
-        Object localVarPostBody = contractAmountFormat;
+        Object localVarPostBody = qrCodeTransactionRequest;
 
         // create path and map variables
         String localVarPath = "/v1/qrcode/transaction";
@@ -134,20 +134,20 @@ public class QrCodeApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call generateWalletQrCodesValidateBeforeCall(@javax.annotation.Nonnull ContractAmountFormat contractAmountFormat, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'contractAmountFormat' is set
-        if (contractAmountFormat == null) {
-            throw new ApiException("Missing the required parameter 'contractAmountFormat' when calling generateWalletQrCodes(Async)");
+    private okhttp3.Call generateWalletQrCodesValidateBeforeCall(@javax.annotation.Nonnull QrCodeTransactionRequest qrCodeTransactionRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'qrCodeTransactionRequest' is set
+        if (qrCodeTransactionRequest == null) {
+            throw new ApiException("Missing the required parameter 'qrCodeTransactionRequest' when calling generateWalletQrCodes(Async)");
         }
 
-        return generateWalletQrCodesCall(contractAmountFormat, _callback);
+        return generateWalletQrCodesCall(qrCodeTransactionRequest, _callback);
 
     }
 
     /**
      * Generate QR-Codes for wallets
      * Generates the QR-Codes to be used by a wallet to help on the creation of a transaction request.
-     * @param contractAmountFormat Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
+     * @param qrCodeTransactionRequest Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
      * @return List&lt;QrCode&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -162,15 +162,15 @@ public class QrCodeApi {
         <tr><td> 0 </td><td> An unexpected server error occurred while processing the request. This indicates an internal system issue that prevented successful completion. The error details may provide additional context for debugging and support purposes. </td><td>  -  </td></tr>
      </table>
      */
-    public List<QrCode> generateWalletQrCodes(@javax.annotation.Nonnull ContractAmountFormat contractAmountFormat) throws ApiException {
-        ApiResponse<List<QrCode>> localVarResp = generateWalletQrCodesWithHttpInfo(contractAmountFormat);
+    public List<QrCode> generateWalletQrCodes(@javax.annotation.Nonnull QrCodeTransactionRequest qrCodeTransactionRequest) throws ApiException {
+        ApiResponse<List<QrCode>> localVarResp = generateWalletQrCodesWithHttpInfo(qrCodeTransactionRequest);
         return localVarResp.getData();
     }
 
     /**
      * Generate QR-Codes for wallets
      * Generates the QR-Codes to be used by a wallet to help on the creation of a transaction request.
-     * @param contractAmountFormat Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
+     * @param qrCodeTransactionRequest Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
      * @return ApiResponse&lt;List&lt;QrCode&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -185,8 +185,8 @@ public class QrCodeApi {
         <tr><td> 0 </td><td> An unexpected server error occurred while processing the request. This indicates an internal system issue that prevented successful completion. The error details may provide additional context for debugging and support purposes. </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<QrCode>> generateWalletQrCodesWithHttpInfo(@javax.annotation.Nonnull ContractAmountFormat contractAmountFormat) throws ApiException {
-        okhttp3.Call localVarCall = generateWalletQrCodesValidateBeforeCall(contractAmountFormat, null);
+    public ApiResponse<List<QrCode>> generateWalletQrCodesWithHttpInfo(@javax.annotation.Nonnull QrCodeTransactionRequest qrCodeTransactionRequest) throws ApiException {
+        okhttp3.Call localVarCall = generateWalletQrCodesValidateBeforeCall(qrCodeTransactionRequest, null);
         Type localVarReturnType = new TypeToken<List<QrCode>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
@@ -194,7 +194,7 @@ public class QrCodeApi {
     /**
      * Generate QR-Codes for wallets (asynchronously)
      * Generates the QR-Codes to be used by a wallet to help on the creation of a transaction request.
-     * @param contractAmountFormat Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
+     * @param qrCodeTransactionRequest Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract&#39;s unit. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -210,9 +210,9 @@ public class QrCodeApi {
         <tr><td> 0 </td><td> An unexpected server error occurred while processing the request. This indicates an internal system issue that prevented successful completion. The error details may provide additional context for debugging and support purposes. </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call generateWalletQrCodesAsync(@javax.annotation.Nonnull ContractAmountFormat contractAmountFormat, final ApiCallback<List<QrCode>> _callback) throws ApiException {
+    public okhttp3.Call generateWalletQrCodesAsync(@javax.annotation.Nonnull QrCodeTransactionRequest qrCodeTransactionRequest, final ApiCallback<List<QrCode>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = generateWalletQrCodesValidateBeforeCall(contractAmountFormat, _callback);
+        okhttp3.Call localVarCall = generateWalletQrCodesValidateBeforeCall(qrCodeTransactionRequest, _callback);
         Type localVarReturnType = new TypeToken<List<QrCode>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

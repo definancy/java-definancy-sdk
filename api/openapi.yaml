@@ -1160,7 +1160,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ContractAmountFormat"
+              $ref: "#/components/schemas/QrCodeTransactionRequest"
         description: |-
           Contract-amount pair for which to generate the qr-codes.
           The amount should represent the desired payment value in the contract's unit.
@@ -1528,8 +1528,8 @@ components:
         Country name or ISO 3166-1 alpha-2 country code for geographic identification.
         Used in address information, birth records, and incorporation details
         for compliance and identity verification purposes.
-      minLength: 1
-      maxLength: 40
+      minLength: 2
+      maxLength: 2
     "Note":
       type: string
       description: |-
@@ -1563,6 +1563,24 @@ components:
       type: object
 
     # QR-Code
+    "QrCodeTransactionRequest":
+      type: object
+      description: |-
+        Request object containing the essential payment parameters needed to generate
+        a blockchain transaction QR code. Specifies the destination, amount, and token
+        contract details that will be encoded into a scannable QR format for cryptocurrency
+        wallet applications.
+      properties:
+        "contract-id":
+          $ref: "#/components/schemas/ContractId"
+        "amount":
+          $ref: "#/components/schemas/AmountFormat"
+        "address":
+          $ref: "#/components/schemas/NetworkAddress"
+      required:
+        - "contract-id"
+        - "amount"
+        - "address"
     "QrCode":
       type: object
       description: |-
@@ -1695,7 +1713,7 @@ components:
         Examples include 'ethereum' for Ethereum, 'algorand' for Algorand,
         or 'bitcoin' for Bitcoin. Used throughout the API to specify which 
         network operations should target.
-      pattern: "^[a-z0-9]+$"
+      pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
       minLength: 1
       maxLength: 32
     "NetworkMediaMap":

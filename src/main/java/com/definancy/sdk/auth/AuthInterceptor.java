@@ -1,53 +1,40 @@
 package com.definancy.sdk.auth;
 
-import com.definancy.sdk.crypto.KeyPair;
 import okhttp3.Interceptor;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
 public class AuthInterceptor implements Interceptor {
-    private final String accessToken;
-    private final KeyPair keyPair;
+    private final AuthProvider provider;
 
-    public AuthInterceptor(Attestor attestor) throws Exception {
-        this.keyPair = KeyPair.generateKeyPair();
-        String thumbprint = this.keyPair.publicKey().jwk().thumbprint();
-        this.accessToken = attestor.Attest(thumbprint);
+    public AuthInterceptor(AuthProvider provider) throws Exception {
+        this.provider = provider;
     }
 
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
         Request originalRequest = chain.request();
-        if (accessToken == null) {
+        if (this.provider == null) {
             return chain.proceed(originalRequest);
         }
 
-        // Generate DPoP token for this specific request
-        RequestBody body = originalRequest.body();
-        Jwt dpop = Jwt.createDPoP(
-            this.keyPair.publicKey(),
-            originalRequest.method(),
-            originalRequest.url().toString(),
-            body == null? null : body.toString()
-        );
-
+        String authorizationToken;
         String dpopToken;
         try {
-            String signature = keyPair.sign(dpop.encodeB64());
-            dpop.setSignature(signature);
-            dpopToken = dpop.encodeB64();
+            Authentication authentication = this.provider.authenticate(originalRequest);
+            authorizationToken = authentication.getAuthorization().encodeB64();
+            dpopToken = authentication.getDPoP().encodeB64();
         } catch (Exception e) {
             throw new IOException(e);
         }
 
         // Build new request with both headers
         Request newRequest = originalRequest.newBuilder()
-                .header("Authorization", "DPoP " + accessToken)
+                .header("Authorization", "DPoP " + authorizationToken)
                 .header("DPoP", dpopToken)
                 .build();
 

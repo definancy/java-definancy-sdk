@@ -1,5 +1,7 @@
 package com.definancy.sdk.demo;
 
+import com.definancy.sdk.auth.Authorization;
+import com.definancy.sdk.auth.DPoP;
 import com.definancy.sdk.auth.Jwt;
 import com.definancy.sdk.crypto.KeyPair;
 
@@ -11,7 +13,7 @@ public class GenerateAuth {
 		String network = Config.network;
 		String audience = Config.audience;
 
-		Jwt authorization  = Jwt.createAuthorization(
+		Jwt authorization  = new Authorization(
 			master.publicKey().computeDID(network),
 			audience,
 			slave.publicKey().jwk().thumbprint()
@@ -20,11 +22,11 @@ public class GenerateAuth {
 		authorization.setSignature(signature);
 		String authorizationString = String.format("Authorization: DPoP %s", authorization.encodeB64());
 
-		Jwt dpop = Jwt.createDPoP(
-			slave.publicKey(),
+		Jwt dpop = new DPoP(
 			"GET",
 			audience + "/v1/contract",
-			null
+			null,
+            slave.publicKey().jwk()
 		);
 		signature = slave.sign(dpop.encodeB64());
 		dpop.setSignature(signature);
@@ -34,8 +36,7 @@ public class GenerateAuth {
 
 		System.out.println();
 
-		dpop = Jwt.createDPoP(
-			slave.publicKey(),
+		dpop = new DPoP(
 			"PUT",
 			audience + "/v1/vault/myVault",
             "{\n" +
@@ -50,8 +51,9 @@ public class GenerateAuth {
             "    }\n" +
             "  ],\n" +
             "  \"enabled\": true\n" +
-            "}\n"
-		);
+            "}\n",
+            slave.publicKey().jwk()
+        );
 		signature = slave.sign(dpop.encodeB64());
 		dpop.setSignature(signature);
 		System.out.println("=== Request 2 ===");

@@ -1,7 +1,7 @@
 package com.definancy.sdk.crypto;
 
-import com.definancy.sdk.DID;
-import com.definancy.sdk.ID;
+import com.definancy.sdk.auth.Jwk;
+import com.definancy.sdk.auth.Signer;
 import com.definancy.sdk.util.CryptoProvider;
 import com.definancy.sdk.util.Encoder;
 import org.bouncycastle.asn1.ASN1Encodable;
@@ -16,7 +16,7 @@ import java.security.Signature;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class KeyPair {
+public class KeyPair implements Signer {
     private final java.security.KeyPair privateKeyPair;
 
     private static final String KEY_ALGO = "Ed25519";
@@ -95,6 +95,10 @@ public class KeyPair {
 
     public Ed25519PublicKey publicKey() {
         return new Ed25519PublicKey(this.privateKeyPair.getPublic());
+    }
+
+    public Jwk jwk() throws Exception{
+        return this.publicKey().jwk();
     }
 
     public String sign(String message) throws Exception {

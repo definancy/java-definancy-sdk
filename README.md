@@ -246,6 +246,7 @@ Class | Method | HTTP request | Description
  - [PersonV1](docs/PersonV1.md)
  - [QrCode](docs/QrCode.md)
  - [QrCodeEncoding](docs/QrCodeEncoding.md)
+ - [QrCodeTransactionRequest](docs/QrCodeTransactionRequest.md)
  - [QrCodeType](docs/QrCodeType.md)
  - [Status](docs/Status.md)
  - [TraitProperties](docs/TraitProperties.md)

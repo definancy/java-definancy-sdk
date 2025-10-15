@@ -3,7 +3,7 @@ package com.definancy.sdk.demo;
 import com.definancy.ApiClient;
 import com.definancy.sdk.DID;
 import com.definancy.sdk.auth.AuthInterceptor;
-import com.definancy.sdk.auth.impl.LocalAttestor;
+import com.definancy.sdk.auth.impl.LocalAuthProvider;
 import com.definancy.sdk.crypto.KeyPair;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -16,8 +16,12 @@ public class Config {
     public static String secret = "qHWHe6jLnx7gD-CZSe3X2UwgC-ISFOVy4rfFWxxJXX0";
     public static String vaultId = "myVault";
 
+    public static KeyPair getKeyPair() throws Exception {
+        return KeyPair.generateKeyPairFromSecret(secret);
+    }
+
     public static DID getDID() throws Exception {
-        KeyPair keyPair = KeyPair.generateKeyPairFromSecret(secret);
+        KeyPair keyPair = getKeyPair();
         return keyPair.publicKey().computeDID(Config.network);
     }
 
@@ -26,10 +30,11 @@ public class Config {
         String audience = Config.audience;
         String secret = Config.secret;
 
-        KeyPair keyPair = KeyPair.generateKeyPairFromSecret(secret);
+        KeyPair keyPair = getKeyPair();
+        DID did = getDID();
 
-        LocalAttestor localAttestor = new LocalAttestor(keyPair, network, audience);
-        AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
+        LocalAuthProvider signer = new LocalAuthProvider(did, keyPair);
+        AuthInterceptor authInterceptor = new AuthInterceptor(signer);
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

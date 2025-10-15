@@ -86,6 +86,7 @@ docs/ProbeApi.md
 docs/QrCode.md
 docs/QrCodeApi.md
 docs/QrCodeEncoding.md
+docs/QrCodeTransactionRequest.md
 docs/QrCodeType.md
 docs/Status.md
 docs/TraitProperties.md
@@ -210,6 +211,7 @@ src/main/java/com/definancy/model/PersonType.java
 src/main/java/com/definancy/model/PersonV1.java
 src/main/java/com/definancy/model/QrCode.java
 src/main/java/com/definancy/model/QrCodeEncoding.java
+src/main/java/com/definancy/model/QrCodeTransactionRequest.java
 src/main/java/com/definancy/model/QrCodeType.java
 src/main/java/com/definancy/model/Status.java
 src/main/java/com/definancy/model/TraitProperties.java

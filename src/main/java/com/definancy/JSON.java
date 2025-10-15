@@ -204,6 +204,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.PersonNaturalV1.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.PersonV1.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.QrCode.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.QrCodeTransactionRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.Status.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.TraitProperties.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.definancy.model.Traits.CustomTypeAdapterFactory());
