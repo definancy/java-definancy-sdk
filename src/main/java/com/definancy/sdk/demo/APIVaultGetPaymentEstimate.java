@@ -35,7 +35,9 @@ public class APIVaultGetPaymentEstimate {
             }
             System.out.println("Estimate generated successfully");
         } catch (ApiException e) {
-            Utils.printApiException(e, "VaultPaymentApi", "vaultGetPaymentEstimate");
+            Utils.printException(e, "VaultPaymentApi", "vaultGetPaymentEstimate");
+        } catch (Exception e) {
+            Utils.printException(e, "VaultPaymentApi", "vaultGetPaymentEstimate");
         }
     }
 }

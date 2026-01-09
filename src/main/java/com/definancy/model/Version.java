@@ -10,60 +10,42 @@
 package com.definancy.model;
 
 import java.util.Objects;
-import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.HashMap;
 import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Version tracking metadata for resources that change over time. Provides sequence numbering and timestamps for creation and modification to support optimistic locking and change tracking.
  */
+@JsonPropertyOrder({
+  Version.JSON_PROPERTY_SEQUENCE,
+  Version.JSON_PROPERTY_CREATED_AT,
+  Version.JSON_PROPERTY_UPDATED_AT
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class Version {
-  public static final String SERIALIZED_NAME_SEQUENCE = "sequence";
-  @SerializedName(SERIALIZED_NAME_SEQUENCE)
+  public static final String JSON_PROPERTY_SEQUENCE = "sequence";
   @javax.annotation.Nonnull
   private Integer sequence;
 
-  public static final String SERIALIZED_NAME_CREATED_AT = "created-at";
-  @SerializedName(SERIALIZED_NAME_CREATED_AT)
+  public static final String JSON_PROPERTY_CREATED_AT = "created-at";
   @javax.annotation.Nonnull
   private Integer createdAt;
 
-  public static final String SERIALIZED_NAME_UPDATED_AT = "updated-at";
-  @SerializedName(SERIALIZED_NAME_UPDATED_AT)
+  public static final String JSON_PROPERTY_UPDATED_AT = "updated-at";
   @javax.annotation.Nonnull
   private Integer updatedAt;
 
-  public Version() {
+  public Version() { 
   }
 
   public Version sequence(@javax.annotation.Nonnull Integer sequence) {
@@ -77,10 +59,16 @@ public class Version {
    * @return sequence
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_SEQUENCE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getSequence() {
     return sequence;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_SEQUENCE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSequence(@javax.annotation.Nonnull Integer sequence) {
     this.sequence = sequence;
   }
@@ -97,10 +85,16 @@ public class Version {
    * @return createdAt
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CREATED_AT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getCreatedAt() {
     return createdAt;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CREATED_AT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCreatedAt(@javax.annotation.Nonnull Integer createdAt) {
     this.createdAt = createdAt;
   }
@@ -117,16 +111,24 @@ public class Version {
    * @return updatedAt
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_UPDATED_AT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getUpdatedAt() {
     return updatedAt;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_UPDATED_AT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUpdatedAt(@javax.annotation.Nonnull Integer updatedAt) {
     this.updatedAt = updatedAt;
   }
 
 
-
+  /**
+   * Return true if this Version object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -168,95 +170,5 @@ public class Version {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("sequence", "created-at", "updated-at"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("sequence", "created-at", "updated-at"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to Version
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!Version.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in Version is not found in the empty JSON string", Version.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!Version.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Version` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : Version.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!Version.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'Version' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<Version> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(Version.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<Version>() {
-           @Override
-           public void write(JsonWriter out, Version value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public Version read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of Version given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of Version
-   * @throws IOException if the JSON string is invalid with respect to Version
-   */
-  public static Version fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, Version.class);
-  }
-
-  /**
-   * Convert an instance of Version to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -7,8 +7,13 @@ import com.definancy.model.ContractAmountFormat;
 import com.definancy.model.ContractId;
 
 public class Utils {
-    public static void printApiException(ApiException e, String api, String method) {
-        System.err.printf("Exception when calling %s#%s\n", api, method);
+    public static void printException(Exception e, String api, String method) {
+        System.err.printf("[GENERIC] Exception when calling %s#%s\n", api, method);
+        e.printStackTrace();
+    }
+
+    public static void printException(ApiException e, String api, String method) {
+        System.err.printf("[API] ApiException when calling %s#%s\n", api, method);
         System.err.println("Status code: " + e.getCode());
         System.err.println("Reason: " + e.getResponseBody());
         System.err.println("Response headers: " + e.getResponseHeaders());

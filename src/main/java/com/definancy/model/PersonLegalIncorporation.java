@@ -10,60 +10,42 @@
 package com.definancy.model;
 
 import java.util.Objects;
-import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.HashMap;
 import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Business incorporation and formation details required for legal entity  verification. Must match information on official business registration  documents and corporate filings.
  */
+@JsonPropertyOrder({
+  PersonLegalIncorporation.JSON_PROPERTY_DATE,
+  PersonLegalIncorporation.JSON_PROPERTY_REGION,
+  PersonLegalIncorporation.JSON_PROPERTY_COUNTRY
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class PersonLegalIncorporation {
-  public static final String SERIALIZED_NAME_DATE = "date";
-  @SerializedName(SERIALIZED_NAME_DATE)
+  public static final String JSON_PROPERTY_DATE = "date";
   @javax.annotation.Nonnull
   private String date;
 
-  public static final String SERIALIZED_NAME_REGION = "region";
-  @SerializedName(SERIALIZED_NAME_REGION)
+  public static final String JSON_PROPERTY_REGION = "region";
   @javax.annotation.Nonnull
   private String region;
 
-  public static final String SERIALIZED_NAME_COUNTRY = "country";
-  @SerializedName(SERIALIZED_NAME_COUNTRY)
+  public static final String JSON_PROPERTY_COUNTRY = "country";
   @javax.annotation.Nonnull
   private String country;
 
-  public PersonLegalIncorporation() {
+  public PersonLegalIncorporation() { 
   }
 
   public PersonLegalIncorporation date(@javax.annotation.Nonnull String date) {
@@ -76,10 +58,16 @@ public class PersonLegalIncorporation {
    * @return date
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_DATE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getDate() {
     return date;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_DATE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setDate(@javax.annotation.Nonnull String date) {
     this.date = date;
   }
@@ -95,10 +83,16 @@ public class PersonLegalIncorporation {
    * @return region
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_REGION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getRegion() {
     return region;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_REGION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setRegion(@javax.annotation.Nonnull String region) {
     this.region = region;
   }
@@ -114,16 +108,24 @@ public class PersonLegalIncorporation {
    * @return country
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_COUNTRY, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCountry() {
     return country;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_COUNTRY, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCountry(@javax.annotation.Nonnull String country) {
     this.country = country;
   }
 
 
-
+  /**
+   * Return true if this PersonLegalIncorporation object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -165,104 +167,5 @@ public class PersonLegalIncorporation {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("date", "region", "country"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("date", "region", "country"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PersonLegalIncorporation
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PersonLegalIncorporation.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PersonLegalIncorporation is not found in the empty JSON string", PersonLegalIncorporation.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PersonLegalIncorporation.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PersonLegalIncorporation` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PersonLegalIncorporation.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("date").toString()));
-      }
-      if (!jsonObj.get("region").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `region` to be a primitive type in the JSON string but got `%s`", jsonObj.get("region").toString()));
-      }
-      if (!jsonObj.get("country").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `country` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PersonLegalIncorporation.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PersonLegalIncorporation' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PersonLegalIncorporation> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PersonLegalIncorporation.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PersonLegalIncorporation>() {
-           @Override
-           public void write(JsonWriter out, PersonLegalIncorporation value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PersonLegalIncorporation read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of PersonLegalIncorporation given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PersonLegalIncorporation
-   * @throws IOException if the JSON string is invalid with respect to PersonLegalIncorporation
-   */
-  public static PersonLegalIncorporation fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PersonLegalIncorporation.class);
-  }
-
-  /**
-   * Convert an instance of PersonLegalIncorporation to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

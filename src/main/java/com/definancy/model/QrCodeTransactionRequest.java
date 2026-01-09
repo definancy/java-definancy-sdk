@@ -10,62 +10,44 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.AmountFormat;
 import com.definancy.model.ContractId;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Request object containing the essential payment parameters needed to generate a blockchain transaction QR code. Specifies the destination, amount, and token contract details that will be encoded into a scannable QR format for cryptocurrency wallet applications.
  */
+@JsonPropertyOrder({
+  QrCodeTransactionRequest.JSON_PROPERTY_CONTRACT_ID,
+  QrCodeTransactionRequest.JSON_PROPERTY_AMOUNT,
+  QrCodeTransactionRequest.JSON_PROPERTY_ADDRESS
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class QrCodeTransactionRequest {
-  public static final String SERIALIZED_NAME_CONTRACT_ID = "contract-id";
-  @SerializedName(SERIALIZED_NAME_CONTRACT_ID)
+  public static final String JSON_PROPERTY_CONTRACT_ID = "contract-id";
   @javax.annotation.Nonnull
   private ContractId contractId;
 
-  public static final String SERIALIZED_NAME_AMOUNT = "amount";
-  @SerializedName(SERIALIZED_NAME_AMOUNT)
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
   @javax.annotation.Nonnull
   private AmountFormat amount;
 
-  public static final String SERIALIZED_NAME_ADDRESS = "address";
-  @SerializedName(SERIALIZED_NAME_ADDRESS)
+  public static final String JSON_PROPERTY_ADDRESS = "address";
   @javax.annotation.Nonnull
   private String address;
 
-  public QrCodeTransactionRequest() {
+  public QrCodeTransactionRequest() { 
   }
 
   public QrCodeTransactionRequest contractId(@javax.annotation.Nonnull ContractId contractId) {
@@ -78,10 +60,16 @@ public class QrCodeTransactionRequest {
    * @return contractId
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractId getContractId() {
     return contractId;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setContractId(@javax.annotation.Nonnull ContractId contractId) {
     this.contractId = contractId;
   }
@@ -97,10 +85,16 @@ public class QrCodeTransactionRequest {
    * @return amount
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_AMOUNT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public AmountFormat getAmount() {
     return amount;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_AMOUNT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmount(@javax.annotation.Nonnull AmountFormat amount) {
     this.amount = amount;
   }
@@ -116,16 +110,24 @@ public class QrCodeTransactionRequest {
    * @return address
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAddress() {
     return address;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddress(@javax.annotation.Nonnull String address) {
     this.address = address;
   }
 
 
-
+  /**
+   * Return true if this QrCodeTransactionRequest object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -167,102 +169,5 @@ public class QrCodeTransactionRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("contract-id", "amount", "address"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("contract-id", "amount", "address"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to QrCodeTransactionRequest
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!QrCodeTransactionRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in QrCodeTransactionRequest is not found in the empty JSON string", QrCodeTransactionRequest.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!QrCodeTransactionRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `QrCodeTransactionRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : QrCodeTransactionRequest.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `contract-id`
-      ContractId.validateJsonElement(jsonObj.get("contract-id"));
-      // validate the required field `amount`
-      AmountFormat.validateJsonElement(jsonObj.get("amount"));
-      if (!jsonObj.get("address").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `address` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!QrCodeTransactionRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'QrCodeTransactionRequest' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<QrCodeTransactionRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(QrCodeTransactionRequest.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<QrCodeTransactionRequest>() {
-           @Override
-           public void write(JsonWriter out, QrCodeTransactionRequest value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public QrCodeTransactionRequest read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of QrCodeTransactionRequest given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of QrCodeTransactionRequest
-   * @throws IOException if the JSON string is invalid with respect to QrCodeTransactionRequest
-   */
-  public static QrCodeTransactionRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, QrCodeTransactionRequest.class);
-  }
-
-  /**
-   * Convert an instance of QrCodeTransactionRequest to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

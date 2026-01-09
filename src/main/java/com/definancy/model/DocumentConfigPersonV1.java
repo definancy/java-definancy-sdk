@@ -10,57 +10,39 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.DocumentType;
 import com.definancy.model.PersonV1;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * DocumentConfigPersonV1
  */
+@JsonPropertyOrder({
+  DocumentConfigPersonV1.JSON_PROPERTY_TYPE,
+  DocumentConfigPersonV1.JSON_PROPERTY_DATA
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class DocumentConfigPersonV1 {
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
+  public static final String JSON_PROPERTY_TYPE = "type";
   @javax.annotation.Nonnull
   private DocumentType type;
 
-  public static final String SERIALIZED_NAME_DATA = "data";
-  @SerializedName(SERIALIZED_NAME_DATA)
+  public static final String JSON_PROPERTY_DATA = "data";
   @javax.annotation.Nonnull
   private PersonV1 data;
 
-  public DocumentConfigPersonV1() {
+  public DocumentConfigPersonV1() { 
   }
 
   public DocumentConfigPersonV1 type(@javax.annotation.Nonnull DocumentType type) {
@@ -73,10 +55,16 @@ public class DocumentConfigPersonV1 {
    * @return type
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public DocumentType getType() {
     return type;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setType(@javax.annotation.Nonnull DocumentType type) {
     this.type = type;
   }
@@ -92,16 +80,24 @@ public class DocumentConfigPersonV1 {
    * @return data
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_DATA, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PersonV1 getData() {
     return data;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_DATA, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setData(@javax.annotation.Nonnull PersonV1 data) {
     this.data = data;
   }
 
 
-
+  /**
+   * Return true if this DocumentConfigPersonV1 object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -141,99 +137,5 @@ public class DocumentConfigPersonV1 {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("type", "data"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("type", "data"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to DocumentConfigPersonV1
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!DocumentConfigPersonV1.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in DocumentConfigPersonV1 is not found in the empty JSON string", DocumentConfigPersonV1.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!DocumentConfigPersonV1.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `DocumentConfigPersonV1` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : DocumentConfigPersonV1.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `type`
-      DocumentType.validateJsonElement(jsonObj.get("type"));
-      // validate the required field `data`
-      PersonV1.validateJsonElement(jsonObj.get("data"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!DocumentConfigPersonV1.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'DocumentConfigPersonV1' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<DocumentConfigPersonV1> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(DocumentConfigPersonV1.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<DocumentConfigPersonV1>() {
-           @Override
-           public void write(JsonWriter out, DocumentConfigPersonV1 value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public DocumentConfigPersonV1 read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of DocumentConfigPersonV1 given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of DocumentConfigPersonV1
-   * @throws IOException if the JSON string is invalid with respect to DocumentConfigPersonV1
-   */
-  public static DocumentConfigPersonV1 fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, DocumentConfigPersonV1.class);
-  }
-
-  /**
-   * Convert an instance of DocumentConfigPersonV1 to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

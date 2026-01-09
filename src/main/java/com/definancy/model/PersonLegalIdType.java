@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Type of business identification document accepted for legal entity  verification. Currently limited to tax identification documents  but may be expanded to include other business registration types.
  */
-@JsonAdapter(PersonLegalIdType.Adapter.class)
 public enum PersonLegalIdType {
   
   TAX_ID("TaxId"),
@@ -37,6 +36,7 @@ public enum PersonLegalIdType {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -46,6 +46,7 @@ public enum PersonLegalIdType {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static PersonLegalIdType fromValue(String value) {
     for (PersonLegalIdType b : PersonLegalIdType.values()) {
       if (b.value.equals(value)) {
@@ -53,24 +54,6 @@ public enum PersonLegalIdType {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<PersonLegalIdType> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final PersonLegalIdType enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public PersonLegalIdType read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return PersonLegalIdType.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    PersonLegalIdType.fromValue(value);
   }
 }
 

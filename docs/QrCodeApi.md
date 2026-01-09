@@ -7,62 +7,62 @@ All URIs are relative to *https://stub.definancy.com*
 | [**generateWalletQrCodes**](QrCodeApi.md#generateWalletQrCodes) | **POST** /v1/qrcode/transaction | Generate QR-Codes for wallets |
 
 
-<a id="generateWalletQrCodes"></a>
-# **generateWalletQrCodes**
+
+## generateWalletQrCodes
+
 > List&lt;QrCode&gt; generateWalletQrCodes(qrCodeTransactionRequest)
 
 Generate QR-Codes for wallets
 
-Generates the QR-Codes to be used by a wallet to help on the creation of a transaction request.
+Generates the QR-Codes to be used by a wallet to help on the creation of a
+transaction request.
 
 ### Example
+
 ```java
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.models.*;
+import com.definancy.model.*;
 import com.definancy.api.QrCodeApi;
 
 public class Example {
-  public static void main(String[] args) {
-    String network = "dev";
-    String audience = "https://stub.definancy.com";
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://stub.definancy.com");
+        
+        // Configure API key authorization: dpop-auth
+        ApiKeyAuth dpop-auth = (ApiKeyAuth) defaultClient.getAuthentication("dpop-auth");
+        dpop-auth.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-auth.setApiKeyPrefix("Token");
 
-    LocalAttestor localAttestor = new LocalAttestor(network, audience);
-    AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
+        // Configure API key authorization: dpop-proof
+        ApiKeyAuth dpop-proof = (ApiKeyAuth) defaultClient.getAuthentication("dpop-proof");
+        dpop-proof.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-proof.setApiKeyPrefix("Token");
 
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-    OkHttpClient httpClient = new OkHttpClient.Builder()
-      .addInterceptor(authInterceptor)
-      .addInterceptor(loggingInterceptor) // Optional: for debugging
-      .connectTimeout(30, TimeUnit.SECONDS)
-      .readTimeout(30, TimeUnit.SECONDS)
-      .build();
-
-    ApiClient apiClient = new ApiClient();
-    apiClient.setHttpClient(httpClient);
-
-    QrCodeApi apiInstance = new QrCodeApi(apiClient);
-    QrCodeTransactionRequest qrCodeTransactionRequest = new QrCodeTransactionRequest(); // QrCodeTransactionRequest | Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract's unit.
-    try {
-      List<QrCode> result = apiInstance.generateWalletQrCodes(qrCodeTransactionRequest);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling QrCodeApi#generateWalletQrCodes");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        QrCodeApi apiInstance = new QrCodeApi(defaultClient);
+        QrCodeTransactionRequest qrCodeTransactionRequest = new QrCodeTransactionRequest(); // QrCodeTransactionRequest | Contract-amount pair for which to generate the qr-codes. The amount should represent the desired payment value in the contract's unit.
+        try {
+            List<QrCode> result = apiInstance.generateWalletQrCodes(qrCodeTransactionRequest);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling QrCodeApi#generateWalletQrCodes");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -78,8 +78,8 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+- **Content-Type**: application/json
+- **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

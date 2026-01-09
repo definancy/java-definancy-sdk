@@ -32,7 +32,9 @@ public class APISetVault {
             System.out.println(vault);
             System.out.println("Vault set successfully");
         } catch (ApiException e) {
-            Utils.printApiException(e, "VaultApi", "setVault");
+            Utils.printException(e, "VaultApi", "setVault");
+        } catch (Exception e) {
+            Utils.printException(e, "VaultApi", "setVault");
         }
     }
 

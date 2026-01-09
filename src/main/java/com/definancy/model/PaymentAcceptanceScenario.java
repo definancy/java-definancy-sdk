@@ -10,86 +10,68 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.BlockchainTransaction;
 import com.definancy.model.ContractAmount;
 import com.definancy.model.Expire;
 import com.definancy.model.PaymentAcceptanceScenarioStatus;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Individual payment execution scenario within a payment acceptance.  Contains all information needed for payment processing including amounts,  blockchain addresses, expiration times, and transaction tracking.
  */
+@JsonPropertyOrder({
+  PaymentAcceptanceScenario.JSON_PROPERTY_PRICE,
+  PaymentAcceptanceScenario.JSON_PROPERTY_PAY,
+  PaymentAcceptanceScenario.JSON_PROPERTY_ADDRESS,
+  PaymentAcceptanceScenario.JSON_PROPERTY_EXPIRE,
+  PaymentAcceptanceScenario.JSON_PROPERTY_STATUS,
+  PaymentAcceptanceScenario.JSON_PROPERTY_RECEIVED,
+  PaymentAcceptanceScenario.JSON_PROPERTY_TRANSACTION_LIST
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class PaymentAcceptanceScenario {
-  public static final String SERIALIZED_NAME_PRICE = "price";
-  @SerializedName(SERIALIZED_NAME_PRICE)
+  public static final String JSON_PROPERTY_PRICE = "price";
   @javax.annotation.Nonnull
   private ContractAmount price;
 
-  public static final String SERIALIZED_NAME_PAY = "pay";
-  @SerializedName(SERIALIZED_NAME_PAY)
+  public static final String JSON_PROPERTY_PAY = "pay";
   @javax.annotation.Nonnull
   private ContractAmount pay;
 
-  public static final String SERIALIZED_NAME_ADDRESS = "address";
-  @SerializedName(SERIALIZED_NAME_ADDRESS)
+  public static final String JSON_PROPERTY_ADDRESS = "address";
   @javax.annotation.Nonnull
   private String address;
 
-  public static final String SERIALIZED_NAME_EXPIRE = "expire";
-  @SerializedName(SERIALIZED_NAME_EXPIRE)
+  public static final String JSON_PROPERTY_EXPIRE = "expire";
   @javax.annotation.Nonnull
   private Expire expire;
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   @javax.annotation.Nonnull
   private PaymentAcceptanceScenarioStatus status;
 
-  public static final String SERIALIZED_NAME_RECEIVED = "received";
-  @SerializedName(SERIALIZED_NAME_RECEIVED)
+  public static final String JSON_PROPERTY_RECEIVED = "received";
   @javax.annotation.Nonnull
   private ContractAmount received;
 
-  public static final String SERIALIZED_NAME_TRANSACTION_LIST = "transaction-list";
-  @SerializedName(SERIALIZED_NAME_TRANSACTION_LIST)
+  public static final String JSON_PROPERTY_TRANSACTION_LIST = "transaction-list";
   @javax.annotation.Nonnull
   private List<BlockchainTransaction> transactionList = new ArrayList<>();
 
-  public PaymentAcceptanceScenario() {
+  public PaymentAcceptanceScenario() { 
   }
 
   public PaymentAcceptanceScenario price(@javax.annotation.Nonnull ContractAmount price) {
@@ -102,10 +84,16 @@ public class PaymentAcceptanceScenario {
    * @return price
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_PRICE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractAmount getPrice() {
     return price;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_PRICE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPrice(@javax.annotation.Nonnull ContractAmount price) {
     this.price = price;
   }
@@ -121,10 +109,16 @@ public class PaymentAcceptanceScenario {
    * @return pay
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_PAY, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractAmount getPay() {
     return pay;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_PAY, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPay(@javax.annotation.Nonnull ContractAmount pay) {
     this.pay = pay;
   }
@@ -140,10 +134,16 @@ public class PaymentAcceptanceScenario {
    * @return address
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAddress() {
     return address;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddress(@javax.annotation.Nonnull String address) {
     this.address = address;
   }
@@ -159,10 +159,16 @@ public class PaymentAcceptanceScenario {
    * @return expire
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_EXPIRE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Expire getExpire() {
     return expire;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_EXPIRE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setExpire(@javax.annotation.Nonnull Expire expire) {
     this.expire = expire;
   }
@@ -178,10 +184,16 @@ public class PaymentAcceptanceScenario {
    * @return status
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PaymentAcceptanceScenarioStatus getStatus() {
     return status;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(@javax.annotation.Nonnull PaymentAcceptanceScenarioStatus status) {
     this.status = status;
   }
@@ -197,10 +209,16 @@ public class PaymentAcceptanceScenario {
    * @return received
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_RECEIVED, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractAmount getReceived() {
     return received;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_RECEIVED, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setReceived(@javax.annotation.Nonnull ContractAmount received) {
     this.received = received;
   }
@@ -224,16 +242,24 @@ public class PaymentAcceptanceScenario {
    * @return transactionList
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TRANSACTION_LIST, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<BlockchainTransaction> getTransactionList() {
     return transactionList;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TRANSACTION_LIST, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTransactionList(@javax.annotation.Nonnull List<BlockchainTransaction> transactionList) {
     this.transactionList = transactionList;
   }
 
 
-
+  /**
+   * Return true if this PaymentAcceptanceScenario object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -283,118 +309,5 @@ public class PaymentAcceptanceScenario {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("price", "pay", "address", "expire", "status", "received", "transaction-list"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("price", "pay", "address", "expire", "status", "received", "transaction-list"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PaymentAcceptanceScenario
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PaymentAcceptanceScenario.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PaymentAcceptanceScenario is not found in the empty JSON string", PaymentAcceptanceScenario.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PaymentAcceptanceScenario.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PaymentAcceptanceScenario` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PaymentAcceptanceScenario.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `price`
-      ContractAmount.validateJsonElement(jsonObj.get("price"));
-      // validate the required field `pay`
-      ContractAmount.validateJsonElement(jsonObj.get("pay"));
-      if (!jsonObj.get("address").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `address` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address").toString()));
-      }
-      // validate the required field `expire`
-      Expire.validateJsonElement(jsonObj.get("expire"));
-      // validate the required field `status`
-      PaymentAcceptanceScenarioStatus.validateJsonElement(jsonObj.get("status"));
-      // validate the required field `received`
-      ContractAmount.validateJsonElement(jsonObj.get("received"));
-      // ensure the json data is an array
-      if (!jsonObj.get("transaction-list").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `transaction-list` to be an array in the JSON string but got `%s`", jsonObj.get("transaction-list").toString()));
-      }
-
-      JsonArray jsonArraytransactionList = jsonObj.getAsJsonArray("transaction-list");
-      // validate the required field `transaction-list` (array)
-      for (int i = 0; i < jsonArraytransactionList.size(); i++) {
-        BlockchainTransaction.validateJsonElement(jsonArraytransactionList.get(i));
-      };
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PaymentAcceptanceScenario.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PaymentAcceptanceScenario' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PaymentAcceptanceScenario> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PaymentAcceptanceScenario.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PaymentAcceptanceScenario>() {
-           @Override
-           public void write(JsonWriter out, PaymentAcceptanceScenario value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PaymentAcceptanceScenario read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of PaymentAcceptanceScenario given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PaymentAcceptanceScenario
-   * @throws IOException if the JSON string is invalid with respect to PaymentAcceptanceScenario
-   */
-  public static PaymentAcceptanceScenario fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PaymentAcceptanceScenario.class);
-  }
-
-  /**
-   * Convert an instance of PaymentAcceptanceScenario to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

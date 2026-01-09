@@ -10,53 +10,35 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.ComplianceScenario;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Comprehensive compliance status and requirements for payment acceptance.  Tracks document submission requirements and validation status across  all contracts involved in payment processing.
  */
+@JsonPropertyOrder({
+  Compliance.JSON_PROPERTY_SCENARIOS
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class Compliance {
-  public static final String SERIALIZED_NAME_SCENARIOS = "scenarios";
-  @SerializedName(SERIALIZED_NAME_SCENARIOS)
+  public static final String JSON_PROPERTY_SCENARIOS = "scenarios";
   @javax.annotation.Nonnull
   private List<ComplianceScenario> scenarios = new ArrayList<>();
 
-  public Compliance() {
+  public Compliance() { 
   }
 
   public Compliance scenarios(@javax.annotation.Nonnull List<ComplianceScenario> scenarios) {
@@ -77,16 +59,24 @@ public class Compliance {
    * @return scenarios
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_SCENARIOS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<ComplianceScenario> getScenarios() {
     return scenarios;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_SCENARIOS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setScenarios(@javax.annotation.Nonnull List<ComplianceScenario> scenarios) {
     this.scenarios = scenarios;
   }
 
 
-
+  /**
+   * Return true if this Compliance object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -124,105 +114,5 @@ public class Compliance {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("scenarios"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("scenarios"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to Compliance
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!Compliance.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in Compliance is not found in the empty JSON string", Compliance.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!Compliance.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Compliance` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : Compliance.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the json data is an array
-      if (!jsonObj.get("scenarios").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `scenarios` to be an array in the JSON string but got `%s`", jsonObj.get("scenarios").toString()));
-      }
-
-      JsonArray jsonArrayscenarios = jsonObj.getAsJsonArray("scenarios");
-      // validate the required field `scenarios` (array)
-      for (int i = 0; i < jsonArrayscenarios.size(); i++) {
-        ComplianceScenario.validateJsonElement(jsonArrayscenarios.get(i));
-      };
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!Compliance.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'Compliance' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<Compliance> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(Compliance.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<Compliance>() {
-           @Override
-           public void write(JsonWriter out, Compliance value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public Compliance read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of Compliance given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of Compliance
-   * @throws IOException if the JSON string is invalid with respect to Compliance
-   */
-  public static Compliance fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, Compliance.class);
-  }
-
-  /**
-   * Convert an instance of Compliance to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

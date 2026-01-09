@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Payment acceptance processing state categories representing different  stages in the payment lifecycle from compliance verification through  final confirmation or cancellation.
  */
-@JsonAdapter(PaymentAcceptanceStatusId.Adapter.class)
 public enum PaymentAcceptanceStatusId {
   
   COMPLIANCE("compliance"),
@@ -47,6 +46,7 @@ public enum PaymentAcceptanceStatusId {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -56,6 +56,7 @@ public enum PaymentAcceptanceStatusId {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static PaymentAcceptanceStatusId fromValue(String value) {
     for (PaymentAcceptanceStatusId b : PaymentAcceptanceStatusId.values()) {
       if (b.value.equals(value)) {
@@ -63,24 +64,6 @@ public enum PaymentAcceptanceStatusId {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<PaymentAcceptanceStatusId> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final PaymentAcceptanceStatusId enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public PaymentAcceptanceStatusId read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return PaymentAcceptanceStatusId.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    PaymentAcceptanceStatusId.fromValue(value);
   }
 }
 

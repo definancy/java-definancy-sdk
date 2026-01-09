@@ -15,7 +15,7 @@ public class APIGetAssets {
         try {
             List<Asset> assets = api.getAssets();
 
-            if (assets.isEmpty()) {
+            if (assets == null || assets.isEmpty()) {
                 System.out.println("No assets found");
                 return;
             }
@@ -25,7 +25,9 @@ public class APIGetAssets {
                System.out.println(asset.getInfo().getName());
             }
         } catch (ApiException e) {
-            Utils.printApiException(e, "AssetApi", "getAssets");
+            Utils.printException(e, "AssetApi", "getAssets");
+        } catch (Exception e) {
+            Utils.printException(e, "AssetApi", "getAssets");
         }
     }
 }

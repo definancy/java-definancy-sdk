@@ -10,65 +10,47 @@
 package com.definancy.model;
 
 import java.util.Objects;
-import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.HashMap;
 import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Complete physical address information used for identity verification and compliance documentation. Includes all components necessary for address validation and geographic identification.
  */
+@JsonPropertyOrder({
+  PersonAddress.JSON_PROPERTY_STREET,
+  PersonAddress.JSON_PROPERTY_POSTAL_CODE,
+  PersonAddress.JSON_PROPERTY_REGION,
+  PersonAddress.JSON_PROPERTY_COUNTRY
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class PersonAddress {
-  public static final String SERIALIZED_NAME_STREET = "street";
-  @SerializedName(SERIALIZED_NAME_STREET)
+  public static final String JSON_PROPERTY_STREET = "street";
   @javax.annotation.Nonnull
   private String street;
 
-  public static final String SERIALIZED_NAME_POSTAL_CODE = "postal-code";
-  @SerializedName(SERIALIZED_NAME_POSTAL_CODE)
+  public static final String JSON_PROPERTY_POSTAL_CODE = "postal-code";
   @javax.annotation.Nonnull
   private String postalCode;
 
-  public static final String SERIALIZED_NAME_REGION = "region";
-  @SerializedName(SERIALIZED_NAME_REGION)
+  public static final String JSON_PROPERTY_REGION = "region";
   @javax.annotation.Nonnull
   private String region;
 
-  public static final String SERIALIZED_NAME_COUNTRY = "country";
-  @SerializedName(SERIALIZED_NAME_COUNTRY)
+  public static final String JSON_PROPERTY_COUNTRY = "country";
   @javax.annotation.Nonnull
   private String country;
 
-  public PersonAddress() {
+  public PersonAddress() { 
   }
 
   public PersonAddress street(@javax.annotation.Nonnull String street) {
@@ -81,10 +63,16 @@ public class PersonAddress {
    * @return street
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_STREET, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getStreet() {
     return street;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_STREET, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStreet(@javax.annotation.Nonnull String street) {
     this.street = street;
   }
@@ -100,10 +88,16 @@ public class PersonAddress {
    * @return postalCode
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_POSTAL_CODE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getPostalCode() {
     return postalCode;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_POSTAL_CODE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPostalCode(@javax.annotation.Nonnull String postalCode) {
     this.postalCode = postalCode;
   }
@@ -119,10 +113,16 @@ public class PersonAddress {
    * @return region
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_REGION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getRegion() {
     return region;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_REGION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setRegion(@javax.annotation.Nonnull String region) {
     this.region = region;
   }
@@ -138,16 +138,24 @@ public class PersonAddress {
    * @return country
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_COUNTRY, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getCountry() {
     return country;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_COUNTRY, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCountry(@javax.annotation.Nonnull String country) {
     this.country = country;
   }
 
 
-
+  /**
+   * Return true if this PersonAddress object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -191,107 +199,5 @@ public class PersonAddress {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("street", "postal-code", "region", "country"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("street", "postal-code", "region", "country"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PersonAddress
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PersonAddress.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PersonAddress is not found in the empty JSON string", PersonAddress.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PersonAddress.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PersonAddress` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PersonAddress.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("street").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `street` to be a primitive type in the JSON string but got `%s`", jsonObj.get("street").toString()));
-      }
-      if (!jsonObj.get("postal-code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `postal-code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("postal-code").toString()));
-      }
-      if (!jsonObj.get("region").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `region` to be a primitive type in the JSON string but got `%s`", jsonObj.get("region").toString()));
-      }
-      if (!jsonObj.get("country").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `country` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PersonAddress.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PersonAddress' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PersonAddress> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PersonAddress.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PersonAddress>() {
-           @Override
-           public void write(JsonWriter out, PersonAddress value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PersonAddress read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of PersonAddress given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PersonAddress
-   * @throws IOException if the JSON string is invalid with respect to PersonAddress
-   */
-  public static PersonAddress fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PersonAddress.class);
-  }
-
-  /**
-   * Convert an instance of PersonAddress to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

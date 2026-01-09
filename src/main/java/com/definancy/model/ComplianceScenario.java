@@ -10,71 +10,53 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.ComplianceScenarioStatus;
 import com.definancy.model.ContractId;
 import com.definancy.model.DocumentType;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Compliance requirements and status for a specific contract within a  payment acceptance. Tracks required document types, submitted documents,  and overall compliance fulfillment status.
  */
+@JsonPropertyOrder({
+  ComplianceScenario.JSON_PROPERTY_CONTRACT_ID,
+  ComplianceScenario.JSON_PROPERTY_REQUIRED,
+  ComplianceScenario.JSON_PROPERTY_SUBMITTED,
+  ComplianceScenario.JSON_PROPERTY_STATUS
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class ComplianceScenario {
-  public static final String SERIALIZED_NAME_CONTRACT_ID = "contract-id";
-  @SerializedName(SERIALIZED_NAME_CONTRACT_ID)
+  public static final String JSON_PROPERTY_CONTRACT_ID = "contract-id";
   @javax.annotation.Nonnull
   private ContractId contractId;
 
-  public static final String SERIALIZED_NAME_REQUIRED = "required";
-  @SerializedName(SERIALIZED_NAME_REQUIRED)
+  public static final String JSON_PROPERTY_REQUIRED = "required";
   @javax.annotation.Nonnull
   private List<DocumentType> required = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_SUBMITTED = "submitted";
-  @SerializedName(SERIALIZED_NAME_SUBMITTED)
+  public static final String JSON_PROPERTY_SUBMITTED = "submitted";
   @javax.annotation.Nullable
   private List<UUID> submitted = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   @javax.annotation.Nonnull
   private ComplianceScenarioStatus status;
 
-  public ComplianceScenario() {
+  public ComplianceScenario() { 
   }
 
   public ComplianceScenario contractId(@javax.annotation.Nonnull ContractId contractId) {
@@ -87,10 +69,16 @@ public class ComplianceScenario {
    * @return contractId
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractId getContractId() {
     return contractId;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setContractId(@javax.annotation.Nonnull ContractId contractId) {
     this.contractId = contractId;
   }
@@ -114,10 +102,16 @@ public class ComplianceScenario {
    * @return required
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_REQUIRED, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<DocumentType> getRequired() {
     return required;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_REQUIRED, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setRequired(@javax.annotation.Nonnull List<DocumentType> required) {
     this.required = required;
   }
@@ -141,10 +135,16 @@ public class ComplianceScenario {
    * @return submitted
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_SUBMITTED, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<UUID> getSubmitted() {
     return submitted;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_SUBMITTED, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSubmitted(@javax.annotation.Nullable List<UUID> submitted) {
     this.submitted = submitted;
   }
@@ -160,16 +160,24 @@ public class ComplianceScenario {
    * @return status
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ComplianceScenarioStatus getStatus() {
     return status;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(@javax.annotation.Nonnull ComplianceScenarioStatus status) {
     this.status = status;
   }
 
 
-
+  /**
+   * Return true if this ComplianceScenario object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -213,109 +221,5 @@ public class ComplianceScenario {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("contract-id", "required", "submitted", "status"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("contract-id", "required", "status"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to ComplianceScenario
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!ComplianceScenario.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in ComplianceScenario is not found in the empty JSON string", ComplianceScenario.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!ComplianceScenario.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ComplianceScenario` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : ComplianceScenario.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `contract-id`
-      ContractId.validateJsonElement(jsonObj.get("contract-id"));
-      // ensure the required json array is present
-      if (jsonObj.get("required") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("required").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `required` to be an array in the JSON string but got `%s`", jsonObj.get("required").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("submitted") != null && !jsonObj.get("submitted").isJsonNull() && !jsonObj.get("submitted").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `submitted` to be an array in the JSON string but got `%s`", jsonObj.get("submitted").toString()));
-      }
-      // validate the required field `status`
-      ComplianceScenarioStatus.validateJsonElement(jsonObj.get("status"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ComplianceScenario.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ComplianceScenario' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ComplianceScenario> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ComplianceScenario.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<ComplianceScenario>() {
-           @Override
-           public void write(JsonWriter out, ComplianceScenario value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public ComplianceScenario read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of ComplianceScenario given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of ComplianceScenario
-   * @throws IOException if the JSON string is invalid with respect to ComplianceScenario
-   */
-  public static ComplianceScenario fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ComplianceScenario.class);
-  }
-
-  /**
-   * Convert an instance of ComplianceScenario to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -10,58 +10,40 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.ContractId;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Vault configuration parameters.
  */
+@JsonPropertyOrder({
+  VaultConfig.JSON_PROPERTY_CONTRACT_IDS,
+  VaultConfig.JSON_PROPERTY_ENABLED
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class VaultConfig {
-  public static final String SERIALIZED_NAME_CONTRACT_IDS = "contract-ids";
-  @SerializedName(SERIALIZED_NAME_CONTRACT_IDS)
+  public static final String JSON_PROPERTY_CONTRACT_IDS = "contract-ids";
   @javax.annotation.Nullable
   private List<ContractId> contractIds = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_ENABLED = "enabled";
-  @SerializedName(SERIALIZED_NAME_ENABLED)
+  public static final String JSON_PROPERTY_ENABLED = "enabled";
   @javax.annotation.Nullable
   private Boolean enabled;
 
-  public VaultConfig() {
+  public VaultConfig() { 
   }
 
   public VaultConfig contractIds(@javax.annotation.Nullable List<ContractId> contractIds) {
@@ -82,10 +64,16 @@ public class VaultConfig {
    * @return contractIds
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_IDS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<ContractId> getContractIds() {
     return contractIds;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_IDS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setContractIds(@javax.annotation.Nullable List<ContractId> contractIds) {
     this.contractIds = contractIds;
   }
@@ -101,16 +89,24 @@ public class VaultConfig {
    * @return enabled
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ENABLED, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Boolean getEnabled() {
     return enabled;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ENABLED, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setEnabled(@javax.annotation.Nullable Boolean enabled) {
     this.enabled = enabled;
   }
 
 
-
+  /**
+   * Return true if this VaultConfig object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -150,102 +146,5 @@ public class VaultConfig {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("contract-ids", "enabled"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to VaultConfig
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!VaultConfig.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in VaultConfig is not found in the empty JSON string", VaultConfig.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!VaultConfig.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `VaultConfig` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (jsonObj.get("contract-ids") != null && !jsonObj.get("contract-ids").isJsonNull()) {
-        JsonArray jsonArraycontractIds = jsonObj.getAsJsonArray("contract-ids");
-        if (jsonArraycontractIds != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("contract-ids").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `contract-ids` to be an array in the JSON string but got `%s`", jsonObj.get("contract-ids").toString()));
-          }
-
-          // validate the optional field `contract-ids` (array)
-          for (int i = 0; i < jsonArraycontractIds.size(); i++) {
-            ContractId.validateJsonElement(jsonArraycontractIds.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!VaultConfig.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'VaultConfig' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<VaultConfig> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(VaultConfig.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<VaultConfig>() {
-           @Override
-           public void write(JsonWriter out, VaultConfig value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public VaultConfig read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of VaultConfig given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of VaultConfig
-   * @throws IOException if the JSON string is invalid with respect to VaultConfig
-   */
-  public static VaultConfig fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, VaultConfig.class);
-  }
-
-  /**
-   * Convert an instance of VaultConfig to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

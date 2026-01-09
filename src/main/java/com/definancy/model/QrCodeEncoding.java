@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Data encoding format used in the QR code content.  Currently supports raw byte encoding for maximum compatibility  with cryptocurrency wallets.
  */
-@JsonAdapter(QrCodeEncoding.Adapter.class)
 public enum QrCodeEncoding {
   
   BYTE("byte"),
@@ -37,6 +36,7 @@ public enum QrCodeEncoding {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -46,6 +46,7 @@ public enum QrCodeEncoding {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static QrCodeEncoding fromValue(String value) {
     for (QrCodeEncoding b : QrCodeEncoding.values()) {
       if (b.value.equals(value)) {
@@ -53,24 +54,6 @@ public enum QrCodeEncoding {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<QrCodeEncoding> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final QrCodeEncoding enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public QrCodeEncoding read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return QrCodeEncoding.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    QrCodeEncoding.fromValue(value);
   }
 }
 

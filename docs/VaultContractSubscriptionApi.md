@@ -8,8 +8,9 @@ All URIs are relative to *https://stub.definancy.com*
 | [**vaultUnsubscribeContract**](VaultContractSubscriptionApi.md#vaultUnsubscribeContract) | **DELETE** /v1/vault/{vaultId}/contract/{assetUnit}/{networkId} | Unsubscribe Contract from Vault |
 
 
-<a id="vaultSubscribeContract"></a>
-# **vaultSubscribeContract**
+
+## vaultSubscribeContract
+
 > Vault vaultSubscribeContract(vaultId, assetUnit, networkId)
 
 Subscribe Contract to Vault
@@ -17,55 +18,53 @@ Subscribe Contract to Vault
 Associates a smart contract with a vault.
 
 ### Example
+
 ```java
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.models.*;
+import com.definancy.model.*;
 import com.definancy.api.VaultContractSubscriptionApi;
 
 public class Example {
-  public static void main(String[] args) {
-    String network = "dev";
-    String audience = "https://stub.definancy.com";
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://stub.definancy.com");
+        
+        // Configure API key authorization: dpop-auth
+        ApiKeyAuth dpop-auth = (ApiKeyAuth) defaultClient.getAuthentication("dpop-auth");
+        dpop-auth.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-auth.setApiKeyPrefix("Token");
 
-    LocalAttestor localAttestor = new LocalAttestor(network, audience);
-    AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
+        // Configure API key authorization: dpop-proof
+        ApiKeyAuth dpop-proof = (ApiKeyAuth) defaultClient.getAuthentication("dpop-proof");
+        dpop-proof.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-proof.setApiKeyPrefix("Token");
 
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-    OkHttpClient httpClient = new OkHttpClient.Builder()
-      .addInterceptor(authInterceptor)
-      .addInterceptor(loggingInterceptor) // Optional: for debugging
-      .connectTimeout(30, TimeUnit.SECONDS)
-      .readTimeout(30, TimeUnit.SECONDS)
-      .build();
-
-    ApiClient apiClient = new ApiClient();
-    apiClient.setHttpClient(httpClient);
-
-    VaultContractSubscriptionApi apiInstance = new VaultContractSubscriptionApi(apiClient);
-    String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
-    String assetUnit = "assetUnit_example"; // String | Ticker symbol for a digital asset (e.g., 'EUR', 'USDC', 'ETH', 'BTC'). Used to identify the specific asset for contract operations, payment processing, and vault management. Must match an existing configured asset.
-    String networkId = "networkId_example"; // String | Unique identifier for a specific blockchain network (e.g., 'ethereum', 'algorand'). Used to target operations on a particular network when managing contracts, assets, or vault subscriptions. Must match an existing configured network.
-    try {
-      Vault result = apiInstance.vaultSubscribeContract(vaultId, assetUnit, networkId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling VaultContractSubscriptionApi#vaultSubscribeContract");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        VaultContractSubscriptionApi apiInstance = new VaultContractSubscriptionApi(defaultClient);
+        String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
+        String assetUnit = "assetUnit_example"; // String | Ticker symbol for a digital asset (e.g., 'EUR', 'USDC', 'ETH', 'BTC'). Used to identify the specific asset for contract operations, payment processing, and vault management. Must match an existing configured asset.
+        String networkId = "networkId_example"; // String | Unique identifier for a specific blockchain network (e.g., 'ethereum', 'algorand'). Used to target operations on a particular network when managing contracts, assets, or vault subscriptions. Must match an existing configured network.
+        try {
+            Vault result = apiInstance.vaultSubscribeContract(vaultId, assetUnit, networkId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling VaultContractSubscriptionApi#vaultSubscribeContract");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -83,8 +82,8 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -95,8 +94,9 @@ public class Example {
 | **404** | The requested resource does not exist or has been removed. This may indicate an incorrect ID, a resource that was deleted, or a path that doesn&#39;t match any configured endpoints. Verify the resource identifier and try again. |  -  |
 | **0** | An unexpected server error occurred while processing the request. This indicates an internal system issue that prevented successful completion. The error details may provide additional context for debugging and support purposes. |  -  |
 
-<a id="vaultUnsubscribeContract"></a>
-# **vaultUnsubscribeContract**
+
+## vaultUnsubscribeContract
+
 > Vault vaultUnsubscribeContract(vaultId, assetUnit, networkId)
 
 Unsubscribe Contract from Vault
@@ -104,55 +104,53 @@ Unsubscribe Contract from Vault
 Removes association between a contract and vault.
 
 ### Example
+
 ```java
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.models.*;
+import com.definancy.model.*;
 import com.definancy.api.VaultContractSubscriptionApi;
 
 public class Example {
-  public static void main(String[] args) {
-    String network = "dev";
-    String audience = "https://stub.definancy.com";
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://stub.definancy.com");
+        
+        // Configure API key authorization: dpop-auth
+        ApiKeyAuth dpop-auth = (ApiKeyAuth) defaultClient.getAuthentication("dpop-auth");
+        dpop-auth.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-auth.setApiKeyPrefix("Token");
 
-    LocalAttestor localAttestor = new LocalAttestor(network, audience);
-    AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
+        // Configure API key authorization: dpop-proof
+        ApiKeyAuth dpop-proof = (ApiKeyAuth) defaultClient.getAuthentication("dpop-proof");
+        dpop-proof.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-proof.setApiKeyPrefix("Token");
 
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-    OkHttpClient httpClient = new OkHttpClient.Builder()
-      .addInterceptor(authInterceptor)
-      .addInterceptor(loggingInterceptor) // Optional: for debugging
-      .connectTimeout(30, TimeUnit.SECONDS)
-      .readTimeout(30, TimeUnit.SECONDS)
-      .build();
-
-    ApiClient apiClient = new ApiClient();
-    apiClient.setHttpClient(httpClient);
-
-    VaultContractSubscriptionApi apiInstance = new VaultContractSubscriptionApi(apiClient);
-    String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
-    String assetUnit = "assetUnit_example"; // String | Ticker symbol for a digital asset (e.g., 'EUR', 'USDC', 'ETH', 'BTC'). Used to identify the specific asset for contract operations, payment processing, and vault management. Must match an existing configured asset.
-    String networkId = "networkId_example"; // String | Unique identifier for a specific blockchain network (e.g., 'ethereum', 'algorand'). Used to target operations on a particular network when managing contracts, assets, or vault subscriptions. Must match an existing configured network.
-    try {
-      Vault result = apiInstance.vaultUnsubscribeContract(vaultId, assetUnit, networkId);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling VaultContractSubscriptionApi#vaultUnsubscribeContract");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        VaultContractSubscriptionApi apiInstance = new VaultContractSubscriptionApi(defaultClient);
+        String vaultId = "vaultId_example"; // String | Unique identifier for a vault container that manages payment acceptance, documents, and contract subscriptions. Used across all vault-related operations including payment processing, document management, and configuration updates.
+        String assetUnit = "assetUnit_example"; // String | Ticker symbol for a digital asset (e.g., 'EUR', 'USDC', 'ETH', 'BTC'). Used to identify the specific asset for contract operations, payment processing, and vault management. Must match an existing configured asset.
+        String networkId = "networkId_example"; // String | Unique identifier for a specific blockchain network (e.g., 'ethereum', 'algorand'). Used to target operations on a particular network when managing contracts, assets, or vault subscriptions. Must match an existing configured network.
+        try {
+            Vault result = apiInstance.vaultUnsubscribeContract(vaultId, assetUnit, networkId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling VaultContractSubscriptionApi#vaultUnsubscribeContract");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -170,8 +168,8 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

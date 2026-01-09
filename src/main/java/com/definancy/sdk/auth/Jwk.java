@@ -5,6 +5,7 @@ import com.definancy.sdk.util.Encoder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 
@@ -37,7 +38,7 @@ public class Jwk {
 
 	public String thumbprint() throws Exception {
 		byte[] encoded = this.encode();
-		byte[] digested = Digester.digest(encoded);
+        byte[] digested = DigestUtils.sha256(encoded);
 		return Encoder.encodeToBase64(digested);
 	}
 }

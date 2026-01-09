@@ -10,156 +10,161 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.AmountRaw;
 import com.definancy.model.AmountValue;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 
-
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Locale;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
-
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.definancy.JSON;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
+@JsonDeserialize(using = AmountFormat.AmountFormatDeserializer.class)
+@JsonSerialize(using = AmountFormat.AmountFormatSerializer.class)
 public class AmountFormat extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(AmountFormat.class.getName());
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
+    public static class AmountFormatSerializer extends StdSerializer<AmountFormat> {
+        public AmountFormatSerializer(Class<AmountFormat> t) {
+            super(t);
+        }
+
+        public AmountFormatSerializer() {
+            this(null);
+        }
+
         @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!AmountFormat.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'AmountFormat' and its subtypes
+        public void serialize(AmountFormat value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+            jgen.writeObject(value.getActualInstance());
+        }
+    }
+
+    public static class AmountFormatDeserializer extends StdDeserializer<AmountFormat> {
+        public AmountFormatDeserializer() {
+            this(AmountFormat.class);
+        }
+
+        public AmountFormatDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        public AmountFormat deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            JsonNode tree = jp.readValueAsTree();
+            Object deserialized = null;
+            boolean typeCoercion = ctxt.isEnabled(MapperFeature.ALLOW_COERCION_OF_SCALARS);
+            int match = 0;
+            JsonToken token = tree.traverse(jp.getCodec()).nextToken();
+            // deserialize AmountValue
+            try {
+                boolean attemptParsing = true;
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(AmountValue.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'AmountValue'");
+                }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'AmountValue'", e);
             }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<AmountValue> adapterAmountValue = gson.getDelegateAdapter(this, TypeToken.get(AmountValue.class));
-            final TypeAdapter<AmountRaw> adapterAmountRaw = gson.getDelegateAdapter(this, TypeToken.get(AmountRaw.class));
 
-            return (TypeAdapter<T>) new TypeAdapter<AmountFormat>() {
-                @Override
-                public void write(JsonWriter out, AmountFormat value) throws IOException {
-                    if (value == null || value.getActualInstance() == null) {
-                        elementAdapter.write(out, null);
-                        return;
-                    }
-
-                    // check if the actual instance is of the type `AmountValue`
-                    if (value.getActualInstance() instanceof AmountValue) {
-                        JsonElement element = adapterAmountValue.toJsonTree((AmountValue)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    // check if the actual instance is of the type `AmountRaw`
-                    if (value.getActualInstance() instanceof AmountRaw) {
-                        JsonElement element = adapterAmountRaw.toJsonTree((AmountRaw)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: AmountRaw, AmountValue");
+            // deserialize AmountRaw
+            try {
+                boolean attemptParsing = true;
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(AmountRaw.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'AmountRaw'");
                 }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'AmountRaw'", e);
+            }
 
-                @Override
-                public AmountFormat read(JsonReader in) throws IOException {
-                    Object deserialized = null;
-                    JsonElement jsonElement = elementAdapter.read(in);
+            if (match == 1) {
+                AmountFormat ret = new AmountFormat();
+                ret.setActualInstance(deserialized);
+                return ret;
+            }
+            throw new IOException(String.format(Locale.ROOT, "Failed deserialization for AmountFormat: %d classes match result, expected 1", match));
+        }
 
-                    int match = 0;
-                    ArrayList<String> errorMessages = new ArrayList<>();
-                    TypeAdapter actualAdapter = elementAdapter;
-
-                    // deserialize AmountValue
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        AmountValue.validateJsonElement(jsonElement);
-                        actualAdapter = adapterAmountValue;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'AmountValue'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for AmountValue failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'AmountValue'", e);
-                    }
-                    // deserialize AmountRaw
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        AmountRaw.validateJsonElement(jsonElement);
-                        actualAdapter = adapterAmountRaw;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'AmountRaw'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for AmountRaw failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'AmountRaw'", e);
-                    }
-
-                    if (match == 1) {
-                        AmountFormat ret = new AmountFormat();
-                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
-                        return ret;
-                    }
-
-                    throw new IOException(String.format(Locale.ROOT, "Failed deserialization for AmountFormat: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, jsonElement.toString()));
-                }
-            }.nullSafe();
+        /**
+         * Handle deserialization of the 'null' value.
+         */
+        @Override
+        public AmountFormat getNullValue(DeserializationContext ctxt) throws JsonMappingException {
+            throw new JsonMappingException(ctxt.getParser(), "AmountFormat cannot be null");
         }
     }
 
     // store a list of schema names defined in oneOf
-    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+    public static final Map<String, GenericType<?>> schemas = new HashMap<>();
 
     public AmountFormat() {
         super("oneOf", Boolean.FALSE);
     }
 
-    public AmountFormat(Object o) {
+    public AmountFormat(AmountValue o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public AmountFormat(AmountRaw o) {
         super("oneOf", Boolean.FALSE);
         setActualInstance(o);
     }
 
     static {
-        schemas.put("AmountValue", AmountValue.class);
-        schemas.put("AmountRaw", AmountRaw.class);
+        schemas.put("AmountRaw", new GenericType<AmountRaw>() {
+        });
+        schemas.put("AmountValue", new GenericType<AmountValue>() {
+        });
+        JSON.registerDescendants(AmountFormat.class, Collections.unmodifiableMap(schemas));
     }
 
     @Override
-    public Map<String, Class<?>> getSchemas() {
+    public Map<String, GenericType<?>> getSchemas() {
         return AmountFormat.schemas;
     }
 
@@ -169,15 +174,16 @@ public class AmountFormat extends AbstractOpenApiSchema {
      * AmountRaw, AmountValue
      *
      * It could be an instance of the 'oneOf' schemas.
+     * The oneOf child schemas may themselves be a composed schema (allOf, anyOf, oneOf).
      */
     @Override
     public void setActualInstance(Object instance) {
-        if (instance instanceof AmountValue) {
+        if (JSON.isInstanceOf(AmountValue.class, instance, new HashSet<>())) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof AmountRaw) {
+        if (JSON.isInstanceOf(AmountRaw.class, instance, new HashSet<>())) {
             super.setActualInstance(instance);
             return;
         }
@@ -191,7 +197,6 @@ public class AmountFormat extends AbstractOpenApiSchema {
      *
      * @return The actual instance (AmountRaw, AmountValue)
      */
-    @SuppressWarnings("unchecked")
     @Override
     public Object getActualInstance() {
         return super.getActualInstance();
@@ -219,55 +224,5 @@ public class AmountFormat extends AbstractOpenApiSchema {
         return (AmountRaw)super.getActualInstance();
     }
 
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to AmountFormat
-     */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        // validate oneOf schemas one by one
-        int validCount = 0;
-        ArrayList<String> errorMessages = new ArrayList<>();
-        // validate the json string with AmountValue
-        try {
-            AmountValue.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format(Locale.ROOT, "Deserialization for AmountValue failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        // validate the json string with AmountRaw
-        try {
-            AmountRaw.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format(Locale.ROOT, "Deserialization for AmountRaw failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        if (validCount != 1) {
-            throw new IOException(String.format(Locale.ROOT, "The JSON string is invalid for AmountFormat with oneOf schemas: AmountRaw, AmountValue. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
-        }
-    }
-
-    /**
-     * Create an instance of AmountFormat given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of AmountFormat
-     * @throws IOException if the JSON string is invalid with respect to AmountFormat
-     */
-    public static AmountFormat fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, AmountFormat.class);
-    }
-
-    /**
-     * Convert an instance of AmountFormat to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
 }
 

@@ -10,57 +10,39 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.Amount;
 import com.definancy.model.ContractId;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Pairing of a specific contract with a precise amount value. Used in **API responses** to provide complete amount information including both display value and raw precision data.
  */
+@JsonPropertyOrder({
+  ContractAmount.JSON_PROPERTY_CONTRACT_ID,
+  ContractAmount.JSON_PROPERTY_AMOUNT
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class ContractAmount {
-  public static final String SERIALIZED_NAME_CONTRACT_ID = "contract-id";
-  @SerializedName(SERIALIZED_NAME_CONTRACT_ID)
+  public static final String JSON_PROPERTY_CONTRACT_ID = "contract-id";
   @javax.annotation.Nonnull
   private ContractId contractId;
 
-  public static final String SERIALIZED_NAME_AMOUNT = "amount";
-  @SerializedName(SERIALIZED_NAME_AMOUNT)
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
   @javax.annotation.Nonnull
   private Amount amount;
 
-  public ContractAmount() {
+  public ContractAmount() { 
   }
 
   public ContractAmount contractId(@javax.annotation.Nonnull ContractId contractId) {
@@ -73,10 +55,16 @@ public class ContractAmount {
    * @return contractId
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractId getContractId() {
     return contractId;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONTRACT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setContractId(@javax.annotation.Nonnull ContractId contractId) {
     this.contractId = contractId;
   }
@@ -92,16 +80,24 @@ public class ContractAmount {
    * @return amount
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_AMOUNT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Amount getAmount() {
     return amount;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_AMOUNT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmount(@javax.annotation.Nonnull Amount amount) {
     this.amount = amount;
   }
 
 
-
+  /**
+   * Return true if this ContractAmount object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -141,99 +137,5 @@ public class ContractAmount {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("contract-id", "amount"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("contract-id", "amount"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to ContractAmount
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!ContractAmount.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in ContractAmount is not found in the empty JSON string", ContractAmount.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!ContractAmount.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ContractAmount` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : ContractAmount.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `contract-id`
-      ContractId.validateJsonElement(jsonObj.get("contract-id"));
-      // validate the required field `amount`
-      Amount.validateJsonElement(jsonObj.get("amount"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ContractAmount.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ContractAmount' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ContractAmount> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ContractAmount.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<ContractAmount>() {
-           @Override
-           public void write(JsonWriter out, ContractAmount value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public ContractAmount read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of ContractAmount given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of ContractAmount
-   * @throws IOException if the JSON string is invalid with respect to ContractAmount
-   */
-  public static ContractAmount fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ContractAmount.class);
-  }
-
-  /**
-   * Convert an instance of ContractAmount to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

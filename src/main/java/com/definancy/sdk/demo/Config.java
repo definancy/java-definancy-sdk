@@ -2,19 +2,23 @@ package com.definancy.sdk.demo;
 
 import com.definancy.ApiClient;
 import com.definancy.sdk.DID;
-import com.definancy.sdk.auth.AuthInterceptor;
+import com.definancy.sdk.auth.AuthRequestFilter;
 import com.definancy.sdk.auth.impl.LocalAuthProvider;
 import com.definancy.sdk.crypto.KeyPair;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
-import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.ws.rs.client.Client;
+
+import org.glassfish.jersey.client.JerseyClientBuilder;
+import org.glassfish.jersey.logging.LoggingFeature;
 
 public class Config {
-	public static String network = "dev";
-	public static String audience = "https://dev.definancy.com";
+    public static String network = "dev";
+    public static String audience = "https://dev.definancy.com";
     public static String secret = "qHWHe6jLnx7gD-CZSe3X2UwgC-ISFOVy4rfFWxxJXX0";
-    public static String vaultId = "myVault";
+    public static String vaultId = "sdkDemoVault";
 
     public static KeyPair getKeyPair() throws Exception {
         return KeyPair.generateKeyPairFromSecret(secret);
@@ -26,24 +30,24 @@ public class Config {
     }
 
     public static ApiClient GetApiClient() throws Exception {
-        String network = Config.network;
         String audience = Config.audience;
-        String secret = Config.secret;
 
         KeyPair keyPair = getKeyPair();
         DID did = getDID();
 
         LocalAuthProvider signer = new LocalAuthProvider(did, keyPair);
-        AuthInterceptor authInterceptor = new AuthInterceptor(signer);
+        AuthRequestFilter authInterceptor = new AuthRequestFilter(signer);
 
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        LoggingFeature loggingFilter = new LoggingFeature(
+                Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
+                Level.INFO,
+                LoggingFeature.Verbosity.PAYLOAD_ANY,
+                1024 // max entity size to log
+        );
 
-        OkHttpClient httpClient = new OkHttpClient.Builder()
-                .addInterceptor(authInterceptor)
-                .addInterceptor(loggingInterceptor) // Optional: for debugging
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
+        Client httpClient = JerseyClientBuilder.newBuilder()
+                .register(authInterceptor)
+                .register(loggingFilter)
                 .build();
 
         ApiClient apiClient = new ApiClient();

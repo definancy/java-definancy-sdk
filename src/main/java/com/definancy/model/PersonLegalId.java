@@ -10,61 +10,43 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.PersonLegalIdType;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Business registration and identification information for legal entities.  Contains official registration details required for entity verification  and compliance with business identification regulations.
  */
+@JsonPropertyOrder({
+  PersonLegalId.JSON_PROPERTY_NUMBER,
+  PersonLegalId.JSON_PROPERTY_TYPE,
+  PersonLegalId.JSON_PROPERTY_ISSUER
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class PersonLegalId {
-  public static final String SERIALIZED_NAME_NUMBER = "number";
-  @SerializedName(SERIALIZED_NAME_NUMBER)
+  public static final String JSON_PROPERTY_NUMBER = "number";
   @javax.annotation.Nonnull
   private String number;
 
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
+  public static final String JSON_PROPERTY_TYPE = "type";
   @javax.annotation.Nonnull
   private PersonLegalIdType type;
 
-  public static final String SERIALIZED_NAME_ISSUER = "issuer";
-  @SerializedName(SERIALIZED_NAME_ISSUER)
+  public static final String JSON_PROPERTY_ISSUER = "issuer";
   @javax.annotation.Nonnull
   private String issuer;
 
-  public PersonLegalId() {
+  public PersonLegalId() { 
   }
 
   public PersonLegalId number(@javax.annotation.Nonnull String number) {
@@ -77,10 +59,16 @@ public class PersonLegalId {
    * @return number
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_NUMBER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getNumber() {
     return number;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_NUMBER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setNumber(@javax.annotation.Nonnull String number) {
     this.number = number;
   }
@@ -96,10 +84,16 @@ public class PersonLegalId {
    * @return type
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public PersonLegalIdType getType() {
     return type;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setType(@javax.annotation.Nonnull PersonLegalIdType type) {
     this.type = type;
   }
@@ -115,16 +109,24 @@ public class PersonLegalId {
    * @return issuer
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_ISSUER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getIssuer() {
     return issuer;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ISSUER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setIssuer(@javax.annotation.Nonnull String issuer) {
     this.issuer = issuer;
   }
 
 
-
+  /**
+   * Return true if this PersonLegalId object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -166,103 +168,5 @@ public class PersonLegalId {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("number", "type", "issuer"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("number", "type", "issuer"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PersonLegalId
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PersonLegalId.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PersonLegalId is not found in the empty JSON string", PersonLegalId.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PersonLegalId.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PersonLegalId` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PersonLegalId.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("number").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
-      }
-      // validate the required field `type`
-      PersonLegalIdType.validateJsonElement(jsonObj.get("type"));
-      if (!jsonObj.get("issuer").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `issuer` to be a primitive type in the JSON string but got `%s`", jsonObj.get("issuer").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PersonLegalId.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PersonLegalId' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PersonLegalId> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PersonLegalId.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PersonLegalId>() {
-           @Override
-           public void write(JsonWriter out, PersonLegalId value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PersonLegalId read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of PersonLegalId given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PersonLegalId
-   * @throws IOException if the JSON string is invalid with respect to PersonLegalId
-   */
-  public static PersonLegalId fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PersonLegalId.class);
-  }
-
-  /**
-   * Convert an instance of PersonLegalId to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

@@ -10,92 +10,74 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.Amount;
 import com.definancy.model.ContractMediaMap;
 import com.definancy.model.ContractStatus;
 import com.definancy.model.ContractTraits;
 import com.definancy.model.Version;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Comprehensive metadata about a contract including deployment details, subscribed vaults, operational status, and version tracking. Provides all information needed to understand contract capabilities and current usage.
  */
+@JsonPropertyOrder({
+  ContractInfo.JSON_PROPERTY_VAULTS,
+  ContractInfo.JSON_PROPERTY_ADDRESS,
+  ContractInfo.JSON_PROPERTY_MEDIA,
+  ContractInfo.JSON_PROPERTY_MINOR_UNIT,
+  ContractInfo.JSON_PROPERTY_TRAITS,
+  ContractInfo.JSON_PROPERTY_NOTE,
+  ContractInfo.JSON_PROPERTY_STATUS,
+  ContractInfo.JSON_PROPERTY_VERSION
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class ContractInfo {
-  public static final String SERIALIZED_NAME_VAULTS = "vaults";
-  @SerializedName(SERIALIZED_NAME_VAULTS)
+  public static final String JSON_PROPERTY_VAULTS = "vaults";
   @javax.annotation.Nonnull
   private List<String> vaults = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_ADDRESS = "address";
-  @SerializedName(SERIALIZED_NAME_ADDRESS)
+  public static final String JSON_PROPERTY_ADDRESS = "address";
   @javax.annotation.Nonnull
   private String address;
 
-  public static final String SERIALIZED_NAME_MEDIA = "media";
-  @SerializedName(SERIALIZED_NAME_MEDIA)
+  public static final String JSON_PROPERTY_MEDIA = "media";
   @javax.annotation.Nonnull
   private ContractMediaMap media;
 
-  public static final String SERIALIZED_NAME_MINOR_UNIT = "minor-unit";
-  @SerializedName(SERIALIZED_NAME_MINOR_UNIT)
+  public static final String JSON_PROPERTY_MINOR_UNIT = "minor-unit";
   @javax.annotation.Nonnull
   private Amount minorUnit;
 
-  public static final String SERIALIZED_NAME_TRAITS = "traits";
-  @SerializedName(SERIALIZED_NAME_TRAITS)
+  public static final String JSON_PROPERTY_TRAITS = "traits";
   @javax.annotation.Nonnull
   private ContractTraits traits;
 
-  public static final String SERIALIZED_NAME_NOTE = "note";
-  @SerializedName(SERIALIZED_NAME_NOTE)
+  public static final String JSON_PROPERTY_NOTE = "note";
   @javax.annotation.Nullable
   private String note;
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   @javax.annotation.Nonnull
   private ContractStatus status;
 
-  public static final String SERIALIZED_NAME_VERSION = "version";
-  @SerializedName(SERIALIZED_NAME_VERSION)
+  public static final String JSON_PROPERTY_VERSION = "version";
   @javax.annotation.Nonnull
   private Version version;
 
-  public ContractInfo() {
+  public ContractInfo() { 
   }
 
   public ContractInfo vaults(@javax.annotation.Nonnull List<String> vaults) {
@@ -116,10 +98,16 @@ public class ContractInfo {
    * @return vaults
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_VAULTS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public List<String> getVaults() {
     return vaults;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_VAULTS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVaults(@javax.annotation.Nonnull List<String> vaults) {
     this.vaults = vaults;
   }
@@ -135,10 +123,16 @@ public class ContractInfo {
    * @return address
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getAddress() {
     return address;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddress(@javax.annotation.Nonnull String address) {
     this.address = address;
   }
@@ -154,10 +148,16 @@ public class ContractInfo {
    * @return media
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_MEDIA, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractMediaMap getMedia() {
     return media;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_MEDIA, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMedia(@javax.annotation.Nonnull ContractMediaMap media) {
     this.media = media;
   }
@@ -173,10 +173,16 @@ public class ContractInfo {
    * @return minorUnit
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_MINOR_UNIT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Amount getMinorUnit() {
     return minorUnit;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_MINOR_UNIT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMinorUnit(@javax.annotation.Nonnull Amount minorUnit) {
     this.minorUnit = minorUnit;
   }
@@ -192,10 +198,16 @@ public class ContractInfo {
    * @return traits
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TRAITS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractTraits getTraits() {
     return traits;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TRAITS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTraits(@javax.annotation.Nonnull ContractTraits traits) {
     this.traits = traits;
   }
@@ -211,10 +223,16 @@ public class ContractInfo {
    * @return note
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_NOTE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public String getNote() {
     return note;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_NOTE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNote(@javax.annotation.Nullable String note) {
     this.note = note;
   }
@@ -230,10 +248,16 @@ public class ContractInfo {
    * @return status
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractStatus getStatus() {
     return status;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(@javax.annotation.Nonnull ContractStatus status) {
     this.status = status;
   }
@@ -249,16 +273,24 @@ public class ContractInfo {
    * @return version
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_VERSION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Version getVersion() {
     return version;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_VERSION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVersion(@javax.annotation.Nonnull Version version) {
     this.version = version;
   }
 
 
-
+  /**
+   * Return true if this ContractInfo object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -310,117 +342,5 @@ public class ContractInfo {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("vaults", "address", "media", "minor-unit", "traits", "note", "status", "version"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("vaults", "address", "media", "minor-unit", "traits", "status", "version"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to ContractInfo
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!ContractInfo.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in ContractInfo is not found in the empty JSON string", ContractInfo.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!ContractInfo.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ContractInfo` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : ContractInfo.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // ensure the required json array is present
-      if (jsonObj.get("vaults") == null) {
-        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
-      } else if (!jsonObj.get("vaults").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `vaults` to be an array in the JSON string but got `%s`", jsonObj.get("vaults").toString()));
-      }
-      if (!jsonObj.get("address").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `address` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address").toString()));
-      }
-      // validate the required field `media`
-      ContractMediaMap.validateJsonElement(jsonObj.get("media"));
-      // validate the required field `minor-unit`
-      Amount.validateJsonElement(jsonObj.get("minor-unit"));
-      // validate the required field `traits`
-      ContractTraits.validateJsonElement(jsonObj.get("traits"));
-      if ((jsonObj.get("note") != null && !jsonObj.get("note").isJsonNull()) && !jsonObj.get("note").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `note` to be a primitive type in the JSON string but got `%s`", jsonObj.get("note").toString()));
-      }
-      // validate the required field `status`
-      ContractStatus.validateJsonElement(jsonObj.get("status"));
-      // validate the required field `version`
-      Version.validateJsonElement(jsonObj.get("version"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!ContractInfo.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'ContractInfo' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<ContractInfo> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(ContractInfo.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<ContractInfo>() {
-           @Override
-           public void write(JsonWriter out, ContractInfo value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public ContractInfo read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of ContractInfo given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of ContractInfo
-   * @throws IOException if the JSON string is invalid with respect to ContractInfo
-   */
-  public static ContractInfo fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, ContractInfo.class);
-  }
-
-  /**
-   * Convert an instance of ContractInfo to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

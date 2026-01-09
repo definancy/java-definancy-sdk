@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Operational status of a contract indicating its availability for payment processing.
  */
-@JsonAdapter(ContractStatus.Adapter.class)
 public enum ContractStatus {
   
   ACTIVE("active"),
@@ -41,6 +40,7 @@ public enum ContractStatus {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -50,6 +50,7 @@ public enum ContractStatus {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static ContractStatus fromValue(String value) {
     for (ContractStatus b : ContractStatus.values()) {
       if (b.value.equals(value)) {
@@ -57,24 +58,6 @@ public enum ContractStatus {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<ContractStatus> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final ContractStatus enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public ContractStatus read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return ContractStatus.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    ContractStatus.fromValue(value);
   }
 }
 

@@ -1,8 +1,10 @@
-# definancy-sdk
+# definancy.sdk
 
 Definancy API
+
 - API version: 0.0.1.wip.20250925
-  - Generator version: 7.16.0-SNAPSHOT
+
+- Generator version: 7.16.0-SNAPSHOT
 
 REST API for managing asset, network and contract configurations, and vault-based financial operations.
 This API provides a comprehensive set of endpoints for health monitoring, network management, asset 
@@ -11,12 +13,12 @@ to facilitate seamless integration with financial systems, ensuring secure and e
 processing while maintaining strict compliance standards.
 
 
-*Automatically generated*
-
+*Automatically generated
 
 ## Requirements
 
 Building the API client library requires:
+
 1. Java 1.8+
 2. Maven (3.8.3+)/Gradle (7.2+)
 
@@ -43,7 +45,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>com.definancy.sdk</groupId>
-  <artifactId>definancy-sdk</artifactId>
+  <artifactId>definancy.sdk</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
 </dependency>
@@ -55,12 +57,12 @@ Add this dependency to your project's build file:
 
 ```groovy
   repositories {
-    mavenCentral()     // Needed if the 'definancy-sdk' jar has been published to maven central.
-    mavenLocal()       // Needed if the 'definancy-sdk' jar has been published to the local maven repo.
+    mavenCentral()     // Needed if the 'definancy.sdk' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'definancy.sdk' jar has been published to the local maven repo.
   }
 
   dependencies {
-     implementation "com.definancy.sdk:definancy-sdk:1.0.0"
+     implementation "com.definancy.sdk:definancy.sdk:1.0.0"
   }
 ```
 
@@ -74,8 +76,33 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/definancy-sdk-1.0.0.jar`
-* `target/lib/*.jar`
+- `target/definancy.sdk-1.0.0.jar`
+- `target/lib/*.jar`
+
+## Usage
+
+To add a HTTP proxy for the API client, use `ClientConfig`:
+```java
+
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
+import com.definancy.*;
+import com.definancy.api.AssetApi;
+
+...
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+ClientConfig clientConfig = defaultClient.getClientConfig();
+clientConfig.connectorProvider(new ApacheConnectorProvider());
+clientConfig.property(ClientProperties.PROXY_URI, "http://proxy_url_here");
+clientConfig.property(ClientProperties.PROXY_USERNAME, "proxy_username");
+clientConfig.property(ClientProperties.PROXY_PASSWORD, "proxy_password");
+defaultClient.setClientConfig(clientConfig);
+
+AssetApi apiInstance = new AssetApi(defaultClient);
+
+```
 
 ## Getting Started
 
@@ -83,49 +110,43 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-// Import classes:
-import com.definancy.ApiClient;
-import com.definancy.ApiException;
-import com.definancy.Configuration;
+import com.definancy.*;
 import com.definancy.auth.*;
 import com.definancy.model.*;
 import com.definancy.api.AssetApi;
 
-public class Example {
-  public static void main(String[] args) {
-    String network = "dev";
-    String audience = "https://stub.definancy.com";
+public class AssetApiExample {
 
-    LocalAttestor localAttestor = new LocalAttestor(network, audience);
-    AuthInterceptor authInterceptor = new AuthInterceptor(localAttestor);
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://stub.definancy.com");
+        
+        // Configure API key authorization: dpop-auth
+        ApiKeyAuth dpop-auth = (ApiKeyAuth) defaultClient.getAuthentication("dpop-auth");
+        dpop-auth.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-auth.setApiKeyPrefix("Token");
 
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        // Configure API key authorization: dpop-proof
+        ApiKeyAuth dpop-proof = (ApiKeyAuth) defaultClient.getAuthentication("dpop-proof");
+        dpop-proof.setApiKey("YOUR API KEY");
+        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+        //dpop-proof.setApiKeyPrefix("Token");
 
-    OkHttpClient httpClient = new OkHttpClient.Builder()
-      .addInterceptor(authInterceptor)
-      .addInterceptor(loggingInterceptor) // Optional: for debugging
-      .connectTimeout(30, TimeUnit.SECONDS)
-      .readTimeout(30, TimeUnit.SECONDS)
-      .build();
-
-    ApiClient apiClient = new ApiClient();
-    apiClient.setHttpClient(httpClient);
-
-    AssetApi apiInstance = new AssetApi(apiClient);
-    String assetUnit = "assetUnit_example"; // String | Ticker symbol for a digital asset (e.g., 'EUR', 'USDC', 'ETH', 'BTC'). Used to identify the specific asset for contract operations, payment processing, and vault management. Must match an existing configured asset.
-    AssetConfig assetConfig = new AssetConfig(); // AssetConfig | Asset configuration parameters to update. Currently supports only the 'enabled'  field for controlling asset availability. When setting 'enabled' to false, the  asset will be disabled for payment processing while preserving all existing  contracts and historical transaction data.
-    try {
-      Asset result = apiInstance.configAsset(assetUnit, assetConfig);
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AssetApi#configAsset");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+        AssetApi apiInstance = new AssetApi(defaultClient);
+        String assetUnit = "assetUnit_example"; // String | Ticker symbol for a digital asset (e.g., 'EUR', 'USDC', 'ETH', 'BTC'). Used to identify the specific asset for contract operations, payment processing, and vault management. Must match an existing configured asset.
+        AssetConfig assetConfig = new AssetConfig(); // AssetConfig | Asset configuration parameters to update. Currently supports only the 'enabled'  field for controlling asset availability. When setting 'enabled' to false, the  asset will be disabled for payment processing while preserving all existing  contracts and historical transaction data.
+        try {
+            Asset result = apiInstance.configAsset(assetUnit, assetConfig);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AssetApi#configAsset");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
-  }
 }
 
 ```
@@ -265,12 +286,14 @@ Authentication schemes defined for the API:
 <a id="dpop-auth"></a>
 ### dpop-auth
 
+
 - **Type**: API key
 - **API key parameter name**: Authorization
 - **Location**: HTTP header
 
 <a id="dpop-proof"></a>
 ### dpop-proof
+
 
 - **Type**: API key
 - **API key parameter name**: DPoP

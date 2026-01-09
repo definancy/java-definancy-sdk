@@ -10,179 +10,197 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.DocumentConfigCustodialV1;
 import com.definancy.model.DocumentConfigNonCustodialV1;
 import com.definancy.model.DocumentConfigPersonV1;
 import com.definancy.model.DocumentType;
 import com.definancy.model.NonCustodialV1;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 
-
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Locale;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
-
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.definancy.JSON;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
+@JsonDeserialize(using = DocumentConfig.DocumentConfigDeserializer.class)
+@JsonSerialize(using = DocumentConfig.DocumentConfigSerializer.class)
 public class DocumentConfig extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(DocumentConfig.class.getName());
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
+    public static class DocumentConfigSerializer extends StdSerializer<DocumentConfig> {
+        public DocumentConfigSerializer(Class<DocumentConfig> t) {
+            super(t);
+        }
+
+        public DocumentConfigSerializer() {
+            this(null);
+        }
+
         @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!DocumentConfig.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'DocumentConfig' and its subtypes
+        public void serialize(DocumentConfig value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+            jgen.writeObject(value.getActualInstance());
+        }
+    }
+
+    public static class DocumentConfigDeserializer extends StdDeserializer<DocumentConfig> {
+        public DocumentConfigDeserializer() {
+            this(DocumentConfig.class);
+        }
+
+        public DocumentConfigDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        public DocumentConfig deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            JsonNode tree = jp.readValueAsTree();
+            Object deserialized = null;
+            boolean typeCoercion = ctxt.isEnabled(MapperFeature.ALLOW_COERCION_OF_SCALARS);
+            int match = 0;
+            JsonToken token = tree.traverse(jp.getCodec()).nextToken();
+            // deserialize DocumentConfigPersonV1
+            try {
+                boolean attemptParsing = true;
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(DocumentConfigPersonV1.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'DocumentConfigPersonV1'");
+                }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'DocumentConfigPersonV1'", e);
             }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<DocumentConfigPersonV1> adapterDocumentConfigPersonV1 = gson.getDelegateAdapter(this, TypeToken.get(DocumentConfigPersonV1.class));
-            final TypeAdapter<DocumentConfigCustodialV1> adapterDocumentConfigCustodialV1 = gson.getDelegateAdapter(this, TypeToken.get(DocumentConfigCustodialV1.class));
-            final TypeAdapter<DocumentConfigNonCustodialV1> adapterDocumentConfigNonCustodialV1 = gson.getDelegateAdapter(this, TypeToken.get(DocumentConfigNonCustodialV1.class));
 
-            return (TypeAdapter<T>) new TypeAdapter<DocumentConfig>() {
-                @Override
-                public void write(JsonWriter out, DocumentConfig value) throws IOException {
-                    if (value == null || value.getActualInstance() == null) {
-                        elementAdapter.write(out, null);
-                        return;
-                    }
-
-                    // check if the actual instance is of the type `DocumentConfigPersonV1`
-                    if (value.getActualInstance() instanceof DocumentConfigPersonV1) {
-                        JsonElement element = adapterDocumentConfigPersonV1.toJsonTree((DocumentConfigPersonV1)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    // check if the actual instance is of the type `DocumentConfigCustodialV1`
-                    if (value.getActualInstance() instanceof DocumentConfigCustodialV1) {
-                        JsonElement element = adapterDocumentConfigCustodialV1.toJsonTree((DocumentConfigCustodialV1)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    // check if the actual instance is of the type `DocumentConfigNonCustodialV1`
-                    if (value.getActualInstance() instanceof DocumentConfigNonCustodialV1) {
-                        JsonElement element = adapterDocumentConfigNonCustodialV1.toJsonTree((DocumentConfigNonCustodialV1)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: DocumentConfigCustodialV1, DocumentConfigNonCustodialV1, DocumentConfigPersonV1");
+            // deserialize DocumentConfigCustodialV1
+            try {
+                boolean attemptParsing = true;
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(DocumentConfigCustodialV1.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'DocumentConfigCustodialV1'");
                 }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'DocumentConfigCustodialV1'", e);
+            }
 
-                @Override
-                public DocumentConfig read(JsonReader in) throws IOException {
-                    Object deserialized = null;
-                    JsonElement jsonElement = elementAdapter.read(in);
-
-                    int match = 0;
-                    ArrayList<String> errorMessages = new ArrayList<>();
-                    TypeAdapter actualAdapter = elementAdapter;
-
-                    // deserialize DocumentConfigPersonV1
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        DocumentConfigPersonV1.validateJsonElement(jsonElement);
-                        actualAdapter = adapterDocumentConfigPersonV1;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'DocumentConfigPersonV1'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for DocumentConfigPersonV1 failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'DocumentConfigPersonV1'", e);
-                    }
-                    // deserialize DocumentConfigCustodialV1
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        DocumentConfigCustodialV1.validateJsonElement(jsonElement);
-                        actualAdapter = adapterDocumentConfigCustodialV1;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'DocumentConfigCustodialV1'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for DocumentConfigCustodialV1 failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'DocumentConfigCustodialV1'", e);
-                    }
-                    // deserialize DocumentConfigNonCustodialV1
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        DocumentConfigNonCustodialV1.validateJsonElement(jsonElement);
-                        actualAdapter = adapterDocumentConfigNonCustodialV1;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'DocumentConfigNonCustodialV1'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format(Locale.ROOT, "Deserialization for DocumentConfigNonCustodialV1 failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'DocumentConfigNonCustodialV1'", e);
-                    }
-
-                    if (match == 1) {
-                        DocumentConfig ret = new DocumentConfig();
-                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
-                        return ret;
-                    }
-
-                    throw new IOException(String.format(Locale.ROOT, "Failed deserialization for DocumentConfig: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, jsonElement.toString()));
+            // deserialize DocumentConfigNonCustodialV1
+            try {
+                boolean attemptParsing = true;
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(DocumentConfigNonCustodialV1.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'DocumentConfigNonCustodialV1'");
                 }
-            }.nullSafe();
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'DocumentConfigNonCustodialV1'", e);
+            }
+
+            if (match == 1) {
+                DocumentConfig ret = new DocumentConfig();
+                ret.setActualInstance(deserialized);
+                return ret;
+            }
+            throw new IOException(String.format(Locale.ROOT, "Failed deserialization for DocumentConfig: %d classes match result, expected 1", match));
+        }
+
+        /**
+         * Handle deserialization of the 'null' value.
+         */
+        @Override
+        public DocumentConfig getNullValue(DeserializationContext ctxt) throws JsonMappingException {
+            throw new JsonMappingException(ctxt.getParser(), "DocumentConfig cannot be null");
         }
     }
 
     // store a list of schema names defined in oneOf
-    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+    public static final Map<String, GenericType<?>> schemas = new HashMap<>();
 
     public DocumentConfig() {
         super("oneOf", Boolean.FALSE);
     }
 
-    public DocumentConfig(Object o) {
+    public DocumentConfig(DocumentConfigPersonV1 o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public DocumentConfig(DocumentConfigCustodialV1 o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public DocumentConfig(DocumentConfigNonCustodialV1 o) {
         super("oneOf", Boolean.FALSE);
         setActualInstance(o);
     }
 
     static {
-        schemas.put("DocumentConfigPersonV1", DocumentConfigPersonV1.class);
-        schemas.put("DocumentConfigCustodialV1", DocumentConfigCustodialV1.class);
-        schemas.put("DocumentConfigNonCustodialV1", DocumentConfigNonCustodialV1.class);
+        schemas.put("DocumentConfigCustodialV1", new GenericType<DocumentConfigCustodialV1>() {
+        });
+        schemas.put("DocumentConfigNonCustodialV1", new GenericType<DocumentConfigNonCustodialV1>() {
+        });
+        schemas.put("DocumentConfigPersonV1", new GenericType<DocumentConfigPersonV1>() {
+        });
+        JSON.registerDescendants(DocumentConfig.class, Collections.unmodifiableMap(schemas));
+        // Initialize and register the discriminator mappings.
+        Map<String, Class<?>> mappings = new HashMap<>();
+        mappings.put("CustodialV1", DocumentConfigCustodialV1.class);
+        mappings.put("NonCustodialV1", DocumentConfigNonCustodialV1.class);
+        mappings.put("PersonV1", DocumentConfigPersonV1.class);
+        mappings.put("DocumentConfig", DocumentConfig.class);
+        JSON.registerDiscriminator(DocumentConfig.class, "type", mappings);
     }
 
     @Override
-    public Map<String, Class<?>> getSchemas() {
+    public Map<String, GenericType<?>> getSchemas() {
         return DocumentConfig.schemas;
     }
 
@@ -192,20 +210,21 @@ public class DocumentConfig extends AbstractOpenApiSchema {
      * DocumentConfigCustodialV1, DocumentConfigNonCustodialV1, DocumentConfigPersonV1
      *
      * It could be an instance of the 'oneOf' schemas.
+     * The oneOf child schemas may themselves be a composed schema (allOf, anyOf, oneOf).
      */
     @Override
     public void setActualInstance(Object instance) {
-        if (instance instanceof DocumentConfigPersonV1) {
+        if (JSON.isInstanceOf(DocumentConfigPersonV1.class, instance, new HashSet<>())) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof DocumentConfigCustodialV1) {
+        if (JSON.isInstanceOf(DocumentConfigCustodialV1.class, instance, new HashSet<>())) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof DocumentConfigNonCustodialV1) {
+        if (JSON.isInstanceOf(DocumentConfigNonCustodialV1.class, instance, new HashSet<>())) {
             super.setActualInstance(instance);
             return;
         }
@@ -219,7 +238,6 @@ public class DocumentConfig extends AbstractOpenApiSchema {
      *
      * @return The actual instance (DocumentConfigCustodialV1, DocumentConfigNonCustodialV1, DocumentConfigPersonV1)
      */
-    @SuppressWarnings("unchecked")
     @Override
     public Object getActualInstance() {
         return super.getActualInstance();
@@ -258,63 +276,5 @@ public class DocumentConfig extends AbstractOpenApiSchema {
         return (DocumentConfigNonCustodialV1)super.getActualInstance();
     }
 
-    /**
-     * Validates the JSON Element and throws an exception if issues found
-     *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to DocumentConfig
-     */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        // validate oneOf schemas one by one
-        int validCount = 0;
-        ArrayList<String> errorMessages = new ArrayList<>();
-        // validate the json string with DocumentConfigPersonV1
-        try {
-            DocumentConfigPersonV1.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format(Locale.ROOT, "Deserialization for DocumentConfigPersonV1 failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        // validate the json string with DocumentConfigCustodialV1
-        try {
-            DocumentConfigCustodialV1.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format(Locale.ROOT, "Deserialization for DocumentConfigCustodialV1 failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        // validate the json string with DocumentConfigNonCustodialV1
-        try {
-            DocumentConfigNonCustodialV1.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format(Locale.ROOT, "Deserialization for DocumentConfigNonCustodialV1 failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        if (validCount != 1) {
-            throw new IOException(String.format(Locale.ROOT, "The JSON string is invalid for DocumentConfig with oneOf schemas: DocumentConfigCustodialV1, DocumentConfigNonCustodialV1, DocumentConfigPersonV1. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
-        }
-    }
-
-    /**
-     * Create an instance of DocumentConfig given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of DocumentConfig
-     * @throws IOException if the JSON string is invalid with respect to DocumentConfig
-     */
-    public static DocumentConfig fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, DocumentConfig.class);
-    }
-
-    /**
-     * Convert an instance of DocumentConfig to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
-    }
 }
 

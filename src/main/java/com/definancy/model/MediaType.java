@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Gets or Sets MediaType
  */
-@JsonAdapter(MediaType.Adapter.class)
 public enum MediaType {
   
   IMAGE("image"),
@@ -37,6 +36,7 @@ public enum MediaType {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -46,6 +46,7 @@ public enum MediaType {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static MediaType fromValue(String value) {
     for (MediaType b : MediaType.values()) {
       if (b.value.equals(value)) {
@@ -53,24 +54,6 @@ public enum MediaType {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<MediaType> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final MediaType enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public MediaType read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return MediaType.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    MediaType.fromValue(value);
   }
 }
 

@@ -2,50 +2,55 @@ package com.definancy.sdk.auth.impl;
 
 import com.definancy.sdk.DID;
 import com.definancy.sdk.auth.*;
-import okhttp3.HttpUrl;
-import okhttp3.Request;
-import okhttp3.RequestBody;
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.ext.Provider;
 
+import org.apache.http.client.utils.URIBuilder;
+
+import java.net.URI;
+import java.util.UUID;
+
+@Provider
 public class LocalAuthProvider implements AuthProvider {
-    private final DID did;
-    private final Signer signer;
+        private final DID did;
+        private final Signer signer;
 
-    public LocalAuthProvider(DID did, Signer signer) throws Exception {
-        this.did = did;
-        this.signer = signer;
-    }
+        public LocalAuthProvider(DID did, Signer signer) throws Exception {
+                this.did = did;
+                this.signer = signer;
+        }
 
-    public Authentication authenticate(Request request) throws Exception {
-        HttpUrl url = request.url();
-        HttpUrl audience = new HttpUrl.Builder()
-                .scheme(url.scheme())
-                .host(url.host())
-                .build();
+        public Authentication authenticate(ClientRequestContext requestContext) throws Exception {
+                URI uri = requestContext.getUri();
+                URI audience = new URIBuilder()
+                                .setScheme(uri.getScheme())
+                                .setHost(uri.getHost())
+                                .setPort(uri.getPort())
+                                .build();
 
-        Jwk jwk = signer.jwk();
+                Jwk jwk = signer.jwk();
 
-        Authorization authorization = new Authorization(
-                did,
-                audience.toString(),
-                jwk.thumbprint()
-        );
+                Authorization authorization = new Authorization(
+                                did,
+                                audience.toString(),
+                                jwk.thumbprint());
 
-        authorization.setSignature(
-                signer.sign(authorization.encodeB64())
-        );
+                authorization.setSignature(
+                                signer.sign(authorization.encodeB64()));
 
-        // Generate DPoP token for this specific request
-        RequestBody body = request.body();
-        DPoP dpop = new DPoP(
-                request.method(),
-                request.url().toString(),
-                body == null? null : body.toString(),
-                jwk
-        );
-        dpop.setSignature(
-                signer.sign(dpop.encodeB64())
-        );
+                // Generate DPoP token for this specific request
+                Object body = requestContext.getEntity();
+                String id = UUID.randomUUID().toString();
 
-        return new Authentication(authorization, dpop);
-    }
+                DPoP dpop = new DPoP(
+                                id,
+                                requestContext.getMethod(),
+                                audience.toString(),
+                                body == null ? null : body.toString(),
+                                jwk);
+                dpop.setSignature(
+                                signer.sign(dpop.encodeB64()));
+
+                return new Authentication(authorization, dpop);
+        }
 }

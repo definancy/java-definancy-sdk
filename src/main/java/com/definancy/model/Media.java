@@ -10,62 +10,44 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.MediaType;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.net.URI;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Media
  */
+@JsonPropertyOrder({
+  Media.JSON_PROPERTY_TYPE,
+  Media.JSON_PROPERTY_URL,
+  Media.JSON_PROPERTY_METADATA
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class Media {
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
+  public static final String JSON_PROPERTY_TYPE = "type";
   @javax.annotation.Nonnull
   private MediaType type;
 
-  public static final String SERIALIZED_NAME_URL = "url";
-  @SerializedName(SERIALIZED_NAME_URL)
+  public static final String JSON_PROPERTY_URL = "url";
   @javax.annotation.Nonnull
   private URI url;
 
-  public static final String SERIALIZED_NAME_METADATA = "metadata";
-  @SerializedName(SERIALIZED_NAME_METADATA)
+  public static final String JSON_PROPERTY_METADATA = "metadata";
   @javax.annotation.Nullable
   private Object metadata;
 
-  public Media() {
+  public Media() { 
   }
 
   public Media type(@javax.annotation.Nonnull MediaType type) {
@@ -78,10 +60,16 @@ public class Media {
    * @return type
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public MediaType getType() {
     return type;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setType(@javax.annotation.Nonnull MediaType type) {
     this.type = type;
   }
@@ -97,10 +85,16 @@ public class Media {
    * @return url
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_URL, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public URI getUrl() {
     return url;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_URL, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUrl(@javax.annotation.Nonnull URI url) {
     this.url = url;
   }
@@ -116,16 +110,24 @@ public class Media {
    * @return metadata
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Object getMetadata() {
     return metadata;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMetadata(@javax.annotation.Nullable Object metadata) {
     this.metadata = metadata;
   }
 
 
-
+  /**
+   * Return true if this Media object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -167,100 +169,5 @@ public class Media {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("type", "url", "metadata"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("type", "url"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to Media
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!Media.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in Media is not found in the empty JSON string", Media.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!Media.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Media` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : Media.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `type`
-      MediaType.validateJsonElement(jsonObj.get("type"));
-      if (!jsonObj.get("url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("url").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!Media.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'Media' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<Media> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(Media.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<Media>() {
-           @Override
-           public void write(JsonWriter out, Media value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public Media read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of Media given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of Media
-   * @throws IOException if the JSON string is invalid with respect to Media
-   */
-  public static Media fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, Media.class);
-  }
-
-  /**
-   * Convert an instance of Media to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

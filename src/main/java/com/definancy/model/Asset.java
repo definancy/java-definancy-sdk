@@ -10,62 +10,44 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.AssetConfig;
 import com.definancy.model.AssetInfo;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Complete digital asset definition combining identification, metadata, and  configuration. Represents a supported asset that can be used in payment  processing across multiple networks.
  */
+@JsonPropertyOrder({
+  Asset.JSON_PROPERTY_UNIT,
+  Asset.JSON_PROPERTY_INFO,
+  Asset.JSON_PROPERTY_CONFIG
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class Asset {
-  public static final String SERIALIZED_NAME_UNIT = "unit";
-  @SerializedName(SERIALIZED_NAME_UNIT)
+  public static final String JSON_PROPERTY_UNIT = "unit";
   @javax.annotation.Nonnull
   private String unit;
 
-  public static final String SERIALIZED_NAME_INFO = "info";
-  @SerializedName(SERIALIZED_NAME_INFO)
+  public static final String JSON_PROPERTY_INFO = "info";
   @javax.annotation.Nonnull
   private AssetInfo info;
 
-  public static final String SERIALIZED_NAME_CONFIG = "config";
-  @SerializedName(SERIALIZED_NAME_CONFIG)
+  public static final String JSON_PROPERTY_CONFIG = "config";
   @javax.annotation.Nonnull
   private AssetConfig config;
 
-  public Asset() {
+  public Asset() { 
   }
 
   public Asset unit(@javax.annotation.Nonnull String unit) {
@@ -78,10 +60,16 @@ public class Asset {
    * @return unit
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_UNIT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getUnit() {
     return unit;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_UNIT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUnit(@javax.annotation.Nonnull String unit) {
     this.unit = unit;
   }
@@ -97,10 +85,16 @@ public class Asset {
    * @return info
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_INFO, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public AssetInfo getInfo() {
     return info;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_INFO, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setInfo(@javax.annotation.Nonnull AssetInfo info) {
     this.info = info;
   }
@@ -116,16 +110,24 @@ public class Asset {
    * @return config
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CONFIG, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public AssetConfig getConfig() {
     return config;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONFIG, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setConfig(@javax.annotation.Nonnull AssetConfig config) {
     this.config = config;
   }
 
 
-
+  /**
+   * Return true if this Asset object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -167,102 +169,5 @@ public class Asset {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("unit", "info", "config"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("unit", "info", "config"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to Asset
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!Asset.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in Asset is not found in the empty JSON string", Asset.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!Asset.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `Asset` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : Asset.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("unit").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit").toString()));
-      }
-      // validate the required field `info`
-      AssetInfo.validateJsonElement(jsonObj.get("info"));
-      // validate the required field `config`
-      AssetConfig.validateJsonElement(jsonObj.get("config"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!Asset.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'Asset' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<Asset> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(Asset.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<Asset>() {
-           @Override
-           public void write(JsonWriter out, Asset value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public Asset read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of Asset given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of Asset
-   * @throws IOException if the JSON string is invalid with respect to Asset
-   */
-  public static Asset fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, Asset.class);
-  }
-
-  /**
-   * Convert an instance of Asset to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

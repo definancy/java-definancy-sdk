@@ -10,65 +10,47 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.ContractAmount;
 import com.definancy.model.PaymentAcceptanceOrder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Complete payment acceptance configuration used in API responses. Provides full amount information with both display values and raw precision data for all payment scenarios.
  */
+@JsonPropertyOrder({
+  PaymentAcceptanceConfig.JSON_PROPERTY_ORDER,
+  PaymentAcceptanceConfig.JSON_PROPERTY_DOCUMENTS,
+  PaymentAcceptanceConfig.JSON_PROPERTY_PRICE_SCENARIOS
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class PaymentAcceptanceConfig {
-  public static final String SERIALIZED_NAME_ORDER = "order";
-  @SerializedName(SERIALIZED_NAME_ORDER)
+  public static final String JSON_PROPERTY_ORDER = "order";
   @javax.annotation.Nullable
   private PaymentAcceptanceOrder order;
 
-  public static final String SERIALIZED_NAME_DOCUMENTS = "documents";
-  @SerializedName(SERIALIZED_NAME_DOCUMENTS)
+  public static final String JSON_PROPERTY_DOCUMENTS = "documents";
   @javax.annotation.Nullable
   private List<UUID> documents = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_PRICE_SCENARIOS = "price-scenarios";
-  @SerializedName(SERIALIZED_NAME_PRICE_SCENARIOS)
+  public static final String JSON_PROPERTY_PRICE_SCENARIOS = "price-scenarios";
   @javax.annotation.Nullable
   private List<ContractAmount> priceScenarios = new ArrayList<>();
 
-  public PaymentAcceptanceConfig() {
+  public PaymentAcceptanceConfig() { 
   }
 
   public PaymentAcceptanceConfig order(@javax.annotation.Nullable PaymentAcceptanceOrder order) {
@@ -81,10 +63,16 @@ public class PaymentAcceptanceConfig {
    * @return order
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ORDER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public PaymentAcceptanceOrder getOrder() {
     return order;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ORDER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setOrder(@javax.annotation.Nullable PaymentAcceptanceOrder order) {
     this.order = order;
   }
@@ -108,10 +96,16 @@ public class PaymentAcceptanceConfig {
    * @return documents
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_DOCUMENTS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<UUID> getDocuments() {
     return documents;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_DOCUMENTS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDocuments(@javax.annotation.Nullable List<UUID> documents) {
     this.documents = documents;
   }
@@ -135,16 +129,24 @@ public class PaymentAcceptanceConfig {
    * @return priceScenarios
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PRICE_SCENARIOS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public List<ContractAmount> getPriceScenarios() {
     return priceScenarios;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_PRICE_SCENARIOS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPriceScenarios(@javax.annotation.Nullable List<ContractAmount> priceScenarios) {
     this.priceScenarios = priceScenarios;
   }
 
 
-
+  /**
+   * Return true if this PaymentAcceptanceConfig object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -186,110 +188,5 @@ public class PaymentAcceptanceConfig {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("order", "documents", "price-scenarios"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PaymentAcceptanceConfig
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PaymentAcceptanceConfig.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in PaymentAcceptanceConfig is not found in the empty JSON string", PaymentAcceptanceConfig.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PaymentAcceptanceConfig.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `PaymentAcceptanceConfig` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `order`
-      if (jsonObj.get("order") != null && !jsonObj.get("order").isJsonNull()) {
-        PaymentAcceptanceOrder.validateJsonElement(jsonObj.get("order"));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("documents") != null && !jsonObj.get("documents").isJsonNull() && !jsonObj.get("documents").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `documents` to be an array in the JSON string but got `%s`", jsonObj.get("documents").toString()));
-      }
-      if (jsonObj.get("price-scenarios") != null && !jsonObj.get("price-scenarios").isJsonNull()) {
-        JsonArray jsonArraypriceScenarios = jsonObj.getAsJsonArray("price-scenarios");
-        if (jsonArraypriceScenarios != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("price-scenarios").isJsonArray()) {
-            throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `price-scenarios` to be an array in the JSON string but got `%s`", jsonObj.get("price-scenarios").toString()));
-          }
-
-          // validate the optional field `price-scenarios` (array)
-          for (int i = 0; i < jsonArraypriceScenarios.size(); i++) {
-            ContractAmount.validateJsonElement(jsonArraypriceScenarios.get(i));
-          };
-        }
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PaymentAcceptanceConfig.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PaymentAcceptanceConfig' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PaymentAcceptanceConfig> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PaymentAcceptanceConfig.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PaymentAcceptanceConfig>() {
-           @Override
-           public void write(JsonWriter out, PaymentAcceptanceConfig value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PaymentAcceptanceConfig read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of PaymentAcceptanceConfig given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PaymentAcceptanceConfig
-   * @throws IOException if the JSON string is invalid with respect to PaymentAcceptanceConfig
-   */
-  public static PaymentAcceptanceConfig fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PaymentAcceptanceConfig.class);
-  }
-
-  /**
-   * Convert an instance of PaymentAcceptanceConfig to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

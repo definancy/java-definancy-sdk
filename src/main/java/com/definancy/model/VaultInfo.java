@@ -10,56 +10,38 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.Version;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Vault lifecycle metadata.
  */
+@JsonPropertyOrder({
+  VaultInfo.JSON_PROPERTY_ARCHIVED_AT,
+  VaultInfo.JSON_PROPERTY_VERSION
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class VaultInfo {
-  public static final String SERIALIZED_NAME_ARCHIVED_AT = "archived-at";
-  @SerializedName(SERIALIZED_NAME_ARCHIVED_AT)
+  public static final String JSON_PROPERTY_ARCHIVED_AT = "archived-at";
   @javax.annotation.Nullable
   private Integer archivedAt;
 
-  public static final String SERIALIZED_NAME_VERSION = "version";
-  @SerializedName(SERIALIZED_NAME_VERSION)
+  public static final String JSON_PROPERTY_VERSION = "version";
   @javax.annotation.Nonnull
   private Version version;
 
-  public VaultInfo() {
+  public VaultInfo() { 
   }
 
   public VaultInfo archivedAt(@javax.annotation.Nullable Integer archivedAt) {
@@ -73,10 +55,16 @@ public class VaultInfo {
    * @return archivedAt
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ARCHIVED_AT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Integer getArchivedAt() {
     return archivedAt;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ARCHIVED_AT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setArchivedAt(@javax.annotation.Nullable Integer archivedAt) {
     this.archivedAt = archivedAt;
   }
@@ -92,16 +80,24 @@ public class VaultInfo {
    * @return version
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_VERSION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Version getVersion() {
     return version;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_VERSION, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVersion(@javax.annotation.Nonnull Version version) {
     this.version = version;
   }
 
 
-
+  /**
+   * Return true if this VaultInfo object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -141,97 +137,5 @@ public class VaultInfo {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("archived-at", "version"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("version"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to VaultInfo
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!VaultInfo.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in VaultInfo is not found in the empty JSON string", VaultInfo.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!VaultInfo.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `VaultInfo` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : VaultInfo.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `version`
-      Version.validateJsonElement(jsonObj.get("version"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!VaultInfo.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'VaultInfo' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<VaultInfo> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(VaultInfo.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<VaultInfo>() {
-           @Override
-           public void write(JsonWriter out, VaultInfo value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public VaultInfo read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of VaultInfo given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of VaultInfo
-   * @throws IOException if the JSON string is invalid with respect to VaultInfo
-   */
-  public static VaultInfo fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, VaultInfo.class);
-  }
-
-  /**
-   * Convert an instance of VaultInfo to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

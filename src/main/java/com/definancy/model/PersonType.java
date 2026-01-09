@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Person entity classification.
  */
-@JsonAdapter(PersonType.Adapter.class)
 public enum PersonType {
   
   PERSON_NATURAL_V1("PersonNaturalV1"),
@@ -39,6 +38,7 @@ public enum PersonType {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -48,6 +48,7 @@ public enum PersonType {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static PersonType fromValue(String value) {
     for (PersonType b : PersonType.values()) {
       if (b.value.equals(value)) {
@@ -55,24 +56,6 @@ public enum PersonType {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<PersonType> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final PersonType enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public PersonType read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return PersonType.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    PersonType.fromValue(value);
   }
 }
 

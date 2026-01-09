@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Document validation status category.
  */
-@JsonAdapter(DocumentStatusId.Adapter.class)
 public enum DocumentStatusId {
   
   PENDING("pending"),
@@ -45,6 +44,7 @@ public enum DocumentStatusId {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -54,6 +54,7 @@ public enum DocumentStatusId {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static DocumentStatusId fromValue(String value) {
     for (DocumentStatusId b : DocumentStatusId.values()) {
       if (b.value.equals(value)) {
@@ -61,24 +62,6 @@ public enum DocumentStatusId {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<DocumentStatusId> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final DocumentStatusId enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public DocumentStatusId read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return DocumentStatusId.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    DocumentStatusId.fromValue(value);
   }
 }
 

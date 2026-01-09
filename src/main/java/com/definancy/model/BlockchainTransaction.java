@@ -10,83 +10,65 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.BlockchainConfirmationStats;
 import com.definancy.model.BlockchainTransactionStatus;
 import com.definancy.model.ContractAmount;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * Complete blockchain transaction record including addresses, amounts, timestamps, and confirmation status for comprehensive payment tracking and verification throughout the transaction lifecycle.
  */
+@JsonPropertyOrder({
+  BlockchainTransaction.JSON_PROPERTY_ID,
+  BlockchainTransaction.JSON_PROPERTY_TS,
+  BlockchainTransaction.JSON_PROPERTY_SENDER,
+  BlockchainTransaction.JSON_PROPERTY_RECEIVER,
+  BlockchainTransaction.JSON_PROPERTY_AMOUNT,
+  BlockchainTransaction.JSON_PROPERTY_STATUS,
+  BlockchainTransaction.JSON_PROPERTY_CONFIRMATION_STATS
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class BlockchainTransaction {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+  public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nonnull
   private String id;
 
-  public static final String SERIALIZED_NAME_TS = "ts";
-  @SerializedName(SERIALIZED_NAME_TS)
+  public static final String JSON_PROPERTY_TS = "ts";
   @javax.annotation.Nonnull
   private Integer ts;
 
-  public static final String SERIALIZED_NAME_SENDER = "sender";
-  @SerializedName(SERIALIZED_NAME_SENDER)
+  public static final String JSON_PROPERTY_SENDER = "sender";
   @javax.annotation.Nonnull
   private String sender;
 
-  public static final String SERIALIZED_NAME_RECEIVER = "receiver";
-  @SerializedName(SERIALIZED_NAME_RECEIVER)
+  public static final String JSON_PROPERTY_RECEIVER = "receiver";
   @javax.annotation.Nonnull
   private String receiver;
 
-  public static final String SERIALIZED_NAME_AMOUNT = "amount";
-  @SerializedName(SERIALIZED_NAME_AMOUNT)
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
   @javax.annotation.Nonnull
   private ContractAmount amount;
 
-  public static final String SERIALIZED_NAME_STATUS = "status";
-  @SerializedName(SERIALIZED_NAME_STATUS)
+  public static final String JSON_PROPERTY_STATUS = "status";
   @javax.annotation.Nonnull
   private BlockchainTransactionStatus status;
 
-  public static final String SERIALIZED_NAME_CONFIRMATION_STATS = "confirmation-stats";
-  @SerializedName(SERIALIZED_NAME_CONFIRMATION_STATS)
+  public static final String JSON_PROPERTY_CONFIRMATION_STATS = "confirmation-stats";
   @javax.annotation.Nonnull
   private BlockchainConfirmationStats confirmationStats;
 
-  public BlockchainTransaction() {
+  public BlockchainTransaction() { 
   }
 
   public BlockchainTransaction id(@javax.annotation.Nonnull String id) {
@@ -99,10 +81,16 @@ public class BlockchainTransaction {
    * @return id
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getId() {
     return id;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setId(@javax.annotation.Nonnull String id) {
     this.id = id;
   }
@@ -119,10 +107,16 @@ public class BlockchainTransaction {
    * @return ts
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public Integer getTs() {
     return ts;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTs(@javax.annotation.Nonnull Integer ts) {
     this.ts = ts;
   }
@@ -138,10 +132,16 @@ public class BlockchainTransaction {
    * @return sender
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_SENDER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getSender() {
     return sender;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_SENDER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSender(@javax.annotation.Nonnull String sender) {
     this.sender = sender;
   }
@@ -157,10 +157,16 @@ public class BlockchainTransaction {
    * @return receiver
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_RECEIVER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getReceiver() {
     return receiver;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_RECEIVER, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setReceiver(@javax.annotation.Nonnull String receiver) {
     this.receiver = receiver;
   }
@@ -176,10 +182,16 @@ public class BlockchainTransaction {
    * @return amount
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_AMOUNT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public ContractAmount getAmount() {
     return amount;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_AMOUNT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAmount(@javax.annotation.Nonnull ContractAmount amount) {
     this.amount = amount;
   }
@@ -195,10 +207,16 @@ public class BlockchainTransaction {
    * @return status
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public BlockchainTransactionStatus getStatus() {
     return status;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_STATUS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(@javax.annotation.Nonnull BlockchainTransactionStatus status) {
     this.status = status;
   }
@@ -214,16 +232,24 @@ public class BlockchainTransaction {
    * @return confirmationStats
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CONFIRMATION_STATS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public BlockchainConfirmationStats getConfirmationStats() {
     return confirmationStats;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONFIRMATION_STATS, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setConfirmationStats(@javax.annotation.Nonnull BlockchainConfirmationStats confirmationStats) {
     this.confirmationStats = confirmationStats;
   }
 
 
-
+  /**
+   * Return true if this BlockchainTransaction object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -273,110 +299,5 @@ public class BlockchainTransaction {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "ts", "sender", "receiver", "amount", "status", "confirmation-stats"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("id", "ts", "sender", "receiver", "amount", "status", "confirmation-stats"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to BlockchainTransaction
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!BlockchainTransaction.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in BlockchainTransaction is not found in the empty JSON string", BlockchainTransaction.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!BlockchainTransaction.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `BlockchainTransaction` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : BlockchainTransaction.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
-      }
-      if (!jsonObj.get("sender").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `sender` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sender").toString()));
-      }
-      if (!jsonObj.get("receiver").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `receiver` to be a primitive type in the JSON string but got `%s`", jsonObj.get("receiver").toString()));
-      }
-      // validate the required field `amount`
-      ContractAmount.validateJsonElement(jsonObj.get("amount"));
-      // validate the required field `status`
-      BlockchainTransactionStatus.validateJsonElement(jsonObj.get("status"));
-      // validate the required field `confirmation-stats`
-      BlockchainConfirmationStats.validateJsonElement(jsonObj.get("confirmation-stats"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!BlockchainTransaction.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'BlockchainTransaction' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<BlockchainTransaction> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(BlockchainTransaction.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<BlockchainTransaction>() {
-           @Override
-           public void write(JsonWriter out, BlockchainTransaction value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public BlockchainTransaction read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of BlockchainTransaction given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of BlockchainTransaction
-   * @throws IOException if the JSON string is invalid with respect to BlockchainTransaction
-   */
-  public static BlockchainTransaction fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, BlockchainTransaction.class);
-  }
-
-  /**
-   * Convert an instance of BlockchainTransaction to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

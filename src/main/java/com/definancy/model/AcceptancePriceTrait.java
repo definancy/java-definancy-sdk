@@ -10,56 +10,38 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.Amount;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * AcceptancePriceTrait
  */
+@JsonPropertyOrder({
+  AcceptancePriceTrait.JSON_PROPERTY_MIN_AMOUNT,
+  AcceptancePriceTrait.JSON_PROPERTY_MAX_AMOUNT
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class AcceptancePriceTrait {
-  public static final String SERIALIZED_NAME_MIN_AMOUNT = "min-amount";
-  @SerializedName(SERIALIZED_NAME_MIN_AMOUNT)
+  public static final String JSON_PROPERTY_MIN_AMOUNT = "min-amount";
   @javax.annotation.Nullable
   private Amount minAmount;
 
-  public static final String SERIALIZED_NAME_MAX_AMOUNT = "max-amount";
-  @SerializedName(SERIALIZED_NAME_MAX_AMOUNT)
+  public static final String JSON_PROPERTY_MAX_AMOUNT = "max-amount";
   @javax.annotation.Nullable
   private Amount maxAmount;
 
-  public AcceptancePriceTrait() {
+  public AcceptancePriceTrait() { 
   }
 
   public AcceptancePriceTrait minAmount(@javax.annotation.Nullable Amount minAmount) {
@@ -72,10 +54,16 @@ public class AcceptancePriceTrait {
    * @return minAmount
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_MIN_AMOUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Amount getMinAmount() {
     return minAmount;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_MIN_AMOUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMinAmount(@javax.annotation.Nullable Amount minAmount) {
     this.minAmount = minAmount;
   }
@@ -91,16 +79,24 @@ public class AcceptancePriceTrait {
    * @return maxAmount
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_MAX_AMOUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Amount getMaxAmount() {
     return maxAmount;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_MAX_AMOUNT, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMaxAmount(@javax.annotation.Nullable Amount maxAmount) {
     this.maxAmount = maxAmount;
   }
 
 
-
+  /**
+   * Return true if this AcceptancePriceTrait object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -140,96 +136,5 @@ public class AcceptancePriceTrait {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("min-amount", "max-amount"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to AcceptancePriceTrait
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AcceptancePriceTrait.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in AcceptancePriceTrait is not found in the empty JSON string", AcceptancePriceTrait.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!AcceptancePriceTrait.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `AcceptancePriceTrait` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `min-amount`
-      if (jsonObj.get("min-amount") != null && !jsonObj.get("min-amount").isJsonNull()) {
-        Amount.validateJsonElement(jsonObj.get("min-amount"));
-      }
-      // validate the optional field `max-amount`
-      if (jsonObj.get("max-amount") != null && !jsonObj.get("max-amount").isJsonNull()) {
-        Amount.validateJsonElement(jsonObj.get("max-amount"));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AcceptancePriceTrait.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AcceptancePriceTrait' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AcceptancePriceTrait> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AcceptancePriceTrait.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AcceptancePriceTrait>() {
-           @Override
-           public void write(JsonWriter out, AcceptancePriceTrait value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AcceptancePriceTrait read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of AcceptancePriceTrait given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of AcceptancePriceTrait
-   * @throws IOException if the JSON string is invalid with respect to AcceptancePriceTrait
-   */
-  public static AcceptancePriceTrait fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AcceptancePriceTrait.class);
-  }
-
-  /**
-   * Convert an instance of AcceptancePriceTrait to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

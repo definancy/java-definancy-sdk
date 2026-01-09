@@ -9,8 +9,8 @@
 
 package com.definancy.auth;
 
-import com.definancy.ApiException;
 import com.definancy.Pair;
+import com.definancy.ApiException;
 
 import java.net.URI;
 import java.util.Map;
@@ -54,8 +54,7 @@ public class ApiKeyAuth implements Authentication {
   }
 
   @Override
-  public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams,
-                           String payload, String method, URI uri) throws ApiException {
+  public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams, String payload, String method, URI uri) throws ApiException {
     if (apiKey == null) {
       return;
     }

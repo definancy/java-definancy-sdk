@@ -10,21 +10,20 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.definancy.JSON;
 
-import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
-import com.google.gson.TypeAdapter;
-import com.google.gson.JsonElement;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Categorization of QR codes based on their payment functionality: - &#39;crypto-address&#39;: Simple wallet address QR code - &#39;crypto-payment&#39;: Payment request with embedded amount and asset details
  */
-@JsonAdapter(QrCodeType.Adapter.class)
 public enum QrCodeType {
   
   CRYPTO_ADDRESS("crypto-address"),
@@ -39,6 +38,7 @@ public enum QrCodeType {
     this.value = value;
   }
 
+  @JsonValue
   public String getValue() {
     return value;
   }
@@ -48,6 +48,7 @@ public enum QrCodeType {
     return String.valueOf(value);
   }
 
+  @JsonCreator
   public static QrCodeType fromValue(String value) {
     for (QrCodeType b : QrCodeType.values()) {
       if (b.value.equals(value)) {
@@ -55,24 +56,6 @@ public enum QrCodeType {
       }
     }
     return UNKNOWN_DEFAULT_OPEN_API;
-  }
-
-  public static class Adapter extends TypeAdapter<QrCodeType> {
-    @Override
-    public void write(final JsonWriter jsonWriter, final QrCodeType enumeration) throws IOException {
-      jsonWriter.value(enumeration.getValue());
-    }
-
-    @Override
-    public QrCodeType read(final JsonReader jsonReader) throws IOException {
-      String value = jsonReader.nextString();
-      return QrCodeType.fromValue(value);
-    }
-  }
-
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-    String value = jsonElement.getAsString();
-    QrCodeType.fromValue(value);
   }
 }
 

@@ -15,7 +15,9 @@ public class APIRegisterDid {
             api.registerDid(did.getId().toString());
             System.out.println("DID registered successfully");
         } catch (ApiException e) {
-            Utils.printApiException(e, "ExperimentalApi", "registerDid");
+            Utils.printException(e, "ExperimentalApi", "registerDid");
+        } catch (Exception e) {
+            Utils.printException(e, "ExperimentalApi", "registerDid");
         }
     }
 }

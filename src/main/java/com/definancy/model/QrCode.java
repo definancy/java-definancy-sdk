@@ -10,67 +10,49 @@
 package com.definancy.model;
 
 import java.util.Objects;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Locale;
 import com.definancy.model.QrCodeEncoding;
 import com.definancy.model.QrCodeType;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Locale;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.definancy.JSON;
+
 
 /**
  * QR code representation for facilitating blockchain transactions. Contains encoded payment instructions that can be scanned by cryptocurrency wallets to initiate payments. Supports different QR code standards and encoding formats.
  */
+@JsonPropertyOrder({
+  QrCode.JSON_PROPERTY_TYPE,
+  QrCode.JSON_PROPERTY_CONTENT,
+  QrCode.JSON_PROPERTY_ENCODING,
+  QrCode.JSON_PROPERTY_METADATA
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0-SNAPSHOT")
 public class QrCode {
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
+  public static final String JSON_PROPERTY_TYPE = "type";
   @javax.annotation.Nonnull
   private QrCodeType type;
 
-  public static final String SERIALIZED_NAME_CONTENT = "content";
-  @SerializedName(SERIALIZED_NAME_CONTENT)
+  public static final String JSON_PROPERTY_CONTENT = "content";
   @javax.annotation.Nonnull
   private String content;
 
-  public static final String SERIALIZED_NAME_ENCODING = "encoding";
-  @SerializedName(SERIALIZED_NAME_ENCODING)
+  public static final String JSON_PROPERTY_ENCODING = "encoding";
   @javax.annotation.Nonnull
   private QrCodeEncoding encoding;
 
-  public static final String SERIALIZED_NAME_METADATA = "metadata";
-  @SerializedName(SERIALIZED_NAME_METADATA)
+  public static final String JSON_PROPERTY_METADATA = "metadata";
   @javax.annotation.Nullable
   private Object metadata;
 
-  public QrCode() {
+  public QrCode() { 
   }
 
   public QrCode type(@javax.annotation.Nonnull QrCodeType type) {
@@ -83,10 +65,16 @@ public class QrCode {
    * @return type
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public QrCodeType getType() {
     return type;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setType(@javax.annotation.Nonnull QrCodeType type) {
     this.type = type;
   }
@@ -102,10 +90,16 @@ public class QrCode {
    * @return content
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_CONTENT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public String getContent() {
     return content;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_CONTENT, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setContent(@javax.annotation.Nonnull String content) {
     this.content = content;
   }
@@ -121,10 +115,16 @@ public class QrCode {
    * @return encoding
    */
   @javax.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_ENCODING, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
   public QrCodeEncoding getEncoding() {
     return encoding;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_ENCODING, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setEncoding(@javax.annotation.Nonnull QrCodeEncoding encoding) {
     this.encoding = encoding;
   }
@@ -140,16 +140,24 @@ public class QrCode {
    * @return metadata
    */
   @javax.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
   public Object getMetadata() {
     return metadata;
   }
 
+
+  @JsonProperty(value = JSON_PROPERTY_METADATA, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMetadata(@javax.annotation.Nullable Object metadata) {
     this.metadata = metadata;
   }
 
 
-
+  /**
+   * Return true if this QrCode object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -193,102 +201,5 @@ public class QrCode {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("type", "content", "encoding", "metadata"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("type", "content", "encoding"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to QrCode
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!QrCode.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field(s) %s in QrCode is not found in the empty JSON string", QrCode.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!QrCode.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The field `%s` in the JSON string is not defined in the `QrCode` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : QrCode.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `type`
-      QrCodeType.validateJsonElement(jsonObj.get("type"));
-      if (!jsonObj.get("content").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(Locale.ROOT, "Expected the field `content` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content").toString()));
-      }
-      // validate the required field `encoding`
-      QrCodeEncoding.validateJsonElement(jsonObj.get("encoding"));
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!QrCode.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'QrCode' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<QrCode> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(QrCode.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<QrCode>() {
-           @Override
-           public void write(JsonWriter out, QrCode value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public QrCode read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
-    }
-  }
-
-  /**
-   * Create an instance of QrCode given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of QrCode
-   * @throws IOException if the JSON string is invalid with respect to QrCode
-   */
-  public static QrCode fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, QrCode.class);
-  }
-
-  /**
-   * Convert an instance of QrCode to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
 }
 

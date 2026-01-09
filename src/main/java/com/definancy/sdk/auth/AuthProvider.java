@@ -1,7 +1,7 @@
 package com.definancy.sdk.auth;
 
-import okhttp3.Request;
+import javax.ws.rs.client.ClientRequestContext;
 
 public interface AuthProvider {
-    Authentication authenticate(Request request) throws Exception;
+    Authentication authenticate(ClientRequestContext requestContext) throws Exception;
 }
