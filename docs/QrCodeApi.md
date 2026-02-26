@@ -14,8 +14,7 @@ All URIs are relative to *https://stub.definancy.com*
 
 Generate QR-Codes for wallets
 
-Generates the QR-Codes to be used by a wallet to help on the creation of a
-transaction request.
+Generates the QR-Codes to be used by a wallet to help on the creation of a transaction request.
 
 ### Example
 
@@ -25,7 +24,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.QrCodeApi;
 
 public class Example {
@@ -80,6 +79,7 @@ public class Example {
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

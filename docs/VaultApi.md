@@ -28,7 +28,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultApi;
 
 public class Example {
@@ -84,6 +84,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -100,9 +101,7 @@ public class Example {
 
 Partially Update Vault Configuration
 
-Updates specific fields of an existing vault configuration. 
-Only provided properties will be modified.
-Returns the updated vault configuration.
+Updates specific fields of an existing vault configuration.  Only provided properties will be modified. Returns the updated vault configuration.
 
 ### Example
 
@@ -112,7 +111,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultApi;
 
 public class Example {
@@ -170,6 +169,7 @@ public class Example {
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -187,9 +187,7 @@ public class Example {
 
 Get Vault
 
-Retrieves configuration details for a specific vault.
-This endpoint returns detailed configuration information for a specific vault,
-which is essential for organizing and processing payments while maintaining compliance.
+Retrieves configuration details for a specific vault. This endpoint returns detailed configuration information for a specific vault, which is essential for organizing and processing payments while maintaining compliance.
 
 ### Example
 
@@ -199,7 +197,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultApi;
 
 public class Example {
@@ -255,6 +253,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -271,9 +270,7 @@ public class Example {
 
 List Vaults
 
-Retrieves all vault configurations.
-This endpoint returns a list of all vault configurations, which are essential for
-organizing and processing payments while maintaining compliance.
+Retrieves all vault configurations. This endpoint returns a list of all vault configurations, which are essential for organizing and processing payments while maintaining compliance.
 
 ### Example
 
@@ -283,7 +280,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultApi;
 
 public class Example {
@@ -335,6 +332,7 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -350,9 +348,7 @@ This endpoint does not need any parameter.
 
 Create or Update Vault
 
-Updates or creates the configuration for a vault with {vaultId}. This operation 
-will fully replace the existing configuration if the vault exists, or create
-a new vault if it does not.
+Updates or creates the configuration for a vault with {vaultId}. This operation  will fully replace the existing configuration if the vault exists, or create a new vault if it does not.
 
 ### Example
 
@@ -362,7 +358,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultApi;
 
 public class Example {
@@ -419,6 +415,7 @@ public class Example {
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

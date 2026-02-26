@@ -1,8 +1,7 @@
 package com.definancy.sdk.util;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import java.security.Security;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class CryptoProvider {
 

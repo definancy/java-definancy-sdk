@@ -25,13 +25,12 @@ Deactivates a payment acceptance while preserving historical records.
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -89,6 +88,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -115,7 +115,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -173,6 +173,7 @@ public class Example {
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -195,13 +196,12 @@ Retrieves details of an existing payment acceptance.
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -259,6 +259,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -275,20 +276,17 @@ public class Example {
 
 Link Document to Payment Acceptance
 
-Associates a document with a payment acceptance.
-Supported document types: personal identification, entity documentation, 
-wallet verification data.
+Associates a document with a payment acceptance. Supported document types: personal identification, entity documentation,  wallet verification data.
 
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -348,6 +346,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -365,19 +364,17 @@ public class Example {
 
 Unlink Document from Payment Acceptance
 
-Removes document association from active consideration in payment acceptance
-while retaining it for audit purposes.
+Removes document association from active consideration in payment acceptance while retaining it for audit purposes.
 
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -437,6 +434,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -459,13 +457,12 @@ Modifies configuration of an existing payment acceptance.
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -525,6 +522,7 @@ public class Example {
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -542,8 +540,7 @@ public class Example {
 
 Generate Payment Estimate
 
-Calculates payment scenarios for specified contracts and amounts.
-Requires at least one contract-amount pair in the request body.
+Calculates payment scenarios for specified contracts and amounts. Requires at least one contract-amount pair in the request body.
 
 ### Example
 
@@ -553,7 +550,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultPaymentApi;
 
 public class Example {
@@ -610,6 +607,7 @@ public class Example {
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

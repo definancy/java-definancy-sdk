@@ -17,10 +17,7 @@ All URIs are relative to *https://stub.definancy.com*
 
 Configure Network
 
-Updates configuration parameters for a network.
-This endpoint allows you to update configuration parameters for a specific
-network, which is essential for managing and maintaining networks for 
-payment processing.
+Updates configuration parameters for a network. This endpoint allows you to update configuration parameters for a specific network, which is essential for managing and maintaining networks for  payment processing.
 
 ### Example
 
@@ -30,7 +27,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.NetworkApi;
 
 public class Example {
@@ -88,6 +85,7 @@ public class Example {
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -105,10 +103,7 @@ public class Example {
 
 Get Network
 
-Retrieves configuration details for a specific network.
-This endpoint returns detailed configuration information for a specific
-network, which is essential for managing and maintaining networks for 
-payment processing.
+Retrieves configuration details for a specific network. This endpoint returns detailed configuration information for a specific network, which is essential for managing and maintaining networks for  payment processing.
 
 ### Example
 
@@ -118,7 +113,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.NetworkApi;
 
 public class Example {
@@ -174,6 +169,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -190,9 +186,7 @@ public class Example {
 
 Get Network Native Asset
 
-Retrieves the native asset of a specific network in a form of a contract.
-This endpoint returns the native asset of a specific network in the form of a contract, 
-which is essential for understanding and managing the native token of a network.
+Retrieves the native asset of a specific network in a form of a contract. This endpoint returns the native asset of a specific network in the form of a contract,  which is essential for understanding and managing the native token of a network.
 
 ### Example
 
@@ -202,7 +196,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.NetworkApi;
 
 public class Example {
@@ -258,6 +252,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -274,9 +269,7 @@ public class Example {
 
 List Networks
 
-Retrieves all configured networks.
-This endpoint returns a list of all configured networks, which are essential for 
-setting up and maintaining networks for payment processing.
+Retrieves all configured networks. This endpoint returns a list of all configured networks, which are essential for  setting up and maintaining networks for payment processing.
 
 ### Example
 
@@ -286,7 +279,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.NetworkApi;
 
 public class Example {
@@ -337,6 +330,7 @@ This endpoint does not need any parameter.
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

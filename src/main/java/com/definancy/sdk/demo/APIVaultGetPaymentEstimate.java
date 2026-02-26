@@ -4,7 +4,6 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.api.VaultPaymentApi;
 import com.definancy.model.*;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,12 +12,16 @@ public class APIVaultGetPaymentEstimate {
         ApiClient apiClient = Config.GetApiClient();
         VaultPaymentApi api = new VaultPaymentApi(apiClient);
 
-        List<ContractAmountFormat> contractAmounts = Arrays.asList(
-            Utils.createContractAmount("target", "EUR", "1.23")
+        List<ContractAmountFormat> payAmounts = Arrays.asList(
+            Utils.createContractAmount(
+                "target",
+                "EUR",
+                "10.23"
+            )
         );
 
         try {
-            PaymentEstimate paymentEstimate = api.vaultGetPaymentEstimate(Config.vaultId, contractAmounts);
+            PaymentEstimate paymentEstimate = api.vaultGetPaymentEstimate(Config.vaultId, payAmounts);
             List<PaymentEstimateScenario> scenarios = paymentEstimate.getScenarios();
 
             if (scenarios.isEmpty()) {
@@ -27,11 +30,16 @@ public class APIVaultGetPaymentEstimate {
             }
 
             System.out.println("Payment scenarios:");
-            for(PaymentEstimateScenario scenario : scenarios) {
+            for (PaymentEstimateScenario scenario : scenarios) {
                 ContractAmount pay = scenario.getPay();
                 ContractId contractId = pay.getContractId();
                 String value = pay.getAmount().getValue();
-                System.out.printf("\tPay %s %s on %s\n", value, contractId.getAssetUnit(), contractId.getNetworkId());
+                System.out.printf(
+                    "- Pay %s %s on %s\n",
+                    value,
+                    contractId.getAssetUnit(),
+                    contractId.getNetworkId()
+                );
             }
             System.out.println("Estimate generated successfully");
         } catch (ApiException e) {

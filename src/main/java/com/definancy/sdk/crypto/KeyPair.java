@@ -4,10 +4,6 @@ import com.definancy.sdk.auth.Jwk;
 import com.definancy.sdk.auth.Signer;
 import com.definancy.sdk.util.CryptoProvider;
 import com.definancy.sdk.util.Encoder;
-import org.bouncycastle.asn1.ASN1Encodable;
-import org.bouncycastle.asn1.ASN1OctetString;
-import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
-
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
@@ -15,6 +11,9 @@ import java.security.SecureRandom;
 import java.security.Signature;
 import java.util.Arrays;
 import java.util.Objects;
+import org.bouncycastle.asn1.ASN1Encodable;
+import org.bouncycastle.asn1.ASN1OctetString;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 
 public class KeyPair implements Signer {
     private final java.security.KeyPair privateKeyPair;
@@ -27,11 +26,9 @@ public class KeyPair implements Signer {
     private static final int SK_PKCS_PREFIX_LENGTH = 16; // Ed25519 specific
     private static final int SK_SEPARATOR_LENGTH = 3; // separator is 0x81 0x21 0x00
 
-    /**
-     * KeyPair creates a new, random account.
-     */
+    /** KeyPair creates a new, random account. */
     private KeyPair() throws Exception {
-        this((SecureRandom)null);
+        this((SecureRandom) null);
     }
 
     public static KeyPair generateKeyPair() throws Exception {
@@ -68,9 +65,11 @@ public class KeyPair implements Signer {
     public KeyPair(PrivateKey pk) throws Exception {
         CryptoProvider.setupIfNeeded();
         if (!pk.getAlgorithm().equals(KEY_ALGO))
-            throw new IllegalArgumentException("KeyPair cannot be generated from a non-Ed25519 key");
+            throw new IllegalArgumentException(
+                    "KeyPair cannot be generated from a non-Ed25519 key");
 
-        if (pk.getEncoded().length != SK_PKCS_PREFIX_LENGTH + SK_SIZE + SK_SEPARATOR_LENGTH + PK_SIZE)
+        if (pk.getEncoded().length
+                != SK_PKCS_PREFIX_LENGTH + SK_SIZE + SK_SEPARATOR_LENGTH + PK_SIZE)
             throw new RuntimeException("Private Key cannot generate clear private key bytes");
 
         byte[] clearPrivateKey = new byte[SK_SIZE];
@@ -97,7 +96,7 @@ public class KeyPair implements Signer {
         return new Ed25519PublicKey(this.privateKeyPair.getPublic());
     }
 
-    public Jwk jwk() throws Exception{
+    public Jwk jwk() throws Exception {
         return this.publicKey().jwk();
     }
 

@@ -4,7 +4,6 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.api.AssetApi;
 import com.definancy.model.Asset;
-
 import java.util.List;
 
 public class APIGetAssets {
@@ -22,7 +21,12 @@ public class APIGetAssets {
 
             System.out.printf("Found %d assets:\n", assets.size());
             for (Asset asset : assets) {
-               System.out.println(asset.getInfo().getName());
+                boolean enabled = Boolean.TRUE.equals(asset.getConfig().getEnabled());
+                System.out.printf(
+                        "- %s is %s\n",
+                        asset.getInfo().getName(),
+                        enabled ? "enabled" : "disabled"
+                );
             }
         } catch (ApiException e) {
             Utils.printException(e, "AssetApi", "getAssets");

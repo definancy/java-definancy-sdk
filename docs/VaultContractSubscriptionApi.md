@@ -25,7 +25,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultContractSubscriptionApi;
 
 public class Example {
@@ -85,6 +85,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -111,7 +112,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultContractSubscriptionApi;
 
 public class Example {
@@ -170,6 +171,7 @@ public class Example {
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

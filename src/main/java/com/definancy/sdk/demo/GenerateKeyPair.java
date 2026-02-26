@@ -5,7 +5,7 @@ import com.definancy.sdk.ID;
 import com.definancy.sdk.crypto.KeyPair;
 
 public class GenerateKeyPair {
-    public static void main( String[] args ) throws Exception {
+    public static void main(String[] args) throws Exception {
         String network = Config.network;
 
         System.out.println("=== MASTER ===");

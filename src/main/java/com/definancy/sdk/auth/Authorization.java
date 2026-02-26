@@ -1,7 +1,6 @@
 package com.definancy.sdk.auth;
 
 import com.definancy.sdk.DID;
-
 import java.time.Instant;
 
 public class Authorization extends Jwt {

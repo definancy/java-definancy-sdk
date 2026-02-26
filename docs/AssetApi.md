@@ -16,9 +16,7 @@ All URIs are relative to *https://stub.definancy.com*
 
 Configure Asset
 
-Updates configuration parameters for a digital asset.
-This endpoint allows you to update configuration parameters for a specific digital asset, 
-which is essential for managing and handling various assets in payment operations.
+Updates configuration parameters for a digital asset. This endpoint allows you to update configuration parameters for a specific digital asset,  which is essential for managing and handling various assets in payment operations.
 
 ### Example
 
@@ -28,7 +26,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.AssetApi;
 
 public class Example {
@@ -86,6 +84,7 @@ public class Example {
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -103,9 +102,7 @@ public class Example {
 
 Get Asset
 
-Retrieves configuration details for a specific digital asset.
-This endpoint returns detailed configuration information for a specific digital asset,
-which is essential for managing and handling various assets in payment operations.
+Retrieves configuration details for a specific digital asset. This endpoint returns detailed configuration information for a specific digital asset, which is essential for managing and handling various assets in payment operations.
 
 ### Example
 
@@ -115,7 +112,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.AssetApi;
 
 public class Example {
@@ -171,6 +168,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -187,9 +185,7 @@ public class Example {
 
 List Assets
 
-Retrieves all configured digital assets.
-This endpoint returns a list of all configured digital assets, which are essential
-for handling various assets in payment operations.
+Retrieves all configured digital assets. This endpoint returns a list of all configured digital assets, which are essential for handling various assets in payment operations.
 
 ### Example
 
@@ -199,7 +195,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.AssetApi;
 
 public class Example {
@@ -250,6 +246,7 @@ This endpoint does not need any parameter.
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

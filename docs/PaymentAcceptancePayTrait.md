@@ -1,6 +1,6 @@
 
 
-# AcceptancePaymentTrait
+# PaymentAcceptancePayTrait
 
 
 ## Properties

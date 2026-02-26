@@ -15,9 +15,7 @@ All URIs are relative to *https://stub.definancy.com*
 
 Health Check
 
-Verifies service liveness. Returns OK when operational.
-This endpoint is used to check if the service is alive and ready to handle requests, 
-ensuring that your applications can rely on the Definancy service for their operations.
+Verifies service liveness. Returns OK when operational. This endpoint is used to check if the service is alive and ready to handle requests,  ensuring that your applications can rely on the Definancy service for their operations.
 
 ### Example
 
@@ -26,7 +24,7 @@ ensuring that your applications can rely on the Definancy service for their oper
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.ProbeApi;
 
 public class Example {
@@ -66,6 +64,7 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -79,9 +78,7 @@ No authorization required
 
 Ready Check
 
-Verifies service readiness. Returns OK when ready to accept traffic.
-This endpoint checks if the service is ready to handle incoming requests, ensuring
-that your applications can rely on the Definancy service for their operations.
+Verifies service readiness. Returns OK when ready to accept traffic. This endpoint checks if the service is ready to handle incoming requests, ensuring that your applications can rely on the Definancy service for their operations.
 
 ### Example
 
@@ -90,7 +87,7 @@ that your applications can rely on the Definancy service for their operations.
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.ProbeApi;
 
 public class Example {
@@ -129,6 +126,7 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

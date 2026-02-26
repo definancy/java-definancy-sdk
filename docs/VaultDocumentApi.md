@@ -16,19 +16,17 @@ All URIs are relative to *https://stub.definancy.com*
 
 Archive Document
 
-Deactivates document from active consideration while 
-retaining it for audit purposes.
+Deactivates document from active consideration while  retaining it for audit purposes.
 
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultDocumentApi;
 
 public class Example {
@@ -86,6 +84,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -102,19 +101,17 @@ public class Example {
 
 Get Document
 
-Retrieves metadata and content of a document 
-including validation status and reviewer comments.
+Retrieves metadata and content of a document  including validation status and reviewer comments.
 
 ### Example
 
 ```java
-import java.util.UUID;
 // Import classes:
 import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultDocumentApi;
 
 public class Example {
@@ -172,6 +169,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -188,9 +186,7 @@ public class Example {
 
 Submit Document
 
-Submits a new document for verification.
-Supported types: personal identification, entity documentation, 
-wallet verification data.
+Submits a new document for verification. Supported types: personal identification, entity documentation,  wallet verification data.
 
 ### Example
 
@@ -200,7 +196,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.VaultDocumentApi;
 
 public class Example {
@@ -257,6 +253,7 @@ public class Example {
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

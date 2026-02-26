@@ -28,13 +28,14 @@ public class Utils {
         return contractId;
     }
 
-    public static ContractAmountFormat createContractAmount(String networkId, String assetUnit, String amountString) {
+    public static ContractAmountFormat createContractAmount(
+            String networkId, String assetUnit, String amountString) {
         ContractId contractId = Utils.createContractId(networkId, assetUnit);
 
         AmountValue amountValue = new AmountValue();
         amountValue.setValue(amountString);
 
-        AmountFormat amount = new AmountFormat(amountValue);
+        AmountFormat amount = new AmountFormat(amountValue.getValue(), "", 0);
 
         ContractAmountFormat contractAmount = new ContractAmountFormat();
         contractAmount.setContractId(contractId);

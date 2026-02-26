@@ -16,9 +16,7 @@ All URIs are relative to *https://stub.definancy.com*
 
 Configure Contract
 
-Updates configuration parameters for a contract.
-This endpoint allows you to update configuration parameters for a specific contract,
-which is essential for executing and validating payments on networks.
+Updates configuration parameters for a contract. This endpoint allows you to update configuration parameters for a specific contract, which is essential for executing and validating payments on networks.
 
 ### Example
 
@@ -28,7 +26,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.ContractApi;
 
 public class Example {
@@ -88,6 +86,7 @@ public class Example {
 - **Content-Type**: application/json
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -105,9 +104,7 @@ public class Example {
 
 Get Contract
 
-Retrieves configuration details for a specific smart contract.
-This endpoint returns detailed configuration information for a specific contract,
-which is essential for executing and validating payments on networks.
+Retrieves configuration details for a specific smart contract. This endpoint returns detailed configuration information for a specific contract, which is essential for executing and validating payments on networks.
 
 ### Example
 
@@ -117,7 +114,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.ContractApi;
 
 public class Example {
@@ -175,6 +172,7 @@ public class Example {
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -191,9 +189,7 @@ public class Example {
 
 List Contracts
 
-Retrieves all contract configurations.
-This endpoint returns a list of all configured contracts, which are essential
-for executing and validating payments on networks.
+Retrieves all contract configurations. This endpoint returns a list of all configured contracts, which are essential for executing and validating payments on networks.
 
 ### Example
 
@@ -203,7 +199,7 @@ import com.definancy.ApiClient;
 import com.definancy.ApiException;
 import com.definancy.Configuration;
 import com.definancy.auth.*;
-import com.definancy.model.*;
+import com.definancy.models.*;
 import com.definancy.api.ContractApi;
 
 public class Example {
@@ -254,6 +250,7 @@ This endpoint does not need any parameter.
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
